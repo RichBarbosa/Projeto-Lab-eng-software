@@ -1,0 +1,66 @@
+<section>     
+  <h2>Busque pela inicial</h2>
+      <div class="container">
+          <div class="row">
+              <div class="col-sm-8">
+                  <form action="teste.html" method="POST">
+                  <button type="submit" class="btn btn-secondary">A</button>
+                  <button type="submit" class="btn btn-secondary">B</button>
+                  <button type="submit" class="btn btn-secondary">C</button>
+                  <button type="submit" class="btn btn-secondary">D</button>
+                  <button type="submit" class="btn btn-secondary">E</button>
+                  <button type="submit" class="btn btn-secondary">F</button>
+                  <button type="submit" class="btn btn-secondary">G</button>
+                  <button type="submit" class="btn btn-secondary">H</button>
+                  <button type="submit" class="btn btn-secondary">I</button>
+                  <button type="submit" class="btn btn-secondary">J</button>
+                  <button type="submit" class="btn btn-secondary">K</button>
+                  <button type="submit" class="btn btn-secondary">L</button>
+                  <button type="submit" class="btn btn-secondary">M</button>
+                  <button type="submit" class="btn btn-secondary">N</button>
+                  <button type="submit" class="btn btn-secondary">O</button>
+                  <button type="submit" class="btn btn-secondary">P</button>
+                  <button type="submit" class="btn btn-secondary">Q</button>
+                  <button type="submit" class="btn btn-secondary">R</button>
+                  <button type="submit" class="btn btn-secondary">S</button>
+                  <button type="submit" class="btn btn-secondary">T</button>
+                  <button type="submit" class="btn btn-secondary">U</button>
+                  <button type="submit" class="btn btn-secondary">V</button>
+                  <button type="submit" class="btn btn-secondary">W</button>
+                  <button type="submit" class="btn btn-secondary">X</button>
+                  <button type="submit" class="btn btn-secondary">Y</button>
+                  <button type="submit" class="btn btn-secondary">Z</button>
+              </form>
+ 
+                </div>
+              <div class="col-4">
+                 
+              </div>
+          </div>                    
+      </div>    
+
+
+
+  <a href="img/557863.jpg" download="1234">aaa</a> 
+
+  if(isset($_POST['escolha'])){
+    $categoria = $_POST['escolha'];
+}else {
+    unset($categoria);
+}  
+
+?>
+
+<Table  class="table">
+        <tr>
+          <th>caminho</th>
+          
+        </tr> 
+    <?php foreach($cat->getTema($categoria) as $col){ ?>
+        <tr>
+            <td><img src="<?php echo $col['caminho'];?>" alt=""></td>
+            <?php }?> 
+        </tr>
+    </Table>
+    </main>
+
