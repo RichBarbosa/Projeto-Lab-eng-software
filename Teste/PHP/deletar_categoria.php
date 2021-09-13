@@ -13,6 +13,7 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
     try{
         $img->deletarImagemByCategoria($cat);
         $img->deletarCategoria($cat);
+        $img->deletarCatFavoritaByCategoria($cat);
         header('Location: ../categorias.php');
 
     }catch(Exception $e){

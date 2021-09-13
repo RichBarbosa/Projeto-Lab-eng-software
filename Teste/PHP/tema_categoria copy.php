@@ -1,13 +1,17 @@
 <?php
-include('classes\Imagem.php');
 if(!isset($_SESSION)){
   session_start();
 }
-$img = new Imagem();
+require_once('../PHP\classes\Imagem.php');
+require_once('../PHP\classes\Usuario.php');
+$cat = new Imagem();
 if(!empty( $_SESSION['nome'])){  
-   include_once('header_buscar.php');
-  
-} else{  ?>
+  include_once('header_tema.php');    
+  $id = $_SESSION['nome'];
+
+}else{
+$id = null;  
+  ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -19,13 +23,12 @@ if(!empty( $_SESSION['nome'])){
     krl, pq ninguém fala que é tão simples assim?-->
     <link rel="icon" href="../img/bull-horns_39319.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="../CSS/menu.css">
-    <link rel="stylesheet" type="text/css" href="../CSS/footer.css">
 
     
     <!--os treco do Bootstrap, quem diria que um link desses faz até um asno como eu fazer um front
     end, krl, eu amo frameworks -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <title>Lista de categorias</title>
+    <title>Teste</title>
     
     <!--um pouco de CSS no código mesmo, eu também to usando uma stylesheet separada mas né? 
       as vezes da preguiça de ficar trocando de arquivo-->
@@ -67,7 +70,7 @@ if(!empty( $_SESSION['nome'])){
                 <nav class="navbar navbar-dark bg-dark">
                     <div class="container-fluid">
                     <form class="d-flex" action="pesquisa.php" method="POST">
-                            <input class="form-control " type="Pesquisar" placeholder="Search" aria-label="Search"  name="buscar" autocomplete="off">
+                            <input class="form-control " type="search" placeholder="Pesquisar" aria-label="Search"  name="buscar" autocomplete="off">
                             <button class="btn btn-outline-success" type="submit">Buscar</button>
                         </form>
                     </div>
@@ -92,10 +95,13 @@ if(!empty( $_SESSION['nome'])){
   <div class="bg-dark p-4">
     <ul class="nav navbar-dark bg-dark">
             <li class="nav-item">
-                <a class="nav-link" href="buscar_por_categoria.php"><button class="btn btn-secondary" type="button">Buscar por categorias</button></a>
+                <a class="nav-link" href="buscar_por_categoria.php"><button class="btn btn-secondary" type="button">Buscar por imagens</button></a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="Subicao.php"><button class="btn btn-secondary"><img src="https://img.icons8.com/office/16/000000/upload--v1.png"/>Submeter conteúdo</button></a>
+                <a class="nav-link" href="buscar_por_categoria_gif.php"><button class="btn btn-secondary" type="button">Buscar por gifs</button></a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="Subimicao.php"><button class="btn btn-secondary"><img src="https://img.icons8.com/office/16/000000/upload--v1.png"/>Submeter conteúdo</button></a>
             </li>
         </ul>
   </div>
@@ -107,77 +113,101 @@ if(!empty( $_SESSION['nome'])){
     </button>
   </div>
 </nav>     
-   </header>
+   </header> 
+<body>
+<br><br><br>
+<?php } ?>
+<main>
+    <?php 
+    if(isset($_GET['escolha'])){
+        $categoria = $_GET['escolha'];
+    }
+    else{
+      $categoria = $_SESSION['categoria'] ;
+    } 
+    $idImagem = null;
+    $caminho = null;
+    ?>
+    <h3 style="text-align:center"><?php echo $categoria ?> </h3>
 
-   <?php } ?>    
-   <body>
-   <main>
-   <h4 style="text-align:center">Buscar</h4>
-        <div class="container">
+    <form action="favoritar.php" method="post">
+    <input type="hidden" name="categoria" value="<?php echo $categoria?>">
+    <?php 
+    $favnome = $categoria;
+    $fav = $cat->verificarCatFavorita($favnome, $id);
+    if($fav){?>
+    <div class="container" style="text-align: center">
+      <br><button class="btn btn-outline-light" type ="submit" name="nmCat" value="<?php echo $categoria;?>" ><img class="img-thumbnail" 
+            src="../img/suit-heart-fill.svg"  alt=""></button>
+  </div>
+  <?php }else{ ?>
+    <div class="container" style="text-align: center">
+    <form action="favoritar.php" method="post">
+    <br><button class="btn btn-outline-success" type ="submit" 
+    name="favoritarCat" value="<?php echo $categoria;?>"
+    <?php if (empty($_SESSION['nome'])){?> 
+      disabled> é preciso estar logado para favoritar</button>
+      <?php }else { ?>
+      >Adicionar como favorita</button><?php }?>
+    <?php } ?>
+  </form>
+  </div>
+<br><br><br>
+    <div class="container">
         <div class="alert alert-success" role="alert">
             <h4 class="alert-heading"></h4>
-                <p>Atualmente possuimos <?php echo count($img->listarCategorias()) . " ";?> categorias no total</p>
+                <p>Atualmente possuimos <?php echo count($cat->listarImagem($categoria)) . " ";?> imagens nessa categoria</p>
             </div>
-            <hr/>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col align-self-center">
-                    <form action="buscar_por_categoria.php" method="GET">
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="A">A</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="B">B</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="C">C</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="D">D</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="E">E</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="F">F</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="G">G</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="H">H</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="I">I</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="J">J</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="K">K</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="L">L</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="M">M</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="N">N</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="O">O</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="P">P</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="Q">Q</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="R">R</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="S">S</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="T">T</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="U">U</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="V">V</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="W">W</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="X">X</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="Y">Y</button>
-                    <button type="submit" class="btn btn-secondary" name="inicial" value="Z">Z</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <hr/>
-            <?php
-            if(!empty($_GET['inicial'])){
-                $inicial = $_GET['inicial'];?>
-                <form action="tema_categoria copy.php" method="GET">
-                    <ul class="list-group list-group-horizontal">
-               <?php foreach ($img->listarCategoriasByInicial($inicial) as $col) {?>
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item"><button class="btn btn-outline-dark" type="submit" value="<?php echo $col['nome'];?>" name="escolha" ><?php echo $col['nome']?></li></button> 
+  </div>
+  <br><br><br> 
+  <hr/>       
+    <div class="container">
+      <div class="row">
+        <?php foreach($cat->listarImagem($categoria) as $col){ ?> 
+        <div class="col-sm-6">
+          <form action="imagemEscolhida copy.php" method="GET">
+            <input type="hidden" name="nImagem" value="<?php echo $col['nome_imagem'] ?>">
+          <button type="submit " name="imagem" value="<?php echo $col['id']; ?>" class="btn btn-light"><img class="img-fluid" src="<?php echo $col['caminho'];?>" alt=""> </button>
+          </Form>
+                   <ul class="list-group list-group-horizontal">
+                   <?php echo ".";?><li><h6><?php echo $cat->getTag1($col['id'])?></h6></li><?php echo ".";?>
+                   <?php echo ".";?><li><h6><?php echo $cat->getTag2($col['id'])?></h6></li><?php echo ".";?>
+                   <?php echo ".";?><li><h6><?php echo $cat->getTag3($col['id'])?></h6></li><?php echo ".";?>
+                   <?php echo ".";?><li><h6><?php echo $cat->getTag4($col['id'])?></h6></li><?php echo ".";?>
+                   <?php echo ".";?><li><h6><?php echo $cat->getTag5($col['id'])?></h6></li><?php echo ".";?>
                     </ul>
-                <?php } ?>
-             </form>
-            <?php 
-        }else{
-            unset($inicial);
-        }?>
-            <hr>
-            
-            
-    </main>        
-  </main>    
-        <footer>
-          
-          <!--essa tag a faz voltar pro topo da página, simples.... oq? achou q eu ia fazer mais um comentário
-          ironizando ou zoando algo?-->
+<ul class="list-group list-group-horizontal">
+  <form action="favoritar.php" method="post">
+    <input type="hidden" name="categoria" value="<?php echo $categoria?>">
+    <input type="hidden" name="caminho" value="<?php echo $col['caminho']?>">
+    <?php 
+    $favnome = $cat->getNome($col['id']);
+    $fav = $cat->verificarFavorita($favnome, $id);
+    if($fav){?>
+  <li><br><button class="btn btn-outline-light" type ="submit" name="id" value="<?php echo $col['id'];?>" ><img class="img-thumbnail" 
+  src="../img/suit-heart-fill.svg"  alt=""></button></li>
+  
+  <?php }else{ ?>
+    <form action="favoritar.php" method="post">
+    <li><br><button class="btn btn-outline-success" type ="submit" 
+    name="favoritar" value="<?php echo $col['id'];?>" 
+    <?php if (empty($_SESSION['nome'])){?> 
+      disabled> é preciso estar logado para favoritar</button>
+      <?php }else { ?>
+      >Adicionar como favorita</button><?php }?> 
+    <?php } ?>
+  </form>
+  <li><button class="btn btn-outline-light"> 
+    <a href="<?php echo $col['caminho'];?>" download="<?php echo $col['id'] + 0310; ?>"><img class="img-thumbnail" 
+    src="../img/download.svg" alt=""></a>
+</ul>         
+          <hr>
+        </div>
+          <?php }?> 
+        </div>        
+        </div>
+  </main>  
+        <footer>                    
           <a href="#top"><button class="btn btn-secondary" type="button">voltar ao Topo</button></a>
           <a href="sobre.html"><button class="btn btn-secondary" type="button">Sobre nós</button></a>
           <ul>
@@ -190,3 +220,5 @@ if(!empty( $_SESSION['nome'])){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>  
 </body>
 </html> 
+<?php
+?>    

@@ -10,11 +10,18 @@ $id = $_SESSION['nome'];
 if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){ 
     if(!empty($_POST)){
         $idImagem = $_POST['excluir'];
+        $caminho = $cat->getCaminho($idImagem);
        
 
         try{
             $cat->deletarImagem($idImagem);
-            header('Location: gerenciar_imagens.php');
+            if(file_exists($caminho)){
+                if (unlink($caminho)){
+                }else {
+                    header('Location: gerenciar_imagens.php');
+                }
+            }    
+                  header('Location: gerenciar_imagens.php');
         }catch(Exception $e){
 
         }

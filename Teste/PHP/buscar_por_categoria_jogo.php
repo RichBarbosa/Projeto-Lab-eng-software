@@ -23,7 +23,7 @@ if(!empty( $_SESSION['nome'])){
         <div class="container-fluid">
             <div class="row">
                 <div class="col align-self-center">
-                    <form action="" method="POST">
+                    <form action="" method="GET">
                     <button type="submit" class="btn btn-secondary" name="inicial" value="A">A</button>
                     <button type="submit" class="btn btn-secondary" name="inicial" value="B">B</button>
                     <button type="submit" class="btn btn-secondary" name="inicial" value="C">C</button>
@@ -56,9 +56,9 @@ if(!empty( $_SESSION['nome'])){
     </div>
     <hr/>
             <?php
-            if(!empty($_POST)){
-                $inicial = $_POST['inicial'];?>
-                <form action="tema_categoria_jogo.php" method="post">
+            if(!empty($_GET)){
+                $inicial = $_GET['inicial'];?>
+                <form action="tema_categoria_jogo copy.php" method="GET">
                     <ul class="list-group list-group-horizontal">
                <?php foreach ($img->listarCategoriasJogoByInicial($inicial) as $col) {?>
                 <ul class="list-group list-group-horizontal">

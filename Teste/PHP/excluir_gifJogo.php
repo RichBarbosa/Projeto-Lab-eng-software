@@ -10,10 +10,17 @@ $id = $_SESSION['nome'];
 if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){ 
     if(!empty($_POST)){
         $idImagem = $_POST['excluir'];
+        $caminho = $cat->getCaminhoJogo($idImagem);
        
 
         try{
             $cat->deletarGifJogo($idImagem);
+            if(file_exists($caminho)){
+                if (unlink($caminho)){
+                }else {
+                    header('Location: gerenciar_gifs_jogo.php');
+                }
+            }    
             header('Location: gerenciar_gifs_jogo.php');
         }catch(Exception $e){
 

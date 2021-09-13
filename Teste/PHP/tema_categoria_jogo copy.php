@@ -2,9 +2,9 @@
 if(!isset($_SESSION)){
   session_start();
 }
-require_once('../PHP\classes\Gif.php');
+require_once('../PHP\classes\Imagem.php');
 require_once('../PHP\classes\Usuario.php');
-$cat = new Gif();
+$cat = new Imagem();
 if(!empty( $_SESSION['nome'])){  
   include_once('header_temaJogo.php');
 }else{  
@@ -14,8 +14,11 @@ if(!empty( $_SESSION['nome'])){
 <br><br><br>
 <main>
     <?php 
-    if(isset($_POST['escolha'])){
-        $categoria = $_POST['escolha'];
+    if(isset($_GET['escolha'])){
+        $categoria = $_GET['escolha'];
+    }
+    else{
+      $categoria = $_SESSION['categoria'] ;
     } 
     $idImagem = null;
     $caminho = null;
@@ -26,56 +29,10 @@ if(!empty( $_SESSION['nome'])){
     }
     $nome = null;
 
-    if(!empty($_POST['categoria'])){
-        $categoria = $_POST['categoria'];
-
-        if(!empty($_POST['id'])){
-          $idImagem = $_POST['id'];
-          $nome = $cat->getNomeJogo($idImagem);
-          try{
-            $cat->deletarImagemJogoFavorita($nome, $id);
-          }catch(Exception $e){
-
-          }
-
-         
-        }else if(!empty($_POST['favoritar'])){
-            $idImagem = $_POST['favoritar'];
-            $caminho = $_POST['caminho'];
-            $nome = $cat->getNomeJogo($idImagem);
-            if($id == null){ ?>
-              <script>alert('é preciso estar logado para favoritar imagens!') </script>        
-      <?php }else{
-                try{
-                    $cat->inserirJogoFavorita($caminho, $nome, $id); ?>
-                    <script>alert("imagem favoritada com sucesso!") </script>
-<?php           }catch(Exception $e){
-            }
-          }  
-        }else if(!empty($_POST['favoritarCat'])){
-          $favCat = $_POST['favoritarCat'];
-          if($id == null){ ?>
-            <script>alert('é preciso estar logado para favoritar categorias!') </script>        
-    <?php }else{
-              try{
-                  $cat->inserirCatJogoFavorita($favCat, $id); ?>
-                  <script>alert("categoria favoritada com sucesso!") </script>
-<?php           }catch(Exception $e){
-                }
-          }  
-        }else if (!empty($_POST['nmCat'])){
-          $favCat = $_POST['nmCat'];
-            try{
-              $cat->deletarCatJogoFavorita($favCat, $id);
-            }catch(Exception $e){
-
-            }
-        }
-      }
     ?>
     <h3 style="text-align:center"><?php echo $categoria ?> </h3>
 
-    <form action="" method="post">
+    <form action="favoritarJ.php" method="post">
     <input type="hidden" name="categoria" value="<?php echo $categoria?>">
     <?php 
     $favnome = $categoria;
@@ -87,8 +44,13 @@ if(!empty( $_SESSION['nome'])){
   </div>
   <?php }else{ ?>
     <div class="container" style="text-align: center">
-    <form action="" method="post">
-    <br><button class="btn btn-outline-success" type ="submit" name="favoritarCat" value="<?php echo $categoria;?>" >Adicionar como favorita</button>
+    <form action="favoritarJ.php" method="post">
+    <br><button class="btn btn-outline-success" type ="submit" 
+    name="favoritarCat" value="<?php echo $categoria;?>" 
+    <?php if (empty($_SESSION['nome'])){?> 
+      disabled> é preciso estar logado para favoritar</button>
+      <?php }else { ?>
+      >Adicionar como favorita</button><?php }?>
     <?php } ?>
   </form>
   </div>
@@ -97,16 +59,16 @@ if(!empty( $_SESSION['nome'])){
     <div class="container">
         <div class="alert alert-success" role="alert">
             <h4 class="alert-heading"></h4>
-                <p>Atualmente possuimos <?php echo count($cat->listarGifJogo($categoria)) . " ";?> imagens nessa categoria</p>
+                <p>Atualmente possuimos <?php echo count($cat->listarImagemJogo($categoria)) . " ";?> imagens nessa categoria</p>
             </div>
   </div>
   <br><br><br> 
   <hr/>       
     <div class="container">
       <div class="row">
-        <?php foreach($cat->listarGifJogo($categoria) as $col){ ?> 
+        <?php foreach($cat->listarImagemJogo($categoria) as $col){ ?> 
         <div class="col-sm-6">
-          <form action="gifJogoEscolhido.php" method="POST">
+          <form action="imagemJogoEscolhida copy.php" method="GET">
             <input type="hidden" name="nImagem" value="<?php echo $col['nome_imagem'] ?>">
           <button type="submit " name="imagem" value="<?php echo $col['id']; ?>" class="btn btn-light"><img class="img-fluid" src="<?php echo $col['caminho'];?>" alt=""> </button>
           </Form>
@@ -118,19 +80,24 @@ if(!empty( $_SESSION['nome'])){
                    <?php echo ".";?><li><h6><?php echo $cat->getJogoTag5($col['id'])?></h6></li><?php echo ".";?>
                     </ul>
 <ul class="list-group list-group-horizontal">
-  <form action="" method="post">
+  <form action="favoritarJ.php" method="post">
     <input type="hidden" name="categoria" value="<?php echo $categoria?>">
     <input type="hidden" name="caminho" value="<?php echo $col['caminho']?>">
     <?php 
     $favnome = $cat->getNomeJogo($col['id']);
-    $fav = $cat->verificarJogoFavorita($favnome, $id);
+    $fav = $cat->verificarFavorita($favnome, $id);
     if($fav){?>
   <li><br><button class="btn btn-outline-light" type ="submit" name="id" value="<?php echo $col['id'];?>" ><img class="img-thumbnail" 
   src="../img/suit-heart-fill.svg"  alt=""></button></li>
   
   <?php }else{ ?>
-    <form action="" method="post">
-    <li><br><button class="btn btn-outline-success" type ="submit" name="favoritar" value="<?php echo $col['id'];?>" >Adicionar como favorita</button></li>
+    <form action="favoritarJ.php" method="post">
+    <li><br><button class="btn btn-outline-success" type ="submit" 
+    name="favoritar" value="<?php echo $col['id'];?>" 
+    <?php if (empty($_SESSION['nome'])){?> 
+      disabled> é preciso estar logado para favoritar</button>
+      <?php }else { ?>
+      >Adicionar como favorita</button><?php }?>
     <?php } ?>
   </form>
   <li><button class="btn btn-outline-light"> 

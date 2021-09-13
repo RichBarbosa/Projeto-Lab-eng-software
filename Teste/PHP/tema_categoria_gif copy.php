@@ -7,7 +7,8 @@ require_once('../PHP\classes\Usuario.php');
 $cat = new Gif();
 if(!empty( $_SESSION['nome'])){  
   include_once('header_tema.php');
-}else{  
+}else{
+  $id = null;    
   ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -116,8 +117,11 @@ if(!empty( $_SESSION['nome'])){
 <?php } ?>
 <main>
     <?php 
-    if(isset($_POST['escolha'])){
-        $categoria = $_POST['escolha'];
+    if(isset($_GET['escolha'])){
+        $categoria = $_GET['escolha'];
+    }
+    else{
+      $categoria = $_SESSION['categoria'] ;
     } 
     $idImagem = null;
     $caminho = null;
@@ -177,7 +181,7 @@ if(!empty( $_SESSION['nome'])){
     ?>
     <h3 style="text-align:center"><?php echo $categoria ?> </h3>
     
-    <form action="" method="post">
+    <form action="favoritarG.php" method="post">
     <input type="hidden" name="categoria" value="<?php echo $categoria?>">
     <?php 
     $favnome = $categoria;
@@ -189,8 +193,13 @@ if(!empty( $_SESSION['nome'])){
   </div>
   <?php }else{ ?>
     <div class="container" style="text-align: center">
-    <form action="" method="post">
-    <br><button class="btn btn-outline-success" type ="submit" name="favoritarCat" value="<?php echo $categoria;?>" >Adicionar como favorita</button>
+    <form action="favoritarG.php" method="post">
+    <br><button class="btn btn-outline-success" type ="submit" 
+    name="favoritarCat" value="<?php echo $categoria;?>" 
+    <?php if (empty($_SESSION['nome'])){?> 
+      disabled> é preciso estar logado para favoritar</button>
+      <?php }else { ?>
+      >Adicionar como favorita</button><?php }?>
     <?php } ?>
   </form>
   </div>
@@ -208,7 +217,7 @@ if(!empty( $_SESSION['nome'])){
       <div class="row">
         <?php foreach($cat->listarGif($categoria) as $col){ ?> 
         <div class="col-sm-6">
-          <form action="gifEscolhido.php" method="POST">
+          <form action="gifEscolhido copy.php" method="GET">
             <input type="hidden" name="nImagem" value="<?php echo $col['nome_gif'] ?>">
           <button type="submit " name="imagem" value="<?php echo $col['id']; ?>" class="btn btn-light"><img class="img-fluid" src="<?php echo $col['caminho'];?>" alt=""> </button>
           </Form>
@@ -220,7 +229,7 @@ if(!empty( $_SESSION['nome'])){
                    <?php echo ".";?><li><h6><?php echo $cat->getTag5($col['id'])?></h6></li><?php echo ".";?>
                     </ul>
 <ul class="list-group list-group-horizontal">
-  <form action="" method="post">
+<form action="favoritarG.php" method="post">
     <input type="hidden" name="categoria" value="<?php echo $categoria?>">
     <input type="hidden" name="caminho" value="<?php echo $col['caminho']?>">
     <?php 
@@ -231,8 +240,13 @@ if(!empty( $_SESSION['nome'])){
   src="../img/suit-heart-fill.svg"  alt=""></button></li>
   
   <?php }else{ ?>
-    <form action="" method="post">
-    <li><br><button class="btn btn-outline-success" type ="submit" name="favoritar" value="<?php echo $col['id'];?>" >Adicionar como favorita</button></li>
+    <form action="favoritarG.php" method="post">
+    <li><br><button class="btn btn-outline-success" type ="submit" 
+    name="favoritar" value="<?php echo $col['id'];?>" 
+    <?php if (empty($_SESSION['nome'])){?> 
+    disabled> é preciso estar logado para favoritar</button>
+    <?php }else { ?>
+    >Adicionar como favorita</button><?php }?> </li>
     <?php } ?>
   </form>
   <li><button class="btn btn-outline-light"> 

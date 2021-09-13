@@ -178,7 +178,7 @@ class Usuario extends Connect  {
    
     function  listarEmail(){
         $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
-        $stmt = $conn->prepare("SELECT id, nome, email, user, administrador  FROM usuario ORDER BY nome ASC");
+        $stmt = $conn->prepare("SELECT id, nome, email, user, administrador  FROM usuario ORDER BY email ASC");
         $run = $stmt->execute();
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $rs;
@@ -265,5 +265,44 @@ class Usuario extends Connect  {
         $stmt ->bindValue(":id_com",$id);
         $run = $stmt->execute();
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }         
+    }
+    function  buscarUsuario($inicial){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT id 
+        FROM usuario
+        WHERE email LIKE  '$inicial%' OR user LIKE  '$inicial%'
+        ORDER BY email ASC");
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rs;
+    }
+    function deletarTodosComentario($idUser){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("DELETE FROM comentarios WHERE idUser = :idUser");
+        $stmt ->bindValue(":idUser",$idUser);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function  deletarTodasFavoritas($id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("DELETE FROM imagens_anime_favorita WHERE id = :id");
+        $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function  deletarTodasCatFavoritas($id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("DELETE FROM cat_favorita WHERE id_user = :id");
+        $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function  deletarFavoritaById($id, $id_user){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("DELETE FROM imagens_anime_favorita WHERE id_favorito = :id AND id = :id_user");
+        $stmt ->bindValue(":id",$id);
+        $stmt ->bindValue(":id_user",$id_user);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+    }        
 }

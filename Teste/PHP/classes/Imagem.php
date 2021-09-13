@@ -179,7 +179,7 @@ class Imagem extends Connect {
     }
     function  getNomeFavorita($id){
         $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
-        $stmt = $conn->prepare("SELECT * FROM imagens_anime_favorita WHERE id = :id");
+        $stmt = $conn->prepare("SELECT * FROM imagens_anime_favorita WHERE id_favorito = :id");
         $stmt ->bindValue(":id",$id);
         $run = $stmt->execute();
         $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
@@ -427,6 +427,146 @@ class Imagem extends Connect {
         $stmt = $conn->prepare("DELETE FROM imagens_anime_favorita WHERE id = :id AND nome_imagemJ = :nome");
         $stmt ->bindValue(":nome",$nome);
         $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function inserirCatFavorita($nome, $id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("INSERT INTO cat_favorita (id_favorito, nomeA, id_user)
+        VALUES (null, :nome, :id)");
+        $stmt ->bindValue(":nome",$nome);
+         $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function inserirCatJogoFavorita($nome, $id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("INSERT INTO cat_favorita (id_favorito, nomeJ, id_user)
+        VALUES (null, :nome, :id)");
+        $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function  verificarCatFavorita($nome, $id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT * FROM cat_favorita WHERE id_user = :id AND nomeA = :nome");
+        $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+        return $rs['nomeA'];  
+    }
+    function  verificarCatJogoFavorita($nome, $id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT * FROM cat_favorita WHERE id_user = :id AND nomeJ = :nome");
+        $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+        return $rs['nomeJ'];  
+    }
+    function  deletarCatFavorita($nome, $id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("DELETE FROM cat_favorita WHERE id_user = :id AND nomeA = :nome");
+        $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function  deletarCatJogoFavorita($nome, $id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("DELETE FROM cat_favorita WHERE id_user = :id AND nomeJ = :nome");
+        $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function  listarCategoriasFavoritas($id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT nomeA  FROM cat_favorita 
+        WHERE id_user = :id AND nomeA IS NOT NULL
+        ORDER BY nomeA ASC");
+         $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rs;
+    }
+    function  listarCategoriasJogoFavoritas($id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT nomeJ  FROM cat_favorita 
+        WHERE id_user = :id AND nomeJ IS NOT NULL
+        ORDER BY nomeJ ASC");
+         $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rs;
+    }
+    function  deletarCatFavoritaByCategoria($nome){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("DELETE FROM cat_favorita WHERE nomeA = :nome");
+        $stmt ->bindValue(":nome",$nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function  deletarCatJogoFavoritaByCategoria($nome){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("DELETE FROM cat_favorita WHERE  nomeJ = :nome");
+        $stmt ->bindValue(":nome",$nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function atualizarCategoria($nome, $categoria){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE categorias_anime SET nome = :nome
+         WHERE nome = :categoria");
+        $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":categoria",$categoria);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function atualizarCatImagem($nome, $categoria){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE imagens_anime SET nome = :nome
+         WHERE nome = :categoria");
+        $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":categoria",$categoria);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function atualizarCatFavorita($nome, $categoria){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE cat_favorita SET nomeA = :nome
+         WHERE nomeA = :categoria");
+        $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":categoria",$categoria);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function atualizarCategoriaJogo($nome, $categoria){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE categorias_jogo SET nome = :nome
+         WHERE nome = :categoria");
+        $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":categoria",$categoria);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function atualizarCatImagemJogo($nome, $categoria){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE imagens_jogo SET nome = :nome
+         WHERE nome = :categoria");
+        $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":categoria",$categoria);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function atualizarCatFavoritaJogo($nome, $categoria){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE cat_favorita SET nomeJ = :nome
+         WHERE nomeJ = :categoria");
+        $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":categoria",$categoria);
         $run = $stmt->execute();
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }   

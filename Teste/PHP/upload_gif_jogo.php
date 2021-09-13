@@ -18,7 +18,7 @@ $id = $_SESSION['nome'];
 
     try{
       $up->uploadGifJogo($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5);
-      header('Location: ../upload_gifJogo.php');
+      header('Location: upload_gifJogo.php');
 
     }catch(Exception $e){
       header('Location: erro.html');

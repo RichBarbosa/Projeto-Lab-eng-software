@@ -4,8 +4,11 @@ if(!isset($_SESSION)){
   session_start();
 }require_once('../PHP\classes\Imagem.php');
 require_once('../PHP\classes\Usuario.php');
+require_once('../PHP\classes\gif.php');
+
 $con = new Usuario();
 $cat = new Imagem();
+$gif = new Gif();
 if(!empty( $_SESSION['nome'])){ 
   $id = $_SESSION['nome']; 
   
@@ -92,9 +95,9 @@ if(!empty( $_SESSION['nome'])){
 
         if(!empty($_POST['id'])){
           $idImagem = $_POST['id'];
-          $nome = $cat->getNomeFavorita($idImagem);
+          
           try{
-            $cat->deletarImagemFavorita($nome, $id);
+            $con->deletarFavoritaById($idImagem, $id);
           }catch(Exception $e){
 
           }
@@ -104,7 +107,90 @@ if(!empty( $_SESSION['nome'])){
     ?>
     <h3 style="text-align:center">Favoritos</h3>
     
-  <br><br><br> 
+  <br><br><br>
+  <div class="container">
+    <div class="row">
+        <div class="col-4">
+          <h6>Categoria imagens anime</h6>
+          <?php if(empty($cat->listarCategoriasFavoritas($id))){?>
+            <h6>Você ainda não favoritou nenhuma sub categoria</h6>
+            <?php }else{ ?>
+          <div class="form-check">
+            <form action="tema_categoria copy.php" method="GET">
+            <select class="form-select" aria-label="Default select example" name= "escolha">
+                <?php foreach($cat->listarCategoriasFavoritas($id) as $col){ ?>      
+                    <option value="<?php echo $col['nomeA'];?>"><?php echo $col['nomeA'];?></option>
+                <?php }?>
+            </select>
+            <button type="submit " class="btn btn-light">ir para a categoria</button>
+
+                </form>
+              </div>
+            <?php }?>              
+        </div>
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+          <h6>Categoria gif anime</h6>
+            <?php if(empty($cat->listarCategoriasFavoritas($id))){?>
+              <h6>Você ainda não favoritou nenhuma sub categoria</h6>
+              <?php }else{ ?>
+                  <div class="form-check">
+                    <form action="tema_categoria_gif copy.php" method="GET">
+                      <select class="form-select" aria-label="Default select example" name= "escolha">
+                <?php foreach($gif->listarCategoriasFavoritas($id) as $col){ ?>      
+                    <option value="<?php echo $col['nomeGA'];?>"><?php echo $col['nomeGA'];?></option>
+                <?php }?>
+            </select>
+            <button type="submit " class="btn btn-light">ir para a categoria</button>
+
+                </form>
+              </div>
+            <?php }?>  
+        </div>
+    </div>
+    <hr>
+    <br><br><br>
+    <div class="row">
+      <div class="col-4">
+        <h6>Categoria imagens Jogos</h6>
+          <?php if(empty($cat->listarCategoriasJogoFavoritas($id))){?>
+            <h6>Você ainda não favoritou nenhuma sub categoria</h6>
+            <?php }else{ ?>
+          <div class="form-check">
+            <form action="tema_categoria_jogo copy.php" method="GET">
+            <select class="form-select" aria-label="Default select example" name= "escolha">
+                <?php foreach($cat->listarCategoriasJogoFavoritas($id) as $col){ ?>      
+                    <option value="<?php echo $col['nomeJ'];?>"><?php echo $col['nomeJ'];?></option>
+                <?php }?>
+            </select>
+            <button type="submit " class="btn btn-light">ir para a categoria</button>
+
+                </form>
+              </div>
+            <?php }?>        
+      </div>
+      <div class="col-4"></div>
+      <div class="col-4">
+        <h6>Categoria gif Jogos</h6>
+          <?php if(empty($gif->listarCategoriasJogoFavoritas($id))){?>
+            <h6>Você ainda não favoritou nenhuma sub categoria</h6>
+            <?php }else{ ?>
+          <div class="form-check">
+            <form action="tema_categoria_jogoGif copy.php" method="GET">
+            <select class="form-select" aria-label="Default select example" name= "escolha">
+                <?php foreach($gif->listarCategoriasJogoFavoritas($id) as $col){ ?>      
+                    <option value="<?php echo $col['nomeGJ'];?>"><?php echo $col['nomeGJ'];?></option>
+                <?php }?>
+            </select>
+            <button type="submit " class="btn btn-light">ir para a categoria</button>
+
+                </form>
+              </div>
+            <?php }?>
+      </div>
+    </div>
+  </div> 
   <hr/>
   <?php if(empty($cat->getFavorita($id))){ ?>
     
@@ -112,6 +198,9 @@ if(!empty( $_SESSION['nome'])){
     <br><br><br><br><br><br><br><br><br><br><br><br> 
 
 <?php }else{?>    
+  <h5>Imagens e gifs favoritados</h5>
+  <?php echo $nome;?>
+  <br><br>
     <div class="container">
       <div class="row">
           <form action="" method="post">
@@ -119,8 +208,8 @@ if(!empty( $_SESSION['nome'])){
         <div class="col-sm-6">
           <button type="submit " class="btn btn-light"><img class="img-fluid" src="<?php echo $col['caminho'];?>" alt=""> </button>
 <ul class="list-group list-group-horizontal">
-  <form action="" method="post"> 
-  <li><br><button class="btn btn-outline-light" type ="submit" name="id" value="<?php echo $col['id'];?>" ><img class="img-thumbnail" 
+  <form action="Deletar_favoritos.php" method="post"> 
+  <li><br><button class="btn btn-outline-light" type ="submit" name="id" value="<?php echo $col['id_favorito'];?>" ><img class="img-thumbnail" 
   src="../img/suit-heart-fill.svg"  alt=""></button></li>
   
   </form>

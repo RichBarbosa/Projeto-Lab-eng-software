@@ -156,8 +156,33 @@ if(!empty( $_SESSION['nome'])){
       <tr>
         <td><button class="btn btn-outline-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">editar informações</button></td>
       </tr>
+      <tr>
+      <td><button class="btn btn-outline-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">excluir conta</button></td>
+      </tr>
  
     </table>
+    <div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    <div class="container">
+      <?php if($con->getAdmin($id) != "S"){ ?>
+     tem certeza que deseja excluir sua conta?
+     <?php }else{?>
+      você atualmente é um administrador, tem certeza que deseja excluir sua conta?
+      <?php }?>
+      <div class="row">
+        <div class="col-4">
+        <button class="btn btn-outline-danger" type="submit" form="me_excluir">confirmar</button>
+
+        <button class="btn btn-outline-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">cancelar</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<form action="me_deletar.php" method="post" id="me_excluir">
+  <input type="hidden" name="del" value="<?php echo $id?>">
+</form>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
     <h5 id="offcanvasRightLabel">Editar perfil</h5>
@@ -224,7 +249,8 @@ if(!empty( $_SESSION['nome'])){
     </form>
   </div>
 </div>
-    </main>   
+    </main>
+    <br><br>   
         <footer>
           
           <!--essa tag a faz voltar pro topo da página, simples.... oq? achou q eu ia fazer mais um comentário

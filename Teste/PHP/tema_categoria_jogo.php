@@ -52,10 +52,48 @@ if(!empty( $_SESSION['nome'])){
 <?php           }catch(Exception $e){
             }
           }  
+        }else if(!empty($_POST['favoritarCat'])){
+          $favCat = $_POST['favoritarCat'];
+          if($id == null){ ?>
+            <script>alert('é preciso estar logado para favoritar categorias!') </script>        
+    <?php }else{
+              try{
+                  $cat->inserirCatJogoFavorita($favCat, $id); ?>
+                  <script>alert("categoria favoritada com sucesso!") </script>
+<?php           }catch(Exception $e){
+                }
+          }  
+        }else if (!empty($_POST['nmCat'])){
+          $favCat = $_POST['nmCat'];
+            try{
+              $cat->deletarCatJogoFavorita($favCat, $id);
+            }catch(Exception $e){
+
+            }
         }
       }
     ?>
     <h3 style="text-align:center"><?php echo $categoria ?> </h3>
+
+    <form action="" method="post">
+    <input type="hidden" name="categoria" value="<?php echo $categoria?>">
+    <?php 
+    $favnome = $categoria;
+    $fav = $cat->verificarCatJogoFavorita($favnome, $id);
+    if($fav){?>
+    <div class="container" style="text-align: center">
+      <br><button class="btn btn-outline-light" type ="submit" name="nmCat" value="<?php echo $categoria;?>" ><img class="img-thumbnail" 
+            src="../img/suit-heart-fill.svg"  alt=""></button>
+  </div>
+  <?php }else{ ?>
+    <div class="container" style="text-align: center">
+    <form action="" method="post">
+    <br><button class="btn btn-outline-success" type ="submit" name="favoritarCat" value="<?php echo $categoria;?>" >Adicionar como favorita</button>
+    <?php } ?>
+  </form>
+  </div>
+<br><br><br>
+
     <div class="container">
         <div class="alert alert-success" role="alert">
             <h4 class="alert-heading"></h4>

@@ -8,6 +8,9 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
   if(!empty($_POST)){
     $IdUser = $_POST['del'];
     try{
+        $con->deletarTodosComentario($IdUser);
+        $con->deletarTodasFavoritas($IdUser);
+        $con->deletarTodasCatFavoritas($IdUser);
         $con->deletarUsuario($IdUser);
         header('Location: gerenciar.php');
 

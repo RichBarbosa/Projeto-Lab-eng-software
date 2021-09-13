@@ -124,7 +124,7 @@ include_once("header_buscar.php");
         <div class="container-fluid">
             <div class="row">
                 <div class="col align-self-center">
-                    <form action="buscar_por_categoria_gif.php" method="POST">
+                    <form action="buscar_por_categoria_gif.php" method="GET">
                     <button type="submit" class="btn btn-secondary" name="inicial" value="A">A</button>
                     <button type="submit" class="btn btn-secondary" name="inicial" value="B">B</button>
                     <button type="submit" class="btn btn-secondary" name="inicial" value="C">C</button>
@@ -157,9 +157,9 @@ include_once("header_buscar.php");
     </div>
     <hr/>
             <?php
-            if(!empty($_POST)){
-                $inicial = $_POST['inicial'];?>
-                <form action="tema_categoria_gif.php" method="post">
+            if(!empty($_GET)){
+                $inicial = $_GET['inicial'];?>
+                <form action="tema_categoria_gif copy.php" method="GET">
                     <ul class="list-group list-group-horizontal">
                <?php foreach ($img->listarCategoriasByInicial($inicial) as $col) {?>
                 <ul class="list-group list-group-horizontal">

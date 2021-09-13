@@ -7,10 +7,11 @@ $id = $_SESSION['nome'];
 $IdUser =NULL;
 if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){ 
   $msg = "algo";
-  if(!empty($_GET['busca'])){
-    $busca = $_GET['busca'];
+  if(!empty($_POST)){
+    $email = $_POST['email'];
     try{
-        if(!empty($con->buscarUsuario($busca))){
+    $IdUser = $con->getId($email);
+        if(!empty($IdUser)){
           $msg = "existe";
         }else{
           unset($msg);
@@ -95,42 +96,131 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
                     </div>
                 </div>
             </nav>
-   </header>
-   <br><br>
-   <h5 style="text-align:center">buscar usuários especificos</h5> 
+   </header> 
     <div class="container-fluid">
-        <form class="d-flex" action="gerenciar.php" method="GET">
-            <input class="form-control" type="search" placeholder="buscar" name="busca" aria-label="Search" autocomplete="off">
+        <form class="d-flex" action="gerenciar.php" method="POST">
+            <input class="form-control" type="search" placeholder="Search" name="email" aria-label="Search" autocomplete="off">
             <button class="btn btn-outline-success" type="submit">Buscar usuários</button>
         </form>
-        <?php 
+    </div>
+   <main>
+<?php 
       if($msg == null){ ?>
         <h3>Usuário não encontrado.</h3>
         <br><br><br><br><br><br><br><br><br>
 <?php }else if($msg == "existe"){ ?>
-  <form action="gerenciarUsuario.php" method="post">
-                  <?php 
-                    foreach ($con->buscarUsuario($busca) as $col) {?>
-                      <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item">
-                          <button class="btn btn-outline-dark" type="submit" value="<?php echo $col['id'];?>" name="id" ><?php echo $con->getEmail($col['id']);?></button></li> 
-                      </ul>
-                  <?php }?>
-              </form>
+        <table class="table">
+          <tr>
+            <th>Nome</th>
+          </tr>
+          <tr>
+            <td><?php echo $con->getNome($IdUser);?></td>
+          </tr>
+          <tr>
+            <th>Usuário</th>
+          </tr>
+          <tr>
+            <td><?php echo $con->getUser($IdUser);?></td>
+          </tr>
+          <tr>
+            <th>email</th>
+          </tr>
+          <tr>
+            <td><?php echo $con->getEmail($IdUser);?></td>
+          </tr>
+          <tr>
+            <th>Adm?</th>
+          </tr>
+          <tr>
+            <td><?php echo $con->getAdmin($IdUser);?></td>
+          </tr>
+          <tr>
+            <th>mais alguma coisa</th>
+          </tr>
+          <tr>
+            <td>bla bla bla</td>
+          </tr>
+          <tr>
+            <th>Ultima coisa</th>
+          </tr>
+          <tr>
+            <td>bla bla bla </td>
+          </tr>
+          <tr>
+            <?php if($id != $IdUser){ ?>
+            <td><button class="btn  btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Deletar</button> </td>
+          </tr>
+          <tr>
+            <?php if($con->getAdmin($IdUser)== "S") { ?>
+        <td><button class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight3" aria-controls="offcanvasRight">Rebaixar Usuário</button></td>
+              <?php }else if($con->getAdmin($IdUser) != "S") { ?> 
+        <td><button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight">Promover para administrador</button></td>
+        <?php     
+            }   
+            }?>
+        </table>
       
-<?php } ?>
-        <br><br><br><br><br>
-        <form action="gerenciarUsuario.php" method="post">
-          <h6 style="text-align:center">lista de usuário</h6>
-        <select class="form-select" aria-label="Default select example" name= "id">
-                                        <?php foreach($con->listarEmail() as $col){ ?>      
-                                            <option value="<?php echo $col['id'];?>"><?php echo $col['email'];?></option>
-                                        <?php }?>
-                                    </select>
-                                    <button type="submit " class="btn btn-secondary">buscar</button>
-        </form>
+<?php }else{ ?>
+        <div class="container-fluid"> Inicie a consulta por usuários utilizando email</div>
+        <br><br><br><br><br><br><br><br><br>
+<?php }?>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Deletar usuário</h5>
+    
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <?php if($con->getAdmin($IdUser) != "S"){?> 
+      <div class="form-floating">
+        Você está preste a deletar o usuário de email <?php echo $con->getEmail($IdUser); ?>, tem certeza?
     </div>
-   <main>
+    <?php }else{?>
+      <div class="form-floating">
+        Você está preste a deletar o administrador de email <?php echo $con->getEmail($IdUser); ?>, tem certeza?
+      </div>
+      <?php }?>
+      <form action="deletar.php" method="POST"> 
+      <input type="hidden" name="del" value="<?php echo $IdUser;?>">    
+      <button class="w-100 btn btn-lg btn-danger" type="submit">Confirmar</button>
+      </form>
+    </div>         
+</div>
+<?php if($con->getAdmin($IdUser) != "S") { ?> 
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight2" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Promover Usuário</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="form-floating">
+        Você está preste a promover o usuário de email <?php echo $con->getEmail($IdUser); ?> há administrador, tem certeza?
+    </div>
+      <form action="adm.php" method="POST">
+      <input type="hidden" name="adm" value="S">     
+      <input type="hidden" name="id" value="<?php echo $IdUser;?>">    
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Confirmar</button>
+      </form>
+   </div>
+</div>
+<?php } else if ($con->getAdmin($IdUser) == "S") {?>
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight3" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Rebaixar Usuário</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+  <div class="form-floating">
+        Você está preste a revogar o direito de adiministrador do usuário de email <?php echo $con->getEmail($IdUser); ?>, tem certeza?
+    </div>
+      <form action="adm.php" method="POST">
+      <input type="hidden" name="adm" value="N">     
+      <input type="hidden" name="id" value="<?php echo $IdUser;?>">    
+      <button class="w-100 btn btn-lg btn-danger" type="submit">Confirmar</button>
+      </form>
+  </div>
+</div>
+<?php } ?>
   </main>
   <br><br><br><br><br><br><br><br><br>
   <footer>          
