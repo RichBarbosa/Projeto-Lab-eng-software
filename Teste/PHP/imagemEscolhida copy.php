@@ -50,6 +50,10 @@ $id = null;?>
         padding: 0;
         border: 0;
       }
+      .imgT{
+        height:500px;
+        width: 500px;
+     }
     </style>
    
 </head>
@@ -71,25 +75,41 @@ $id = null;?>
                 </div>
                 <nav class="navbar navbar-dark bg-dark">
                     <div class="container-fluid">
-                        <form class="d-flex" action="pesquisa.php">
+                        <form class="d-flex" action="pesquisa.php" method="GET">
                             <input class="form-control " type="search" placeholder="Pesquisar" aria-label="Search"  name="buscar" autocomplete="off">
                             <button class="btn btn-outline-success" type="submit">Buscar</button>
                         </form>
                     </div>
+                    <div class="collapse" id="navbarToggleExternalContent">
+  <div class="bg-dark p-4">
+    <ul class="nav navbar-dark bg-dark">
+            <li class="nav-item">
+                <a class="nav-link" href="../Jogos.php"><button class="btn btn-secondary" type="button">Jogos</button></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../Animes.php"><button class="btn btn-secondary" type="button">Animes</button></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href=""><button class="btn btn-secondary" type="button"></button></a>
+            </li>
+        </ul>
+  </div>
+</div>
                 </nav>
             </nav>
         
         <div class="collapse" id="navbarToggleExternalContent">
   <div class="bg-dark p-4">
     <ul class="nav navbar-dark bg-dark">
-            <li class="nav-item">
-                <a class="nav-link" href="buscar_por_categoria.php"><button class="btn btn-secondary" type="button">Buscar por categorias</button></a>
+    <li class="nav-item">
+                <a class="nav-link" href="buscar_por_categoria.php"><button class="btn btn-secondary" type="button">Buscar por imagens</button></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="buscar_por_categoria_gif.php"><button class="btn btn-secondary" type="button">Buscar por categorias</button></a>
+                <a class="nav-link" href="buscar_por_categoria_gif.php"><button class="btn btn-secondary" type="button">Buscar gifs</button></a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="Subimicao.php"><button class="btn btn-secondary"><img src="https://img.icons8.com/office/16/000000/upload--v1.png"/>Submeter conteúdo</button></a>
+            </li>
             </li>
         </ul>
   </div>
@@ -115,13 +135,19 @@ $id = null;?>
 
     }
 ?>
-<main>       
+<main>
+<div class="btn-group" role="group" aria-label="Basic example">
+     <form action="tema_categoria copy.php" method="get">
+       <input type="hidden" name="escolha" value="<?php echo $cat->getCategoriaByNome($nImagem);?>">
+      <button type="submit" class="btn btn-light">Categoria</button>  
+       </form>
+         <button type="button" class="btn btn-light">Imagem</button>
+</div>       
 <div class="container">
- <div class="row">
+ <div class="imgT">
     <img src="<?php echo $cat->getCaminho($idImagem);?>" class="img-thumbnail" alt="...">
-  </tr>
   </div>
-</div>
+  </div>
 <hr/>       
 <div class="container">
   <div class="row">

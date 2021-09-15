@@ -12,8 +12,7 @@ if(!empty( $_SESSION['nome'])){
 
  } ?>
 <br><br><br>
-<main>
-    <?php 
+<?php 
     if(isset($_GET['escolha'])){
         $categoria = $_GET['escolha'];
     }
@@ -30,6 +29,13 @@ if(!empty( $_SESSION['nome'])){
     $nome = null;
 
     ?>
+<main>
+<div class="btn-group" role="group" aria-label="Basic example">
+     <form action="tema_categoria_jogo copy.php" method="get">
+       <input type="hidden" name="escolha" value="<?php echo $categoria;?>">
+      <button type="submit" class="btn btn-light">Categoria</button>  
+       </form>
+</div>
     <h3 style="text-align:center"><?php echo $categoria ?> </h3>
 
     <form action="favoritarJ.php" method="post">

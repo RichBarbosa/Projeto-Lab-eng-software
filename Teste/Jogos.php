@@ -13,7 +13,7 @@ $img = new Imagem();
   $imagem3 = $img->getCaminhoCarroceuA('6');
 
 if(!empty( $_SESSION['nome'])){  
-  include_once('PHP/header_buscarJogo.php');   
+  include_once('PHP/header_indexJogo.php');   
   
 }else{?>
 <!DOCTYPE html>
@@ -92,7 +92,7 @@ if(!empty( $_SESSION['nome'])){
                 <a class="nav-link" href="Jogos.php"><button class="btn btn-secondary" type="button">Jogos</button></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php"><button class="btn btn-secondary" type="button">Animes</button></a>
+                <a class="nav-link" href="Animes.php"><button class="btn btn-secondary" type="button">Animes</button></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href=""><button class="btn btn-secondary" type="button"></button></a>
@@ -106,7 +106,7 @@ if(!empty( $_SESSION['nome'])){
   <div class="bg-dark p-4">
     <ul class="nav navbar-dark bg-dark">
             <li class="nav-item">
-                <a class="nav-link" href="PHP\buscar_por_categoria_jogo.php"><button class="btn btn-secondary" type="button">Buscar por categorias</button></a>
+                <a class="nav-link" href="PHP\buscar_por_categoria_jogo.php"><button class="btn btn-secondary" type="button">Buscar por imagens</button></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="PHP\buscar_por_categoria_jogo_gif.php"><button class="btn btn-secondary" type="button">Buscar gifs</button></a>

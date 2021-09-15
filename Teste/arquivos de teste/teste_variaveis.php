@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST)){
-   echo $_POST['teste'];
+session_start();
 
-}
+
+unset($_SESSION['teste']);

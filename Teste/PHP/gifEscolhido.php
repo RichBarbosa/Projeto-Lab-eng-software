@@ -83,10 +83,10 @@ $id = null;?>
   <div class="bg-dark p-4">
     <ul class="nav navbar-dark bg-dark">
             <li class="nav-item">
-                <a class="nav-link" href="buscar_por_categoria.php"><button class="btn btn-secondary" type="button">Buscar por categorias</button></a>
+                <a class="nav-link" href="buscar_por_categoria.php"><button class="btn btn-secondary" type="button">Buscar por imagens</button></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="buscar_por_categoria_gif.php"><button class="btn btn-secondary" type="button">Buscar por categorias</button></a>
+                <a class="nav-link" href="buscar_por_categoria_gif.php"><button class="btn btn-secondary" type="button">Buscar por gifs</button></a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="Subimicao.php"><button class="btn btn-secondary"><img src="https://img.icons8.com/office/16/000000/upload--v1.png"/>Submeter conteúdo</button></a>

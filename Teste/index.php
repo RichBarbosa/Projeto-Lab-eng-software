@@ -86,7 +86,7 @@ if(!empty( $_SESSION['nome'])){
                 <a class="nav-link" href="Jogos.php"><button class="btn btn-secondary" type="button">Jogos</button></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php"><button class="btn btn-secondary" type="button">Animes</button></a>
+                <a class="nav-link" href="Animes.php"><button class="btn btn-secondary" type="button">Animes</button></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href=""><button class="btn btn-secondary" type="button"></button></a>

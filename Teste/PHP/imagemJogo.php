@@ -51,6 +51,10 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
 
       
       }
+      .imgT{
+        height:500px;
+        width: 500px;
+     }
      
     </style>
    
@@ -95,13 +99,15 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
     <h2>Gerenciar imagens<h2>
         <form action="atualizar_imagemJogo.php" method="post" >
             <input type="hidden" name="id" value="<?php echo $idImagem;?>">
+            <div class="container">
+              <div class=row>
+                <div class="col-6">
+              <div class="imgT">
+              <img src="<?php echo $cat->getCaminhoJogo($idImagem);?>" class="img-thumbnail" alt="...">
+                </div>
+              </div>
+     <div class="col-6">         
     <table class="table">
-      <tr>
-        <th>Imagem</th>
-      </tr>
-      <tr>
-        <td><img src="<?php echo $cat->getCaminhoJogo($idImagem);?>" class="img-thumbnail" alt="..."> </td>
-      </tr>
       <tr>
         <th>Tag1</th>
       </tr>
@@ -137,12 +143,43 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
             <button class="btn btn-outline-success" type="reset">Redefinir</button>                        
     </td>
       </tr>
+      <td>
+        <tr>
+          <td><button class="btn btn-outline-success" type="button" data-bs-toggle="collapse" 
+        data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Mover imagem</button></td>
+        </tr>
+      </td>
       <tr>
           <td><button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Excluir</button></td>
       </tr>
       </form>
  
     </table>
+
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+  <div class="form-check">
+    <h6>mover para:</h6>
+        <form action="mover.php" method="POST">
+          <input type="hidden" name="idJImagem" value="<?php echo $idImagem;?>">
+        <select class="form-select" aria-label="Default select example" name= "categoria">
+            <?php foreach($cat->listarCategoriasJogo() as $col){ ?>      
+                <option value="<?php echo $col['nome'];?>"><?php echo $col['nome'];?></option>
+            <?php }?>
+        </select>
+        <button type="submit " class="btn btn-primary">Confirmar</button>
+
+            </form>  
+            
+    </div>
+  </div>
+</div>
+
+      </div>
+      </div>
+
+      
+
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

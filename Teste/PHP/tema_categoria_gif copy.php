@@ -67,7 +67,7 @@ if(!empty( $_SESSION['nome'])){
                 </div>
                 <nav class="navbar navbar-dark bg-dark">
                     <div class="container-fluid">
-                    <form class="d-flex" action="pesquisa.php" method="POST">
+                    <form class="d-flex" action="pesquisa.php" method="GET">
                             <input class="form-control " type="search" placeholder="Pesquisar" aria-label="Search"  name="buscar" autocomplete="off">
                             <button class="btn btn-outline-success" type="submit">Buscar</button>
                         </form>
@@ -93,10 +93,10 @@ if(!empty( $_SESSION['nome'])){
   <div class="bg-dark p-4">
     <ul class="nav navbar-dark bg-dark">
             <li class="nav-item">
-                <a class="nav-link" href="buscar_por_categoria.php"><button class="btn btn-secondary" type="button">Buscar por categorias</button></a>
+                <a class="nav-link" href="buscar_por_categoria.php"><button class="btn btn-secondary" type="button">Buscar por imagens</button></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="buscar_por_categoria_gif.php"><button class="btn btn-secondary" type="button">Buscar por categorias</button></a>
+                <a class="nav-link" href="buscar_por_categoria_gif.php"><button class="btn btn-secondary" type="button">Buscar por gifs</button></a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="Subimicao.php"><button class="btn btn-secondary"><img src="https://img.icons8.com/office/16/000000/upload--v1.png"/>Submeter conteudo</button></a>
@@ -115,8 +115,7 @@ if(!empty( $_SESSION['nome'])){
 <body>
 <br><br><br>
 <?php } ?>
-<main>
-    <?php 
+ <?php 
     if(isset($_GET['escolha'])){
         $categoria = $_GET['escolha'];
     }
@@ -125,60 +124,16 @@ if(!empty( $_SESSION['nome'])){
     } 
     $idImagem = null;
     $caminho = null;
-    if(!empty($_SESSION['nome'])){
-          $id = $_SESSION['nome'];
-    }else{
-      $id = null;
-    }
-    $nome = null;
-
-    if(!empty($_POST['categoria'])){
-        $categoria = $_POST['categoria'];
-
-        if(!empty($_POST['id'])){
-          $idImagem = $_POST['id'];
-          $nome = $cat->getNome($idImagem);
-          try{
-            $cat->deletarGifFavorito($nome, $id);
-          }catch(Exception $e){
-
-          }
-
-         
-        }else if(!empty($_POST['favoritar'])){
-            $idImagem = $_POST['favoritar'];
-            $caminho = $_POST['caminho'];
-            $nome = $cat->getNome($idImagem);
-            if($id == null){ ?>
-              <script>alert('é preciso estar logado para favoritar imagens!') </script>        
-      <?php }else{
-                try{
-                    $cat->inserirFavorita($caminho, $nome, $id); ?>
-                    <script>alert("imagem favoritada com sucesso!") </script>
-<?php           }catch(Exception $e){
-            }
-          }  
-        }else if(!empty($_POST['favoritarCat'])){
-          $favCat = $_POST['favoritarCat'];
-          if($id == null){ ?>
-            <script>alert('é preciso estar logado para favoritar categorias!') </script>        
-    <?php }else{
-              try{
-                  $cat->inserirCatFavorita($favCat, $id); ?>
-                  <script>alert("categoria favoritada com sucesso!") </script>
-<?php           }catch(Exception $e){
-                }
-          }  
-        }else if (!empty($_POST['nmCat'])){
-          $favCat = $_POST['nmCat'];
-            try{
-              $cat->deletarCatFavorita($favCat, $id);
-            }catch(Exception $e){
-
-            }
-        }
-      }
+    
     ?>
+<main>
+<div class="btn-group" role="group" aria-label="Basic example">
+     <form action="tema_categoria_gif copy.php" method="get">
+       <input type="hidden" name="escolha" value="<?php echo $categoria;?>">
+      <button type="submit" class="btn btn-light">Categoria</button>  
+       </form>
+</div>
+   
     <h3 style="text-align:center"><?php echo $categoria ?> </h3>
     
     <form action="favoritarG.php" method="post">

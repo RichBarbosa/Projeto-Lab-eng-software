@@ -569,6 +569,38 @@ class Imagem extends Connect {
         $stmt ->bindValue(":categoria",$categoria);
         $run = $stmt->execute();
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function  getCategoriaByNome($nome){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT nome FROM imagens_anime WHERE nome_imagem = :nome");
+        $stmt ->bindValue(":nome",$nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+        return $rs['nome'];  
+    }
+    function  getCategoriaJogoByNome($nome){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT nome FROM imagens_jogo WHERE nome_imagem = :nome");
+        $stmt ->bindValue(":nome",$nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+        return $rs['nome'];  
+    }
+    function moverImagem($categoria, $id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE imagens_anime SET nome = :categoria WHERE id = :id");
+        $stmt ->bindValue(":categoria",$categoria);
+        $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function moverImagemJogo($categoria, $id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE imagens_jogo SET nome = :categoria WHERE id = :id");
+        $stmt ->bindValue(":categoria",$categoria);
+        $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }   
 }
 

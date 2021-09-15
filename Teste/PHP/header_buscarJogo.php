@@ -82,7 +82,7 @@ if(!empty( $_SESSION['nome'])){
                 </div>
                 <nav class="navbar navbar-dark bg-dark">
                     <div class="container-fluid">
-                    <form class="d-flex" action="pesquisaJogo.php" method="POST">
+                    <form class="d-flex" action="pesquisaJogo.php" method="GET">
                             <input class="form-control " type="search" placeholder="Pesquisar" aria-label="Search" name="buscar" autocomplete="off">
                             <button class="btn btn-outline-success" type="submit">Buscar</button>
                         </form>
@@ -91,10 +91,10 @@ if(!empty( $_SESSION['nome'])){
   <div class="bg-dark p-4">
     <ul class="nav navbar-dark bg-dark">
             <li class="nav-item">
-                <a class="nav-link" href="Jogos.php"><button class="btn btn-secondary" type="button">Jogos</button></a>
+                <a class="nav-link" href="../Jogos.php"><button class="btn btn-secondary" type="button">Jogos</button></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="Animes.php"><button class="btn btn-secondary" type="button">Animes</button></a>
+                <a class="nav-link" href="../Animes.php"><button class="btn btn-secondary" type="button">Animes</button></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href=""><button class="btn btn-secondary" type="button"></button></a>
@@ -109,10 +109,10 @@ if(!empty( $_SESSION['nome'])){
   <div class="bg-dark p-4">
     <ul class="nav navbar-dark bg-dark">
             <li class="nav-item">
-                <a class="nav-link" href="PHP\buscar_por_categoria_jogo.php"><button class="btn btn-secondary" type="button">Buscar por categorias</button></a>
+                <a class="nav-link" href="PHP\buscar_por_categoria_jogo.php"><button class="btn btn-secondary" type="button">Buscar por imagens</button></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="PHP\buscar_por_categoria_jogo_gif.php"><button class="btn btn-secondary" type="button">Buscar por categorias</button></a>
+                <a class="nav-link" href="PHP\buscar_por_categoria_jogo_gif.php"><button class="btn btn-secondary" type="button">Buscar por gifs</button></a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="PHP\Subimicao_jogo.php"><button class="btn btn-secondary"><img src="https://img.icons8.com/office/16/000000/upload--v1.png"/>Submeter conteúdo</button></a>

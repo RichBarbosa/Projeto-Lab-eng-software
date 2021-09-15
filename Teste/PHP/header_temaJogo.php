@@ -83,7 +83,7 @@ if(!empty( $_SESSION['nome'])){
                 </div>
                 <nav class="navbar navbar-dark bg-dark">
                     <div class="container-fluid">
-                        <form class="d-flex" action="pesquisaJogo.php" method="POST">
+                        <form class="d-flex" action="pesquisaJogo.php" method="GET">
                             <input class="form-control " type="search" placeholder="Pesquisar" aria-label="Search" name="buscar" autocomplete="off">
                             <button class="btn btn-outline-success" type="submit">Buscar</button>
                         </form>
@@ -92,10 +92,10 @@ if(!empty( $_SESSION['nome'])){
   <div class="bg-dark p-4">
     <ul class="nav navbar-dark bg-dark">
             <li class="nav-item">
-                <a class="nav-link" href="Jogos.php"><button class="btn btn-secondary" type="button">Jogos</button></a>
+                <a class="nav-link" href="../Jogos.php"><button class="btn btn-secondary" type="button">Jogos</button></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="Animes.php"><button class="btn btn-secondary" type="button">Animes</button></a>
+                <a class="nav-link" href="../Animes.php"><button class="btn btn-secondary" type="button">Animes</button></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href=""><button class="btn btn-secondary" type="button"></button></a>

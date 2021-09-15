@@ -122,7 +122,25 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
                                 <?php }?>
                             </select>
                         </form>  
-                              <button class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Excluir</button> 
+                              <button class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Excluir</button>
+                              <br><br>
+                              <h6>renomear categoria de imagem </h6>
+                        <form action="PHP\renomear_categoria.php" method="POST" id="renomearJ">
+                            <select class="form-select" aria-label="Default select example" name= "categoria">
+                                <?php foreach($cat->listarCategoriasJogo() as $col){ ?>      
+                                    <option value="<?php echo $col['nome'];?>"><?php echo $col['nome'];?></option>
+                                <?php }?>
+                            </select>
+                        </form>
+                        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Renomear essa sub categoria
+                        </button>
+                        <div class="collapse" id="collapseExample">
+                          <div class="card card-body">
+                            <input type="text" name="novoNomeJ" form="renomearJ" autocomplete ="off">
+                            <button class="btn btn-secondary" type="submit" form="renomearJ">Confirmar</button>
+                          </div>
+                        </div> 
                     </div>                          
                 </div>
         </div>
@@ -168,7 +186,25 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
                                 <?php }?>
                             </select>
                         </form>  
-                              <button class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight">Excluir</button> 
+                              <button class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight">Excluir</button>
+                              <br><br>
+                        <h6>renomear categoria de imagem </h6>
+                        <form action="PHP\renomear_categoria.php" method="POST" id="renomearGJ">
+                            <select class="form-select" aria-label="Default select example" name= "categoria">
+                                <?php foreach($gif->listarCategoriasJogo() as $col){ ?>      
+                                    <option value="<?php echo $col['nome'];?>"><?php echo $col['nome'];?></option>
+                                <?php }?>
+                            </select>
+                        </form>
+                        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
+                            Renomear essa sub categoria
+                        </button>
+                        <div class="collapse" id="collapseExample2">
+                          <div class="card card-body">
+                            <input type="text" name="novoNomeGJ" form="renomearGJ" autocomplete ="off">
+                            <button class="btn btn-secondary" type="submit" form="renomearGJ">Confirmar</button>
+                          </div>
+                        </div> 
                     </div>                          
                 </div>  
     </div>

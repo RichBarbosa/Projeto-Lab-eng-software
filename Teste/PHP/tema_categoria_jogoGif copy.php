@@ -12,8 +12,7 @@ if(!empty( $_SESSION['nome'])){
 
  } ?>
 <br><br><br>
-<main>
-    <?php 
+ <?php 
     if(isset($_GET['escolha'])){
         $categoria = $_GET['escolha'];
     }
@@ -29,53 +28,14 @@ if(!empty( $_SESSION['nome'])){
     }
     $nome = null;
 
-    if(!empty($_POST['categoria'])){
-        $categoria = $_POST['categoria'];
-
-        if(!empty($_POST['id'])){
-          $idImagem = $_POST['id'];
-          $nome = $cat->getNomeJogo($idImagem);
-          try{
-            $cat->deletarImagemJogoFavorita($nome, $id);
-          }catch(Exception $e){
-
-          }
-
-         
-        }else if(!empty($_POST['favoritar'])){
-            $idImagem = $_POST['favoritar'];
-            $caminho = $_POST['caminho'];
-            $nome = $cat->getNomeJogo($idImagem);
-            if($id == null){ ?>
-              <script>alert('é preciso estar logado para favoritar imagens!') </script>        
-      <?php }else{
-                try{
-                    $cat->inserirJogoFavorita($caminho, $nome, $id); ?>
-                    <script>alert("imagem favoritada com sucesso!") </script>
-<?php           }catch(Exception $e){
-            }
-          }  
-        }else if(!empty($_POST['favoritarCat'])){
-          $favCat = $_POST['favoritarCat'];
-          if($id == null){ ?>
-            <script>alert('é preciso estar logado para favoritar categorias!') </script>        
-    <?php }else{
-              try{
-                  $cat->inserirCatJogoFavorita($favCat, $id); ?>
-                  <script>alert("categoria favoritada com sucesso!") </script>
-<?php           }catch(Exception $e){
-                }
-          }  
-        }else if (!empty($_POST['nmCat'])){
-          $favCat = $_POST['nmCat'];
-            try{
-              $cat->deletarCatJogoFavorita($favCat, $id);
-            }catch(Exception $e){
-
-            }
-        }
-      }
     ?>
+<main>
+<div class="btn-group" role="group" aria-label="Basic example">
+     <form action="tema_categoria_jogoGif copy.php" method="get">
+       <input type="hidden" name="escolha" value="<?php echo $categoria;?>">
+      <button type="submit" class="btn btn-light">Categoria</button>  
+       </form>
+</div>
     <h3 style="text-align:center"><?php echo $categoria ?> </h3>
 
     <form action="favoritarJG.php" method="post">

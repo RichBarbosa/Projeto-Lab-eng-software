@@ -28,6 +28,7 @@ if(!empty( $_SESSION['nome'])){
     <link rel="icon" href="img/bull-horns_39319.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="CSS/menu.css">
     <link rel="stylesheet" type="text/css" href="../CSS/footer.css">
+    <link rel="stylesheet" href="https://unpkg.com/wingcss"/>
 
     
     <!--os treco do Bootstrap, quem diria que um link desses faz até um asno como eu fazer um front
@@ -52,6 +53,11 @@ if(!empty( $_SESSION['nome'])){
         padding: 0;
         border: 0;
       }
+      .imgT{
+        max-height: max-content;
+        max-width: max-content;
+        object-fit: cover;
+     }
     </style>
    
 </head>
@@ -80,7 +86,7 @@ if(!empty( $_SESSION['nome'])){
                 </div>
                 <nav class="navbar navbar-dark bg-dark">
                     <div class="container-fluid">
-                        <form class="d-flex" action="PHP\pesquisa.php" method="POST">
+                        <form class="d-flex" action="PHP\pesquisa.php" method="GET">
                             <input class="form-control " type="search" placeholder="Pesquisar" aria-label="Search"  name="buscar" autocomplete="off">
                             <button class="btn btn-outline-success" type="submit">Buscar</button>
                         </form>
@@ -92,7 +98,7 @@ if(!empty( $_SESSION['nome'])){
                 <a class="nav-link" href="Jogos.php"><button class="btn btn-secondary" type="button">Jogos</button></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php"><button class="btn btn-secondary" type="button">Animes</button></a>
+                <a class="nav-link" href="Animes.php"><button class="btn btn-secondary" type="button">Animes</button></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href=""><button class="btn btn-secondary" type="button"></button></a>
@@ -107,13 +113,10 @@ if(!empty( $_SESSION['nome'])){
   <div class="bg-dark p-4">
     <ul class="nav navbar-dark bg-dark">
             <li class="nav-item">
-                <a class="nav-link" href="PHP\buscar_por_categoria.php"><button class="btn btn-secondary" type="button">Buscar por categorias</button></a>
+                <a class="nav-link" href="PHP\buscar_por_categoria.php"><button class="btn btn-secondary" type="button">Buscar por imagens</button></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="PHP\buscar_por_categoria_gif.php"><button class="btn btn-secondary" type="button">Buscar gifs</button></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="PHP\upload_gif.php"><button class="btn btn-secondary" type="button">Buscar por categorias</button></a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="PHP\Subimicao.php"><button class="btn btn-secondary"><img src="https://img.icons8.com/office/16/000000/upload--v1.png"/>Submeter conteúdo</button></a>
@@ -164,7 +167,7 @@ if(!empty( $_SESSION['nome'])){
                     <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                           <div class="carousel-item active" data-bs-interval="4000">
-                          <form action="PHP\imagemEscolhida.php" method="post"> 
+                          <form action="PHP\imagemEscolhida copy.php" method="GET"> 
                               <input type="hidden" name="nImagem" value="<?php echo $img->getNome($id1); ?>">
                             <button type="submit" class="btn btn-outline-light" name="imagem" value="<?php echo $id1;?>">
                               <img  class="img-fluid" src=" PHP\<?php echo $imagem1;?>" class="d-block w-100" alt="...">
@@ -172,7 +175,7 @@ if(!empty( $_SESSION['nome'])){
                           </form>  
                           </div>
                           <div class="carousel-item" data-bs-interval="4000">
-                          <form action="PHP\imagemEscolhida.php" method="post">
+                          <form action="PHP\imagemEscolhida copy.php" method="GET">
                           <input type="hidden" name="nImagem" value="<?php echo $img->getNome($id2); ?>"> 
                           <button type="submit" class="btn btn-outline-light" name="imagem" value="<?php echo $id2?>">
                               <img  class="img-fluid" src=" PHP\<?php echo $imagem2?>" class="d-block w-100" alt="...">
@@ -180,7 +183,7 @@ if(!empty( $_SESSION['nome'])){
                             </form>  
                           </div>
                           <div class="carousel-item" data-bs-interval="4000">
-                          <form action="PHP\imagemEscolhida.php" method="post">
+                          <form action="PHP\imagemEscolhida copy.php" method="GET">
                           <input type="hidden" name="nImagem" value="<?php echo $img->getNome($id3); ?>">  
                           <button type="submit" class="btn btn-outline-light" name="imagem" value="<?php echo $id3?>">
                               <img  class="img-fluid" src=" PHP\<?php echo $imagem3?>" class="d-block w-100" alt="...">
@@ -206,59 +209,83 @@ if(!empty( $_SESSION['nome'])){
 
     <h2>Algumas categorias em destaque</h2>
     <section> 
-      <form action="PHP\tema_categoria.php" method="post">   
+      <form action="PHP\tema_categoria copy.php" method="GET">   
       <div class="container">        
         <div class="row">
           <div class="col-6">
             <figure class="figure">
+            <div class="container">
+             <div class="imgT">
             <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('1'); ?>">
             <img  class="img-fluid" src=" PHP\<?php echo $img->getCaminhoDestaqueA('1');?>" class="d-block w-100" alt="...">
             </button>
+            </div>
+            </div>
               <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('1'); ?></figcaption>
             </figure>
             <br>
             <br>
             <figure class="figure">
+            <div class="container">
+             <div class="imgT">
             <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('2'); ?>">
-            <img  class="img-fluid" src=" PHP\<?php echo $img->getCaminhoDestaqueA('2');?>" class="d-block w-100" alt="...">
+            <img  class="img-fluid imgT" src=" PHP\<?php echo $img->getCaminhoDestaqueA('2');?>" class="d-block w-100" alt="...">
 
             </button>
+            </div>
+            </div>
               <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('2'); ?></figcaption>
             </figure>
             <br>
             <br>
             <figure class="figure">
+            <div class="container">
+             <div class="imgT">
             <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('3'); ?>">
-            <img  class="img-fluid" src=" PHP\<?php echo $img->getCaminhoDestaqueA('3');?>" class="d-block w-100" alt="...">
+            <img  class="img-fluid imgT" src=" PHP\<?php echo $img->getCaminhoDestaqueA('3');?>" class="d-block w-100" alt="...">
 
             </button>
+            </div>
+            </div>
               <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('3'); ?></figcaption>
             </figure>
           </div>
           
           <div class="col-6">
+          <div class="container">
+             <div class="imgT">
           <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('4'); ?>">
-          <img  class="img-fluid" src=" PHP\<?php echo $img->getCaminhoDestaqueA('4');?>" class="d-block w-100" alt="...">
+          <img  class="img-fluid imgT" src=" PHP\<?php echo $img->getCaminhoDestaqueA('4');?>" class="d-block w-100" alt="...">
 
           </button>
+          </div>
+            </div>
             <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('4'); ?></figcaption>
           </figure>
           <br>
           <br>
           <figure class="figure">
+          <div class="container">
+             <div class="imgT">
           <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('5'); ?>">
-          <img  class="img-fluid" src=" PHP\<?php echo $img->getCaminhoDestaqueA('5');?>" class="d-block w-100" alt="...">
+          <img  class="img-fluid imgT" src=" PHP\<?php echo $img->getCaminhoDestaqueA('5');?>" class="d-block w-100" alt="...">
 
           </button>
+          <div class="container">
+             <div class="imgT">
               <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('5'); ?></figcaption>
             </figure>
             <br>
             <br>
             <figure class="figure">
+            <div class="container">
+             <div class="imgT">
             <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('6'); ?>">
-            <img  class="img-fluid" src=" PHP\<?php echo $img->getCaminhoDestaqueA('6');?>" class="d-block w-100" alt="...">
+            <img  class="img-fluid imgT" src=" PHP\<?php echo $img->getCaminhoDestaqueA('6');?>" class="d-block w-100" alt="...">
 
             </button>
+            </div>
+            </div>
               <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('6'); ?> </figcaption>
             </figure>
             <br>

@@ -74,7 +74,8 @@ if(!empty( $_SESSION['nome'])){
             
             
     </main>        
-  </main>    
+  </main>
+  <br><br><br><br><br><br>    
         <footer>
           
           <!--essa tag a faz voltar pro topo da página, simples.... oq? achou q eu ia fazer mais um comentário

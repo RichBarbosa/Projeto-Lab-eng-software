@@ -19,7 +19,6 @@ if(!empty( $_SESSION['nome'])){
     krl, pq ninguém fala que é tão simples assim?-->
     <link rel="icon" href="../img/bull-horns_39319.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="../CSS/menu.css">
-    <link rel="stylesheet" type="text/css" href="../CSS/footer.css">
 
     
     <!--os treco do Bootstrap, quem diria que um link desses faz até um asno como eu fazer um front
@@ -83,7 +82,7 @@ if(!empty( $_SESSION['nome'])){
                 </div>
                 <nav class="navbar navbar-dark bg-dark">
                     <div class="container-fluid">
-                    <form class="d-flex" action="pesquisa.php" method="POST">
+                    <form class="d-flex" action="pesquisa.php" method="GET">
                             <input class="form-control " type="search" placeholder="Pesquisar" aria-label="Search" name="buscar" autocomplete="off">
                             <button class="btn btn-outline-success" type="submit">Buscar</button>
                         </form>
@@ -92,10 +91,10 @@ if(!empty( $_SESSION['nome'])){
   <div class="bg-dark p-4">
     <ul class="nav navbar-dark bg-dark">
             <li class="nav-item">
-                <a class="nav-link" href="Jogos.php"><button class="btn btn-secondary" type="button">Jogos</button></a>
+                <a class="nav-link" href="../Jogos.php"><button class="btn btn-secondary" type="button">Jogos</button></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="Animes.php"><button class="btn btn-secondary" type="button">Animes</button></a>
+                <a class="nav-link" href="../Animes.php"><button class="btn btn-secondary" type="button">Animes</button></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href=""><button class="btn btn-secondary" type="button"></button></a>
@@ -109,8 +108,11 @@ if(!empty( $_SESSION['nome'])){
         <div class="collapse" id="navbarToggleExternalContent">
   <div class="bg-dark p-4">
     <ul class="nav navbar-dark bg-dark">
-            <li class="nav-item">
+    <li class="nav-item">
                 <a class="nav-link" href="buscar_por_categoria.php"><button class="btn btn-secondary" type="button">Buscar por categorias</button></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="buscar_por_categoria_gif.php"><button class="btn btn-secondary" type="button">Buscar por categorias</button></a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="Subimicao.php"><button class="btn btn-secondary"><img src="https://img.icons8.com/office/16/000000/upload--v1.png"/>Submeter conteúdo</button></a>

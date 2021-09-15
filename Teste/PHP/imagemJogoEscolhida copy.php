@@ -30,7 +30,14 @@ $id = null;
     }
         
 ?>
-   <main>       
+   <main>
+   <div class="btn-group" role="group" aria-label="Basic example">
+     <form action="tema_categoria_jogo copy.php" method="get">
+       <input type="hidden" name="escolha" value="<?php echo $cat->getCategoriaJogoByNome($nImagem);?>">
+      <button type="submit" class="btn btn-light">Categoria</button>  
+       </form>
+         <button type="button" class="btn btn-light">Imagem</button>
+</div>       
     <table class="table">
       <tr>
         <th></th>

@@ -69,7 +69,7 @@ $id = null;
                 </div>
                 <nav class="navbar navbar-dark bg-dark">
                     <div class="container-fluid">
-                    <form class="d-flex" action="pesquisa.php" method="POST">
+                    <form class="d-flex" action="pesquisa.php" method="GET">
                             <input class="form-control " type="search" placeholder="Pesquisar" aria-label="Search"  name="buscar" autocomplete="off">
                             <button class="btn btn-outline-success" type="submit">Buscar</button>
                         </form>
@@ -115,10 +115,10 @@ $id = null;
 </nav>     
    </header> 
 <body>
-<br><br><br>
+  
 <?php } ?>
 <main>
-    <?php 
+<?php 
     if(isset($_GET['escolha'])){
         $categoria = $_GET['escolha'];
     }
@@ -127,7 +127,16 @@ $id = null;
     } 
     $idImagem = null;
     $caminho = null;
-    ?>
+    ?>  
+<div class="btn-group" role="group" aria-label="Basic example">
+<form action="" method="get">
+ <input type="hidden" name="escolha" value="<?php echo $categoria;?>">
+  <button type="submit" class="btn btn-light">Categoria</button>
+</form>
+</div>
+ <br><br><br>
+ 
+    
     <h3 style="text-align:center"><?php echo $categoria ?> </h3>
 
     <form action="favoritar.php" method="post">

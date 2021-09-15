@@ -65,8 +65,8 @@ if(!empty( $_SESSION['nome'])){
                 </div>
                 <nav class="navbar navbar-dark bg-dark">
                     <div class="container-fluid">
-                        <form class="d-flex" action="pesquisa.php" method="POST">
-                            <input class="form-control " type="search" placeholder="Pesquisar" aria-label="Search" name="buscar">
+                        <form class="d-flex" action="pesquisa.php" method="GET">
+                            <input class="form-control " type="search" placeholder="Pesquisar" aria-label="Search" name="buscar" autocomplete="off">
                             <button class="btn btn-outline-success" type="submit">Buscar</button>
                         </form>
                     </div>
@@ -100,10 +100,10 @@ if(!empty( $_SESSION['nome'])){
   <?php } ?>
   <main>
     <?php 
-      if(isset($_POST['buscar'])){
-          $busca = $_POST['buscar'];
+      if(isset($_GET['buscar'])){
+          $busca = $_GET['buscar'];
           if($img ->listarCategoriasByInicial($busca) != null || $gif ->listarCategoriasByInicial($busca) != null){ ?>
-            <form action="tema_categoria_jogo.php" method="post">
+            <form action="tema_categoria copy.php" method="GET">
               <h6>Imagens</h6>
               <ul class="list-group list-group-horizontal">
                   <?php 
@@ -114,7 +114,7 @@ if(!empty( $_SESSION['nome'])){
                   <?php }?>
               </ul>  
             </form>
-              <form action="tema_categoria_jogoGif.php" method="post">
+              <form action="tema_categoria_gif copy.php" method="GET">
                 <h6>gifs</h6>
                 <ul class="list-group list-group-horizontal">
                   <?php 
@@ -129,7 +129,7 @@ if(!empty( $_SESSION['nome'])){
         <h5>Ops... não foi encontrado nada..</h5>
         <h5>gostaria de buscar por tag?</h5>
         <div class="container-fluid">
-          <form class="d-flex" action="pesquisa.php" method="POST">
+          <form class="d-flex" action="pesquisa.php" method="GET">
             <input class="form-control " type="search" placeholder="Search" aria-label="Search" name="buscarTag" autocomplete="off">
               <button class="btn btn-outline-success" type="submit">Buscar</button>
           </form>
@@ -137,8 +137,8 @@ if(!empty( $_SESSION['nome'])){
 
         </div>     
     <?php }
-      } if(!empty($_POST['buscarTag'])){ 
-        $busca = $_POST['buscarTag'];
+      } if(!empty($_GET['buscarTag'])){ 
+        $busca = $_GET['buscarTag'];
         if($img->getCaminhoByTag($busca) || $gif->getCaminhoByTag($busca)){?>
           <div class="container-fluid">
             <div class="row">
@@ -150,7 +150,7 @@ if(!empty( $_SESSION['nome'])){
                 <h4>Imagens</h4>
                 <?php 
                   foreach($img->getCaminhoByTag($busca) as $col){ ?> 
-                    <form action="imagemJogoEscolhida.php" method="POST">
+                    <form action="imagemEscolhida copy.php" method="GET">
                       <input type="hidden" name="nImagem" value="<?php echo $col['nome_imagem'] ?>">
                       <button type="submit " name="imagem" value="<?php echo $col['id']; ?>" class="btn btn-light"><img class="img-fluid" src="<?php echo $col['caminho'];?>" alt=""> </button>
                     </Form>
@@ -193,7 +193,7 @@ if(!empty( $_SESSION['nome'])){
                 <h4>Gifs</h4>
                 <?php 
                   foreach($gif->getCaminhoByTag($busca) as $col){ ?> 
-                    <form action="gifJogoEscolhido.php" method="POST">
+                    <form action="gifEscolhido copy.php" method="GET">
                       <input type="hidden" name="nImagem" value="<?php echo $col['nome_imagem'] ?>">
                       <button type="submit " name="imagem" value="<?php echo $col['id']; ?>" class="btn btn-light"><img class="img-fluid" src="<?php echo $col['caminho'];?>" alt=""> </button>
                     </Form>
@@ -227,14 +227,25 @@ if(!empty( $_SESSION['nome'])){
                     </ul>         
                             </hr>
                 <?php 
-                } ?>         
+                } ?>
               </div>
             </div>
           </div>
-    <?php }
-      }?>
+    <?php }else if(empty($img->getCaminhoByTag($busca)) && empty($gif->getCaminhoByTag($busca))){?>
+      <h5>Ops... não foi encontrado nada..</h5>
+        <h5>gostaria de buscar por tag?</h5>
+        <div class="container-fluid">
+          <form class="d-flex" action="pesquisa.php" method="GET">
+            <input class="form-control " type="search" placeholder="Search" aria-label="Search" name="buscarTag" autocomplete="off">
+              <button class="btn btn-outline-success" type="submit">Buscar</button>
+          </form>
+      <?php }
 
-</main>  
+      }
+?>      
+</main> 
+<br><br><br><br><br><br><br><br><br><br><br>
+
         <footer>                    
           <a href="#top"><button class="btn btn-secondary" type="button">voltar ao Topo</button></a>
           <a href="sobre.html"><button class="btn btn-secondary" type="button">Sobre nós</button></a>

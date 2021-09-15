@@ -19,7 +19,6 @@ include_once("header_buscar.php");
     krl, pq ninguém fala que é tão simples assim?-->
     <link rel="icon" href="../img/bull-horns_39319.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="../CSS/menu.css">
-    <link rel="stylesheet" type="text/css" href="../CSS/footer.css">
 
     
     <!--os treco do Bootstrap, quem diria que um link desses faz até um asno como eu fazer um front
@@ -66,7 +65,7 @@ include_once("header_buscar.php");
                 </div>
                 <nav class="navbar navbar-dark bg-dark">
                     <div class="container-fluid">
-                         <form class="d-flex" action="pesquisa.php" method="POST">
+                         <form class="d-flex" action="pesquisa.php" method="GET">
                             <input class="form-control " type="search" placeholder="Pesquisar" aria-label="Search" name="buscar" autocomplete="off">
                             <button class="btn btn-outline-success" type="submit">Buscar</button>
                         </form>
@@ -175,7 +174,9 @@ include_once("header_buscar.php");
             
             
     </main>        
-  </main>    
+  </main> 
+  <br><br><br><br><br><br>   
+   
         <footer>
           
           <!--essa tag a faz voltar pro topo da página, simples.... oq? achou q eu ia fazer mais um comentário
