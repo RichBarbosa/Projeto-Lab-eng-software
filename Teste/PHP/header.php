@@ -82,7 +82,7 @@ if(!empty( $_SESSION['nome'])){
                 </div>
                 <nav class="navbar navbar-dark bg-dark">
                     <div class="container-fluid">
-                    <form class="d-flex" action="PHP\pesquisa.php" method="POST">
+                    <form class="d-flex" action="PHP\pesquisa.php" method="GET">
                             <input class="form-control " type="search" placeholder="Pesquisar" aria-label="Search" name="buscar" autocomplete="off"> 
                             <button class="btn btn-outline-success" type="submit">Buscar</button>
                         </form>

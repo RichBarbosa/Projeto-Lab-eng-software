@@ -161,6 +161,7 @@ $id = null;?>
                 <?php 
                   $favnome = $cat->getNome($idImagem);
                   $fav = $cat->verificarFavorita($favnome, $id);
+                  $curtido = $con->verificarCurtido($favnome, $id);
                   if($fav){?>
                           <li><br><button class="btn btn-outline-light" type ="submit" name="id" value="<?php echo $idImagem;?>" ><img class="img-thumbnail" 
                             src="../img/suit-heart-fill.svg"  alt=""></button></li> 
@@ -175,12 +176,33 @@ $id = null;?>
                             >Adicionar como favorita</button><?php }?> </li>
                 <?php } ?>
                             </form>
-                          <li><button class="btn btn-outline-light"> 
-                            <a href="<?php echo $cat->getCaminho($idImagem);?>" download="<?php echo $idImagem + 0310; ?>"><img class="img-thumbnail" 
-                            src="../img/download.svg" alt=""></a>
-                      </ul> 
-                  <hr>
-          </div>
+                            <?php 
+                       if($curtido){?>
+                       <form action="curtir.php" method="post">
+                        <li><br><button class="btn btn-success" type ="submit" name="descurtirG" value="<?php echo $idImagem;?>" >curtido!</button></li>
+                        </form> 
+              <?php }else{ ?>
+                          <form action="curtir.php" method="post">
+                              <li><br><button class="btn btn-outline-success" type ="submit"
+                              name="curtirG" value="<?php echo $idImagem;?>"
+                              <?php if (empty($_SESSION['nome'])){?> 
+                              disabled> é preciso estar logado para curtir</button>
+                             <?php }else { ?>
+                              >curtir!</button><?php }?> </li>
+              <?php } ?>
+                          </form>
+                        <li><button class="btn btn-outline-light"> 
+                        <a href="<?php echo $cat->getCaminho($idImagem);?>" download="<?php echo $idImagem + 0310; ?>"><img class="img-thumbnail" 
+                        src="../img/download.svg" alt=""></a></li>  
+                  </ul> 
+                  <br>
+                  <?php if(count($con->getCurtido($nImagem)) == 1){?>
+                  <h6> <?php echo count($con->getCurtido($nImagem)) . " ";?> curtida!</h6>
+                  <?php }else{ ?>
+                    <h6> <?php echo count($con->getCurtido($nImagem)) . " ";?> curtidas!</h6>
+                    <?php }?>
+              <hr>
+      </div>
       </div>        
     </div>
     <div class="container-fluid">
@@ -218,7 +240,7 @@ $id = null;?>
          <tr>
            <td id="com">
              <input type="hidden" name="idImagem" value="<?php echo $idImagem?>">
-             <h5><?php echo $col['comentario'];?> <?php if ($id == $col['id']){ 
+             <h5><?php echo $col['comentario']. "<br>". "<h6>" .$col['data_atual']."</h6>";?> <?php if ($id == $col['id']){ 
                ?><br><textarea name="edit" id="" cols="30" rows=""></textarea> <button class="btn btn-outline-danger" type="submit" name="idComEdit" value="<?php echo $col['id_com'];?>">editar </button> <button class="btn btn-outline-danger" type="submit" name="idCom" value="<?php echo $col['id_com'];?>">apagar? </button><?php }?>
                </h5></td>
             </form>  

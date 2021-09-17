@@ -156,7 +156,7 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
             <?php
             if(!empty($_POST)){
                 $inicial = $_POST['inicial'];?>
-                <form action="escolherImagemDestaque.php" method="post" id="destaque">
+                <form action="escolherImagemDestaqueJogo.php" method="post" id="destaque">
                     <ul class="list-group list-group-horizontal">
                <?php foreach ($img->listarCategoriasJogoByInicial($inicial) as $col) {?>
                 <ul class="list-group list-group-horizontal">

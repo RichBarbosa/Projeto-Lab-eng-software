@@ -103,17 +103,7 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
             <div class="container">
                 <div class ="row">
                     <div class="col">
-                    <h6> editar destaques</h6>
 
-<select class="form-select" aria-label="Default select example" name="destaque" id="" form="destaque">
-            <option value="destaque1">Primeiro destaque</option>
-            <option value="destaque2">Segundo destaque</option>
-            <option value="destaque3">Terceiro destaque</option>
-            <option value="destaque4">quarto destaque</option>
-            <option value="destaque5">quinto destaque</option>
-            <option value="destaque6">sexto destaque</option>
-
-</select>
                     </div>
                 </div>
             </div>

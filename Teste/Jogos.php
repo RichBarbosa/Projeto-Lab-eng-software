@@ -215,37 +215,37 @@ if(!empty( $_SESSION['nome'])){
             <br>
             <figure class="figure">
             <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('8'); ?>">
-            <img  class="img-fluid" src=" PHP\<?php echo $img->getCaminhoDestaqueA('8');?>" class="d-block w-100" alt="...">
-
-            </button>
-              <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('8'); ?></figcaption>
-            </figure>
-            <br>
-            <br>
-            <figure class="figure">
-            <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('9'); ?>">
             <img  class="img-fluid" src=" PHP\<?php echo $img->getCaminhoDestaqueA('9');?>" class="d-block w-100" alt="...">
 
             </button>
               <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('9'); ?></figcaption>
             </figure>
+            <br>
+            <br>
+            <figure class="figure">
+            <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('9'); ?>">
+            <img  class="img-fluid" src=" PHP\<?php echo $img->getCaminhoDestaqueA('11');?>" class="d-block w-100" alt="...">
+
+            </button>
+              <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('11'); ?></figcaption>
+            </figure>
           </div>
           
           <div class="col-6">
           <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('10'); ?>">
-          <img  class="img-fluid" src=" PHP\<?php echo $img->getCaminhoDestaqueA('10');?>" class="d-block w-100" alt="...">
+          <img  class="img-fluid" src=" PHP\<?php echo $img->getCaminhoDestaqueA('8');?>" class="d-block w-100" alt="...">
 
           </button>
-            <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('10'); ?></figcaption>
+            <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('8'); ?></figcaption>
           </figure>
           <br>
           <br>
           <figure class="figure">
           <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('11'); ?>">
-          <img  class="img-fluid" src=" PHP\<?php echo $img->getCaminhoDestaqueA('11');?>" class="d-block w-100" alt="...">
+          <img  class="img-fluid" src=" PHP\<?php echo $img->getCaminhoDestaqueA('10');?>" class="d-block w-100" alt="...">
 
           </button>
-              <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('11'); ?></figcaption>
+              <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('10'); ?></figcaption>
             </figure>
             <br>
             <br>

@@ -97,7 +97,6 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
    <?php 
     if(isset($_POST['escolha'])){
         $categoria = $_POST['escolha'];
-        $destaque = $_POST['destaque'];
     }?> 
    
     <h3 style="text-align:center"><?php echo $categoria ?> </h3>
@@ -113,8 +112,7 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
       <div class="row">
         <?php foreach($cat->listarImagem($categoria) as $col){ ?> 
         <div class="col-sm-6">
-          <form action="editarDestaquesA.php" method="POST">
-            <input type="hidden" name="destaque" value="<?php echo $destaque ?>">
+          <form action="../editar_DestaqueA.php" method="POST">
             <input type="hidden" name="categoria" value="<?php echo $categoria ?>">
           <button type="submit " name="imagem" value="<?php echo $col['id']; ?>" class="btn btn-light"><img class="img-fluid" src="<?php echo $col['caminho'];?>" alt=""> </button>
           </Form>

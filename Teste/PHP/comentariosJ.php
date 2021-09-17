@@ -13,10 +13,11 @@ if(!empty( $_SESSION['nome'])){
             $idImagem = $_POST['idimagem'];
             $nImagem = $cat->getNomeJogo($idImagem);
             $nome = $cat->getNomeJogo($idImagem);
+            $data = date("Y-m-d");
             $comentario = $_POST['comentario'];
             $_SESSION['imagem'] = $idImagem;
           try{
-            $con -> inserirComentario($comentario, $id, $nome);
+            $con -> inserirComentario($comentario, $id, $nome, $data);
             header('Location: imagemJogoEscolhida copy.php');
           }catch(Exception $e){
 

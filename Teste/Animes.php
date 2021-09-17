@@ -58,6 +58,11 @@ if(!empty( $_SESSION['nome'])){
         max-width: max-content;
         object-fit: cover;
      }
+     .imgC{
+       height: 360px;
+       width: 360px;
+       object-fit: cover;
+     }
     </style>
    
 </head>
@@ -229,19 +234,6 @@ if(!empty( $_SESSION['nome'])){
             <div class="container">
              <div class="imgT">
             <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('2'); ?>">
-            <img  class="img-fluid imgT" src=" PHP\<?php echo $img->getCaminhoDestaqueA('2');?>" class="d-block w-100" alt="...">
-
-            </button>
-            </div>
-            </div>
-              <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('2'); ?></figcaption>
-            </figure>
-            <br>
-            <br>
-            <figure class="figure">
-            <div class="container">
-             <div class="imgT">
-            <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('3'); ?>">
             <img  class="img-fluid imgT" src=" PHP\<?php echo $img->getCaminhoDestaqueA('3');?>" class="d-block w-100" alt="...">
 
             </button>
@@ -249,18 +241,31 @@ if(!empty( $_SESSION['nome'])){
             </div>
               <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('3'); ?></figcaption>
             </figure>
+            <br>
+            <br>
+            <figure class="figure">
+            <div class="container">
+             <div class="imgT">
+            <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('3'); ?>">
+            <img  class="img-fluid imgT" src=" PHP\<?php echo $img->getCaminhoDestaqueA('5');?>" class="d-block w-100" alt="...">
+
+            </button>
+            </div>
+            </div>
+              <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('5'); ?></figcaption>
+            </figure>
           </div>
           
           <div class="col-6">
           <div class="container">
              <div class="imgT">
           <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('4'); ?>">
-          <img  class="img-fluid imgT" src=" PHP\<?php echo $img->getCaminhoDestaqueA('4');?>" class="d-block w-100" alt="...">
+          <img  class="img-fluid imgT" src=" PHP\<?php echo $img->getCaminhoDestaqueA('2');?>" class="d-block w-100" alt="...">
 
           </button>
           </div>
             </div>
-            <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('4'); ?></figcaption>
+            <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('2'); ?></figcaption>
           </figure>
           <br>
           <br>
@@ -268,12 +273,12 @@ if(!empty( $_SESSION['nome'])){
           <div class="container">
              <div class="imgT">
           <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('5'); ?>">
-          <img  class="img-fluid imgT" src=" PHP\<?php echo $img->getCaminhoDestaqueA('5');?>" class="d-block w-100" alt="...">
+          <img  class="img-fluid imgT" src=" PHP\<?php echo $img->getCaminhoDestaqueA('4');?>" class="d-block w-100" alt="...">
 
           </button>
           <div class="container">
              <div class="imgT">
-              <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('5'); ?></figcaption>
+              <figcaption class="figure-caption"><?php echo $img->getNomeDestaqueA('4'); ?></figcaption>
             </figure>
             <br>
             <br>

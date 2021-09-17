@@ -1,13 +1,17 @@
 <?php
 if(!isset($_SESSION)){
   session_start();
-}include('classes\Usuario.php');
-include('classes\Imagem.php');
+}include('PHP\classes\Usuario.php');
+include('PHP\classes\Imagem.php');
 
 $con = new Usuario();
 $cat = new Imagem();
 $id = $_SESSION['nome'];
-if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){ 
+if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
+    if (!empty($_POST['imagem'])) {
+        $idImagem = $_POST['imagem'];
+        $categoria = $_POST['categoria']
+     
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -19,8 +23,8 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
     <!--icone no título, mano eu to perplexo q é só essa tag link para colocar icones,
     krl, pq ninguém fala que é tão simples assim?-->
     <link rel="icon" href="../img/bull-horns_39319.ico" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="../CSS/menu.css">
-    <link rel="stylesheet" type="text/css" href="../CSS/signin.css">
+    <link rel="stylesheet" type="text/css" href="CSS/menu.css">
+    <link rel="stylesheet" type="text/css" href="CSS/signin.css">
     
     <!--os treco do Bootstrap, quem diria que um link desses faz até um asno como eu fazer um front
     end, krl, eu amo frameworks -->
@@ -46,14 +50,10 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
 
       
       }
-      #div1{
-          
-        overflow: scroll;
-        height: 500px;
-        width: 100%;
-        overflow-x: hidden;
-        overflow-y: auto;
-      }
+      .imgT{
+        height:500px;
+        width: 500px;
+     }
     </style>
    
 </head>
@@ -61,8 +61,8 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
    <header id="top" >          
           <nav class="navbar navbar-dark bg-dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="../index.php" id="a1">
-                        <img src="../img/bull-horns_39319.ico" alt="" width="30" height="24" class="d-inline-block align-text-top" >    
+                    <a class="navbar-brand" href="index.php" id="a1">
+                        <img src="img/bull-horns_39319.ico" alt="" width="30" height="24" class="d-inline-block align-text-top" >    
                           Horn's Gallery
                     </a>
                     <div class="d-grid gap-2 d-md-block">
@@ -87,72 +87,46 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
                                 <li><button type="submit" class="dropdown-item"form ="logout">Logout</a></button>
                             </ul>
                           </div>
-                          <form action="logout.php" method="POST" id="logout"></form>
+                          <form action="PHP\logout.php" method="POST" id="logout"></form>
                     </div>
                 </div>
             </nav>
    </header> 
-    <br><br><br>
-   <main>       
-                                    <h2>Gerenciar imagens<h2>
-       <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                        <div class="row mb-3">
-                            <div class="col-sm-10">
-                              </div>
-                        </div>  
-                    </form>
-                    <div class="col sm-6">
-                                <div class="form-check">
-                                    <h6> categoria de imagem </h6>
-                                    <form action="" method="POST">
-                                    <select class="form-select" aria-label="Default select example" name= "categoria">
-                                        <?php foreach($cat->listarCategoriasJogo() as $col){ ?>      
-                                            <option value="<?php echo $col['nome'];?>"><?php echo $col['nome'];?></option>
-                                        <?php }?>
-                                    </select>
-                                    <button type="submit " class="btn btn-primary">Confirmar</button>
+    <br>
+   <main>
+       <h3 style="text-align: center">Editar Destaques</h3>
+       <p>você escolheu a sub categoria <b><?php echo $categoria;?></b> para destacar no inicio e 
+       a seguinte imagem para apresentação, 
+           escolha a posição do destaque</p>
+        <div class="container">
+              <div class=row>
+                <div class="col-6">
+              <img src=" PHP\<?php echo $cat->getCaminhoJogo($idImagem);?>" class="img-thumbnail" alt="...">
+              <form action="PHP\editarDestaquesJ.php" method="post">
+              <input type="hidden" name="categoria" value="<?php echo $categoria ?>">
+            <input type="hidden" name="imagem" value="<?php echo $idImagem;?>">
+            <select class="form-select" aria-label="Default select example" name="destaque" id="">
+            <option value="destaque1">Primeiro destaque</option>
+            <option value="destaque2">Segundo destaque</option>
+            <option value="destaque3">Terceiro destaque</option>
+            <option value="destaque4">quarto destaque</option>
+            <option value="destaque5">quinto destaque</option>
+            <option value="destaque6">sexto destaque</option>
 
-                                        </form>  
-                                </div>
-                                <br><br>
-                                
-                              </div>
+</select>
+                <button type="submit" class="btn btn-success">Confirmar</button>
+                <a href="PHP\editarinicioJ.php" class="btn btn-success">Cancelar</a>
+            </form>    
+              </div>
         </div>
-        <div class="col-sm-6">
-            <form action="../editar_carroceuJ.php" method="post" id="carroceu">
-          <h6>Lista de imagem </h6>
-                <div id= "div1">         
-            <?php
-              if(!empty($_POST)){
-                $escolha = $_POST['categoria']; 
-                foreach($cat->listarImagemJogo($escolha) as $col){ ?>
-                    <button type="submit "value= "<?php echo $col['id'] ?>" class="btn btn-light" name= "imagem"><img class="img-fluid" src="<?php echo $col['caminho'];?>" alt=""> </button>
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item"><h6><?php echo $cat->getJogoTag1($col['id'])?></h6></li>
-                        <li class="list-group-item"><h6><?php echo $cat->getJogoTag2($col['id'])?></h6></li>
-                        <li class="list-group-item"><h6><?php echo $cat->getJogoTag3($col['id'])?></h6></li>
-                        <li class="list-group-item"><h6><?php echo $cat->getJogoTag4($col['id'])?></h6></li>
-                        <li class="list-group-item"><h6><?php echo $cat->getJogoTag5($col['id'])?></h6></li>
-                    </ul>
-                    <br><br><br>
-            <?php }
-                }else{
-                    unset($escolha);
-                }
-                ?> 
-                </div>
-                </form>    
-        </div>
+        <br>       
   </main>
-  <br><br><br><br><br><br><br><br><br>
   <footer>          
     <a href="#top"><button class="btn btn-secondary" type="button">voltar ao Topo</button></a>
     <a href="sobre.html"><button class="btn btn-secondary" type="button">Sobre nós</button></a>
     <ul>
-      <li><a href="teste.html"><img src="../img/discord.svg" alt="discord logo"> </a></li>
-      <li><a href="teste.html"><img src="../img/linkedin.svg" alt="linkedin logo"> </a></li>
+      <li><a href="teste.html"><img src="img/discord.svg" alt="discord logo"> </a></li>
+      <li><a href="teste.html"><img src="img/linkedin.svg" alt="linkedin logo"> </a></li>
       <li></li>
       <li></li>
     </ul>
@@ -161,6 +135,9 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
 </body>
 </html> 
 <?php
+}else {
+    header('Location: editar_inicio.php');
+}
 }else{ 
  header('Location: ../index.php');
 }

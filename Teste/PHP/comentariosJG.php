@@ -14,9 +14,10 @@ if(!empty( $_SESSION['nome'])){
             $nImagem = $cat->getNomeJogo($idImagem);
             $nome = $cat->getNomeJogo($idImagem);
             $comentario = $_POST['comentario'];
+            $data = date("Y-m-d");
             $_SESSION['imagem'] = $idImagem;
           try{
-            $con -> inserirComentario($comentario, $id, $nome);
+            $con -> inserirComentario($comentario, $id, $nome, $data);
             header('Location: gifJogoEscolhido copy.php');
           }catch(Exception $e){
 

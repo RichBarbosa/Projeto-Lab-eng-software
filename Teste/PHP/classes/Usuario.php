@@ -230,19 +230,20 @@ class Usuario extends Connect  {
         $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
         return $rs['idade'];                  
     }
-    function inserirComentario( $comentario,  $idUser,  $nomeI){
+    function inserirComentario( $comentario,  $idUser,  $nomeI, $data){
         $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
-        $stmt = $conn->prepare("INSERT INTO comentarios (id_com, comentario, idUser, nome_imagem) VALUES (null, :comentario, :idUser, :nome_gif)");
+        $stmt = $conn->prepare("INSERT INTO comentarios (id_com, comentario, idUser, nome_imagem, data_atual) VALUES (null, :comentario, :idUser, :nome_gif, :data_atual)");
         $stmt ->bindValue(":comentario",$comentario);
         $stmt ->bindValue(":idUser",$idUser);
         $stmt ->bindValue(":nome_gif",$nomeI);
+        $stmt ->bindValue(":data_atual",$data);
         $run = $stmt->execute();
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $rs;          
     }
     function  getComentario($nome){
         $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
-        $stmt = $conn->prepare("SELECT comentarios.comentario,comentarios.id_com, usuario.user, usuario.id
+        $stmt = $conn->prepare("SELECT comentarios.comentario,comentarios.id_com, comentarios.data_atual, usuario.user, usuario.id
         FROM comentarios INNER JOIN usuario ON comentarios.idUser = usuario.id
         WHERE nome_imagem = '$nome' OR nome_gif = '$nome'");               
         $run = $stmt->execute();
@@ -304,5 +305,39 @@ class Usuario extends Connect  {
         $stmt ->bindValue(":id_user",$id_user);
         $run = $stmt->execute();
         $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+    }
+    function inserirCurtido( $nome,  $idUser){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("INSERT INTO curtidos VALUES (null, :nome, :idUser)");
+        $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":idUser",$idUser);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rs;          
+    }
+    function getCurtido($nome){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT * FROM curtidos WHERE nome = :nome");
+        $stmt ->bindValue(":nome",$nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);        
+        return $rs;                  
+    }
+    function  verificarCurtido($nome, $id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT * FROM curtidos WHERE idUser = :id AND nome = :nome");
+        $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+        return $rs['nome'];  
+    }
+    function  removerCurtido($nome, $id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("DELETE FROM curtidos WHERE idUser = :id AND nome = :nome");
+        $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }        
 }

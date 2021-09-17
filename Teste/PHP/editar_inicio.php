@@ -18,7 +18,7 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
     
     <!--icone no título, mano eu to perplexo q é só essa tag link para colocar icones,
     krl, pq ninguém fala que é tão simples assim?-->
-    <link rel="icon" href="../img/bull-horns_39319.ico" type="image/x-icon">
+    <link rel="icon" href="img/bull-horns_39319.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="../CSS/menu.css">
     <link rel="stylesheet" type="text/css" href="../CSS/signin.css">
     
@@ -116,19 +116,11 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
 
                                         </form>  
                                 </div>
-                                <br><br>
-                                <h6> editar carroceu</h6>
-
-                                <select class="form-select" aria-label="Default select example" name="escolha" id="" form="carroceu">
-                                            <option value="imagem1">Primeira imagem</option>
-                                            <option value="imagem2">Segunda imagem</option>
-                                            <option value="imagem3">Terceira imagem</option>
-
-                                </select>
+                                
                               </div>
         </div>
         <div class="col-sm-6">
-            <form action="editarCarroceuA.php" method="post" id="carroceu">
+            <form action="../editar_carroceuA.php" method="post" id="carroceu">
           <h6>Lista de imagem </h6>
                 <div id= "div1">         
             <?php

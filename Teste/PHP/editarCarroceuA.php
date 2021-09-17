@@ -7,8 +7,8 @@ require_once('classes\Imagem.php');
 $con = new Usuario();
 $cat = new Imagem();
 
-$id = $_SESSION['nome'];
-if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){ 
+$idUser = $_SESSION['nome'];
+if(!empty( $_SESSION['nome']) && $con->getAdmin($idUser)){ 
     if(!empty($_POST['imagem']) && $_POST['escolha']== "imagem1" ){
         $id = $_POST['imagem'];
         $caminho = $cat->getCaminho($id);
