@@ -214,7 +214,7 @@ if(!empty( $_SESSION['nome'])){
             <br>
             <br>
             <figure class="figure">
-            <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('8'); ?>">
+            <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('9'); ?>">
             <img  class="img-fluid" src=" PHP\<?php echo $img->getCaminhoDestaqueA('9');?>" class="d-block w-100" alt="...">
 
             </button>
@@ -223,7 +223,7 @@ if(!empty( $_SESSION['nome'])){
             <br>
             <br>
             <figure class="figure">
-            <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('9'); ?>">
+            <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('11'); ?>">
             <img  class="img-fluid" src=" PHP\<?php echo $img->getCaminhoDestaqueA('11');?>" class="d-block w-100" alt="...">
 
             </button>
@@ -232,7 +232,7 @@ if(!empty( $_SESSION['nome'])){
           </div>
           
           <div class="col-6">
-          <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('10'); ?>">
+          <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('8'); ?>">
           <img  class="img-fluid" src=" PHP\<?php echo $img->getCaminhoDestaqueA('8');?>" class="d-block w-100" alt="...">
 
           </button>
@@ -241,7 +241,7 @@ if(!empty( $_SESSION['nome'])){
           <br>
           <br>
           <figure class="figure">
-          <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('11'); ?>">
+          <button type="submit" class="btn btn-outline-light" name="escolha" value="<?php echo $img->getNomeDestaqueA('10'); ?>">
           <img  class="img-fluid" src=" PHP\<?php echo $img->getCaminhoDestaqueA('10');?>" class="d-block w-100" alt="...">
 
           </button>
