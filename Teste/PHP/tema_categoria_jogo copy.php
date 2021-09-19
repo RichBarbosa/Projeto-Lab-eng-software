@@ -11,7 +11,6 @@ if(!empty( $_SESSION['nome'])){
   include_once('header_nao_logado.php');
 
  } ?>
-<br><br><br>
 <?php 
     if(isset($_GET['escolha'])){
         $categoria = $_GET['escolha'];
@@ -78,13 +77,25 @@ if(!empty( $_SESSION['nome'])){
             <input type="hidden" name="nImagem" value="<?php echo $col['nome_imagem'] ?>">
           <button type="submit " name="imagem" value="<?php echo $col['id']; ?>" class="btn btn-light"><img class="img-fluid" src="<?php echo $col['caminho'];?>" alt=""> </button>
           </Form>
-                   <ul class="list-group list-group-horizontal">
-                   <?php echo ".";?><li><h6><?php echo $cat->getJogoTag1($col['id'])?></h6></li><?php echo ".";?>
-                   <?php echo ".";?><li><h6><?php echo $cat->getJogoTag2($col['id'])?></h6></li><?php echo ".";?>
-                   <?php echo ".";?><li><h6><?php echo $cat->getJogoTag3($col['id'])?></h6></li><?php echo ".";?>
-                   <?php echo ".";?><li><h6><?php echo $cat->getJogoTag4($col['id'])?></h6></li><?php echo ".";?>
-                   <?php echo ".";?><li><h6><?php echo $cat->getJogoTag5($col['id'])?></h6></li><?php echo ".";?>
+          <form action="Tag_jogo_imagem.php" method="get">
+                    <ul class="list-group list-group-horizontal">
+                    <?php if(!empty($cat->getJogoTag1($col['id']))){?>
+                      <li><h6><button type="submit" name="tag" value="<?php echo $cat->getJogoTag1($col['id']);?>" class="btn btn-light"> <?php echo $cat->getJogoTag1($col['id'])?></h6></li></button>
+                      <?php }?>
+                      <?php if(!empty($cat->getJogoTag2($col['id']))){?>
+                      <li><h6><button type="submit" name="tag" value="<?php echo $cat->getJogoTag2($col['id']);?>" class="btn btn-light"><?php echo $cat->getJogoTag2($col['id'])?></h6></li></button>
+                      <?php }?>  
+                      <?php if(!empty($cat->getJogoTag3($col['id']))){?>
+                      <li><h6><button type="submit" name="tag" value="<?php echo $cat->getJogoTag3($col['id']);?>" class="btn btn-light"><?php echo $cat->getJogoTag3($col['id'])?></h6></li></button>
+                      <?php }?>
+                      <?php if(!empty($cat->getJogoTag4($col['id']))){?>
+                      <li><h6><button type="submit" name="tag" value="<?php echo $cat->getJogoTag4($col['id']);?>" class="btn btn-light"><?php echo $cat->getJogoTag4($col['id'])?></h6></li></button>
+                      <?php }?>
+                      <?php if(!empty($cat->getJogoTag5($col['id']))){?>
+                      <li><h6><button type="submit" name="tag" value="<?php echo $cat->getJogoTag5($col['id']);?>" class="btn btn-light"><?php echo $cat->getJogoTag5($col['id'])?></h6></li></button>
+                      <?php }?>
                     </ul>
+                    </form>
 <ul class="list-group list-group-horizontal">
   <form action="favoritarJ.php" method="post">
     <input type="hidden" name="categoria" value="<?php echo $categoria?>">

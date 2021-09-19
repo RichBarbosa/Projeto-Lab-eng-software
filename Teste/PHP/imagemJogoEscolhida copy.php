@@ -50,13 +50,30 @@ $id = null;
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
-            <ul class="list-group list-group-horizontal">
-              <li><h6><?php echo $cat->getJogoTag1($idImagem)?></h6></li>
-              <li><h6><?php echo $cat->getJogoTag2($idImagem)?></h6></li>
-              <li><h6><?php echo $cat->getJogoTag3($idImagem)?></h6></li>
-              <li><h6><?php echo $cat->getJogoTag4($idImagem)?></h6></li>
-              <li><h6><?php echo $cat->getJogoTag5($idImagem)?></h6></li>
-            </ul>
+        <ul class="list-group list-group-horizontal">
+        <form action="Tag_jogo_imagem.php" method="get">
+        <?php if(!empty($cat->getJogoTag1($idImagem))){?>
+          <li><button type="submit" name="tag" value="<?php echo $cat->getJogoTag1($idImagem)?>" class="btn btn-light">
+       <h6><?php echo $cat->getJogoTag1($idImagem)?></h6> </button></li>
+       <?php }?>
+       <?php if(!empty($cat->getJogoTag2($idImagem))){?>
+       <li><button type="submit" name="tag" value="<?php echo $cat->getJogoTag2($idImagem)?>" class="btn btn-light">
+       <h6><?php echo $cat->getJogoTag2($idImagem)?></h6> </button></li>
+       <?php }?>
+       <?php if(!empty($cat->getJogoTag3($idImagem))){?>
+       <li><button type="submit" name="tag" value="<?php echo $cat->getJogoTag3($idImagem)?>" class="btn btn-light">
+       <h6><?php echo $cat->getJogoTag3($idImagem)?></h6> </button></li>
+       <?php }?>
+       <?php if(!empty($cat->getJogoTag4($idImagem))){?>
+       <li><button type="submit" name="tag" value="<?php echo $cat->getJogoTag4($idImagem)?>" class="btn btn-light">
+       <h6><?php echo $cat->getJogoTag4($idImagem)?></h6> </button></li>
+       <?php }?>
+       <?php if(!empty($cat->getJogoTag5($idImagem))){?>
+       <li><button type="submit" name="tag" value="<?php echo $cat->getJogoTag5($idImagem)?>" class="btn btn-light">
+       <h6><?php echo $cat->getJogoTag5($idImagem)?></h6> </button></li>
+       <?php }?>
+        </ul>
+        </form>
             <ul class="list-group list-group-horizontal">
               <form action="favoritar_imagemJ.php" method="post">
                 <?php 
@@ -135,7 +152,11 @@ $id = null;
           <form action="comentariosJ.php" method="post">
           <table>  
          <tr>
-           <td><h5><?php echo $col['user'];?> comentou:</h5></td>
+           <td><h5><?php echo $col['user'];?> comentou:</h5>
+           <?php if($col['editado'] == "S"){ ?>
+        <h6 style="font-size: small;">editado</h6>
+        <?php }?>
+          </td>
          </tr>
          <tr>
            <td id="com">

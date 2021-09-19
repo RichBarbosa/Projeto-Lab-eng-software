@@ -150,11 +150,30 @@ $id = null;?>
       <div class="row">
         <div class="col-sm-6">
             <ul class="list-group list-group-horizontal">
-              <li><h6><?php echo $cat->getTag1($idImagem)?></h6></li>
-              <li><h6><?php echo $cat->getTag2($idImagem)?></h6></li>
-              <li><h6><?php echo $cat->getTag3($idImagem)?></h6></li>
-              <li><h6><?php echo $cat->getTag4($idImagem)?></h6></li>
-              <li><h6><?php echo $cat->getTag5($idImagem)?></h6></li>
+            <form action="Tag_anime_gif.php" method="get">
+            <?php if(!empty($cat->getTag1($idImagem))){?>
+
+          <li><button type="submit" name="tag" value="<?php echo $cat->getTag1($idImagem)?>" class="btn btn-light">
+       <h6><?php echo $cat->getTag1($idImagem)?></h6> </button></li>
+       <?php }?>
+       <?php if(!empty($cat->getTag2($idImagem))){?>
+       <li><button type="submit" name="tag" value="<?php echo $cat->getTag2($idImagem)?>" class="btn btn-light">
+       <h6><?php echo $cat->getTag2($idImagem)?></h6> </button></li>
+       <?php }?>
+       <?php if(!empty($cat->getTag3($idImagem))){?>
+       <li><button type="submit" name="tag" value="<?php echo $cat->getTag3($idImagem)?>" class="btn btn-light">
+       <h6><?php echo $cat->getTag3($idImagem)?></h6> </button></li>
+       <?php }?>
+       <?php if(!empty($cat->getTag4($idImagem))){?>
+       <li><button type="submit" name="tag" value="<?php echo $cat->getTag4($idImagem)?>" class="btn btn-light">
+       <h6><?php echo $cat->getTag4($idImagem)?></h6> </button></li>
+       <?php }?>
+       <?php if(!empty($cat->getTag5($idImagem))){?>
+       <li><button type="submit" name="tag" value="<?php echo $cat->getTag5($idImagem)?>" class="btn btn-light">
+       <h6><?php echo $cat->getTag5($idImagem)?></h6> </button></li>
+       <?php }?>
+        </ul>
+        </form>
             </ul>
             <ul class="list-group list-group-horizontal">
               <form action="favoritar_gif.php" method="post">
@@ -235,7 +254,11 @@ $id = null;?>
           <form action="comentariosAG.php" method="post">
           <table>  
          <tr>
-           <td><h5><?php echo $col['user'];?> comentou:</h5></td>
+           <td><h5><?php echo $col['user'];?> comentou:</h5>
+           <?php if($col['editado'] == "S"){ ?>
+        <h6 style="font-size: small;">editado</h6>
+        <?php }?>
+          </td>
          </tr>
          <tr>
            <td id="com">

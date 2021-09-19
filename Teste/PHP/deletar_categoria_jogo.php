@@ -11,6 +11,11 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
   if(!empty($_POST)){
     $cat = $_POST['categoria']; 
     try{
+      for($i = 7; $i <= 12; $i++){
+        if ($cat == $img->getNomeDestaqueA($i)) {
+          $img->atualizarDestaquesA("cat_apagada", "destaque a ser definido", $i);
+        }
+      }  
         $img->deletarImagemByCategoriaJogo($cat);
         $img->deletarCategoriaJogo($cat);
         $img->deletarCatJogoFavoritaByCategoria($cat);

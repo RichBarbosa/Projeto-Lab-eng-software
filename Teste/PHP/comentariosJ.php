@@ -42,11 +42,12 @@ if(!empty( $_SESSION['nome'])){
             $nImagem = $cat->getNomeJogo($idImagem);
             $idComentario = $_POST['idComEdit'];
             $comentario = $_POST['edit'];
+            $edit = "S";
             $_SESSION['imagem'] = $idImagem;
             if(!empty($comentario)){
    
                 try{
-                  $con->editarComentario($comentario, $id, $idComentario);
+                  $con->editarComentario($comentario, $id, $idComentario, $edit);
                   header('Location: imagemJogoEscolhida copy.php');
           
                 }catch(Exception $e){

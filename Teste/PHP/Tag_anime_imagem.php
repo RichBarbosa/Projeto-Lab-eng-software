@@ -100,61 +100,34 @@ if(!empty( $_SESSION['nome'])){
   <?php } ?>
   <main>
     <?php 
-      if(isset($_GET['buscar'])){
-          $busca = $_GET['buscar'];
-          if($img ->listarCategoriasByInicial($busca) != null || $gif ->listarCategoriasByInicial($busca) != null){ ?>
-            <form action="tema_categoria copy.php" method="GET">
-              <h6>Imagens</h6>
-              <ul class="list-group list-group-horizontal">
-                  <?php 
-                    foreach ($img->listarCategoriasByInicial($busca) as $col) {?>
-                      <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item"><button class="btn btn-outline-dark" type="submit" value="<?php echo $col['nome'];?>" name="escolha" ><?php echo $col['nome']?></li></button> 
-                      </ul>
-                  <?php }?>
-              </ul>  
-            </form>
-              <form action="tema_categoria_gif copy.php" method="GET">
-                <h6>gifs</h6>
-                <ul class="list-group list-group-horizontal">
-                  <?php 
-                    foreach ($gif->listarCategoriasByInicial($busca) as $col) {?>
-                      <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item"><button class="btn btn-outline-dark" type="submit" value="<?php echo $col['nome'];?>" name="escolha" ><?php echo $col['nome']?></li></button> 
-                      </ul>
-                  <?php }?>
-              </form>
-    <?php 
-          }else{ ?>
-        <h5>Ops... não foi encontrado nada..</h5>
-        <h5>gostaria de buscar por tag?</h5>
-        <div class="container-fluid">
-          <form class="d-flex" action="pesquisa.php" method="GET">
-            <input class="form-control " type="search" placeholder="Search" aria-label="Search" name="buscarTag" autocomplete="off">
-              <button class="btn btn-outline-success" type="submit">Buscar</button>
-          </form>
-          <br><br><br><br><br><br><br><br><br>
-
-        </div>     
-    <?php }
-      } if(!empty($_GET['buscarTag'])){ 
-        $busca = $_GET['buscarTag'];
-        if($img->getCaminhoByTag($busca) || $gif->getCaminhoByTag($busca)){?>
+     
+       if(!empty($_GET['tag'])){ 
+        $busca = $_GET['tag'];
+        ?>
           <div class="container-fluid">
-            <div class="row">
+            <div class="row" style="text-align:center">
               <h3>Conteúdo marcado com a tag <?php echo $busca; ?> </h3>
               <br><br><br><hr>
             </div>
+            <?php if ($img->getCaminhoByTag($busca) != null && $gif->getCaminhoByTag($busca) != null) {?>
+              <div class="btn-group" role="group" aria-label="Basic example" style="text-align:center">
+                <button type="submit" name="tag" class="btn btn-outline-secondary" value="<?php echo $busca;?>" form="imagem">Imagens</button>
+                <button type="submit" name="tag" class="btn btn-outline-secondary" value="<?php echo $busca;?>" form="gif">Gifs</button>
+              </div>
+                    <form action="" method="get" id="imagem"></form>
+                    <form action="Tag_anime_gif.php" method="get" id="gif"></form>
+                    <br>
+                <?php }?>
             <div class="row">
-              <div class="col-6">
-                <h4>Imagens</h4>
+              <div class="col-8">
+                <h4 style="text-align:center">Imagens</h4>
                 <?php 
                   foreach($img->getCaminhoByTag($busca) as $col){ ?> 
                     <form action="imagemEscolhida copy.php" method="GET">
                       <input type="hidden" name="nImagem" value="<?php echo $col['nome_imagem'] ?>">
                       <button type="submit " name="imagem" value="<?php echo $col['id']; ?>" class="btn btn-light"><img class="img-fluid" src="<?php echo $col['caminho'];?>" alt=""> </button>
                     </Form>
-                    <form action="Tag_anime_imagem.php" method="get">
+                    <form action="" method="get">
                     <ul class="list-group list-group-horizontal">
                       <?php if(!empty($img->getTag1($col['id']))){?>
                       <li><h6><button type="submit" name="tag" value="<?php echo $img->getTag1($col['id']);?>" class="btn btn-light"> <?php echo $img->getTag1($col['id'])?></h6></li></button>
@@ -172,26 +145,8 @@ if(!empty( $_SESSION['nome'])){
                       <li><h6><button type="submit" name="tag" value="<?php echo $img->getTag5($col['id']);?>" class="btn btn-light"><?php echo $img->getTag5($col['id'])?></h6></li></button>
                       <?php }?>
                     </ul>
+                    </form>
                     <ul class="list-group list-group-horizontal">
-                      <?php /*?>
-                      por hora isso vai ficar comentado, vai dar trabalho fazer com que de pra favoritar aqui
-                      <form action="" method="post">
-                        <input type="hidden" name="categoria" value="<?php echo $busca?>">
-                        <input type="hidden" name="caminho" value="<?php echo $col['caminho']?>">
-                        <?php 
-                          $favnome = $img->getNome($col['id']);
-                          $fav = $img->verificarFavorita($favnome, $id);
-                          if($fav){?>
-                            <li><br><button class="btn btn-outline-light" type ="submit" name="id" value="<?php echo $col['id'];?>" ><img class="img-thumbnail" 
-                                                src="../img/suit-heart-fill.svg"  alt=""></button></li>  
-                        <?php 
-                          }else{ ?>
-                            <form action="" method="post">
-                              <li><br><button class="btn btn-outline-success" type ="submit" name="favoritar" value="<?php echo $col['id'];?>" >Adicionar como favorita</button></li>
-                        <?php 
-                          } ?>
-                      </form>
-                      <?php */?>
                       <li><button class="btn btn-outline-light"> 
                         <a href="<?php echo $col['caminho'];?>" download="<?php echo $col['id'] + 0310; ?>"><img class="img-thumbnail" 
                                     src="../img/download.svg" alt=""></a></li>
@@ -201,70 +156,11 @@ if(!empty( $_SESSION['nome'])){
                   } ?>         
               </div>
               <div class="col-6">
-                <h4>Gifs</h4>
-                <?php 
-                  foreach($gif->getCaminhoByTag($busca) as $col){ ?> 
-                    <form action="gifEscolhido copy.php" method="GET">
-                      <input type="hidden" name="nImagem" value="<?php echo $col['nome_imagem'] ?>">
-                      <button type="submit " name="imagem" value="<?php echo $col['id']; ?>" class="btn btn-light"><img class="img-fluid" src="<?php echo $col['caminho'];?>" alt=""> </button>
-                    </Form>
-                    <form action="Tag_anime_gif.php" method="get">
-                    <ul class="list-group list-group-horizontal">
-                    <?php if(!empty($gif->getTag1($col['id']))){?>
-                      <li><h6><button type="submit" name="tag" value="<?php echo $gif->getTag1($col['id']);?>" class="btn btn-light"> <?php echo $gif->getTag1($col['id'])?></h6></li></button>
-                      <?php }?>
-                      <?php if(!empty($gif->getTag2($col['id']))){?>
-                      <li><h6><button type="submit" name="tag" value="<?php echo $gif->getTag2($col['id']);?>" class="btn btn-light"><?php echo $gif->getTag2($col['id'])?></h6></li></button>
-                      <?php }?>
-                      <?php if(!empty($gif->getTag3($col['id']))){?>
-                      <li><h6><button type="submit" name="tag" value="<?php echo $gif->getTag3($col['id']);?>" class="btn btn-light"><?php echo $gif->getTag3($col['id'])?></h6></li></button>
-                      <?php }?>
-                      <?php if(!empty($gif->getTag4($col['id']))){?>
-                      <li><h6><button type="submit" name="tag" value="<?php echo $gif->getTag4($col['id']);?>" class="btn btn-light"><?php echo $gif->getTag4($col['id'])?></h6></li></button>
-                      <?php }?>
-                      <?php if(!empty($gif->getTag5($col['id']))){?>
-                      <li><h6><button type="submit" name="tag" value="<?php echo $gif->getTag5($col['id']);?>" class="btn btn-light"><?php echo $gif->getTag5($col['id'])?></h6></li></button>
-                      <?php }?>
-                    </ul>
-                    <ul class="list-group list-group-horizontal">
-                      <form action="" method="post">
-                        <input type="hidden" name="categoria" value="<?php echo $busca?>">
-                        <input type="hidden" name="caminho" value="<?php echo $col['caminho']?>">
-                        <?php 
-                          $favnome = $gif->getNomeJogo($col['id']);
-                          $fav = $gif->verificarJogoFavorita($favnome, $id);
-                              if($fav){?>
-                                <li><br><button class="btn btn-outline-light" type ="submit" name="id" value="<?php echo $col['id'];?>" ><img class="img-thumbnail" 
-                                  src="../img/suit-heart-fill.svg"  alt=""></button></li>  
-                        <?php 
-                              }else{ ?>
-                                    <form action="" method="post">
-                                      <li><br><button class="btn btn-outline-success" type ="submit" name="favoritar" value="<?php echo $col['id'];?>" >Adicionar como favorita</button></li>
-                        <?php 
-                              } ?>
-                      </form>
-                      <li><button class="btn btn-outline-light"> 
-                          <a href="<?php echo $col['caminho'];?>" download="<?php echo $col['id'] + 0310; ?>"><img class="img-thumbnail" 
-                              src="../img/download.svg" alt=""></a>
-                    </ul>         
-                            </hr>
-                <?php 
-                } ?>
+               
               </div>
             </div>
-          </div>
-    <?php }else if(empty($img->getCaminhoByTag($busca)) && empty($gif->getCaminhoByTag($busca))){?>
-      <h5>Ops... não foi encontrado nada..</h5>
-        <h5>gostaria de buscar por tag?</h5>
-        <div class="container-fluid">
-          <form class="d-flex" action="pesquisa.php" method="GET">
-            <input class="form-control " type="search" placeholder="Search" aria-label="Search" name="buscarTag" autocomplete="off">
-              <button class="btn btn-outline-success" type="submit">Buscar</button>
-          </form>
-      <?php }
-
-      }
-?>      
+          </div> 
+<?php }?>     
 </main> 
 <br><br><br><br><br><br><br><br><br><br><br>
 

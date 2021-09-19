@@ -10,6 +10,7 @@ if(!empty( $_SESSION['nome'])){
       $con->deletarTodosComentario($IdUser);
       $con->deletarTodasFavoritas($IdUser);
       $con->deletarTodasCatFavoritas($IdUser);
+      $con->deletarTodasCurtidas($IdUser);
       $con->deletarUsuario($IdUser);
         header('Location: logout.php');
 

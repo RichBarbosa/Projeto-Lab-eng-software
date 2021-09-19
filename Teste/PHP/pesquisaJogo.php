@@ -72,12 +72,23 @@ if(!empty( $_SESSION['nome'])){
                       <input type="hidden" name="nImagem" value="<?php echo $col['nome_imagem'] ?>">
                       <button type="submit " name="imagem" value="<?php echo $col['id']; ?>" class="btn btn-light"><img class="img-fluid" src="<?php echo $col['caminho'];?>" alt=""> </button>
                     </Form>
+                    <form action="Tag_jogo_imagem.php" method="get">
                     <ul class="list-group list-group-horizontal">
-                      <?php echo ".";?><li><h6><?php echo $img->getJogoTag1($col['id'])?></h6></li><?php echo ".";?>
-                      <?php echo ".";?><li><h6><?php echo $img->getJogoTag2($col['id'])?></h6></li><?php echo ".";?>
-                      <?php echo ".";?><li><h6><?php echo $img->getJogoTag3($col['id'])?></h6></li><?php echo ".";?>
-                      <?php echo ".";?><li><h6><?php echo $img->getJogoTag4($col['id'])?></h6></li><?php echo ".";?>
-                      <?php echo ".";?><li><h6><?php echo $img->getJogoTag5($col['id'])?></h6></li><?php echo ".";?>
+                    <?php if(!empty($img->getJogoTag1($col['id']))){?>
+                      <li><h6><button type="submit" name="tag" value="<?php echo $img->getJogoTag1($col['id']);?>" class="btn btn-light"><?php echo $img->getJogoTag1($col['id'])?></h6></li></button>
+                      <?php }?>  
+                      <?php if(!empty($img->getJogoTag2($col['id']))){?>
+                      <li><h6><button type="submit" name="tag" value="<?php echo $img->getJogoTag2($col['id']);?>" class="btn btn-light"><?php echo $img->getJogoTag2($col['id'])?></h6></li></button>
+                      <?php }?>
+                      <?php if(!empty($img->getJogoTag3($col['id']))){?>
+                      <li><h6><button type="submit" name="tag" value="<?php echo $img->getJogoTag3($col['id']);?>" class="btn btn-light"><?php echo $img->getJogoTag3($col['id'])?></h6></li></button>
+                      <?php }?>
+                      <?php if(!empty($img->getJogoTag4($col['id']))){?>
+                      <li><h6><button type="submit" name="tag" value="<?php echo $img->getJogoTag4($col['id']);?>" class="btn btn-light"><?php echo $img->getJogoTag4($col['id'])?></h6></li></button>
+                      <?php }?>
+                      <?php if(!empty($img->getJogoTag5($col['id']))){?>
+                      <li><h6><button type="submit" name="tag" value="<?php echo $img->getJogoTag5($col['id']);?>" class="btn btn-light"><?php echo $img->getJogoTag5($col['id'])?></h6></li></button>
+                      <?php }?>
                     </ul>
                     <ul class="list-group list-group-horizontal">
                       <?php /*?>
@@ -115,12 +126,23 @@ if(!empty( $_SESSION['nome'])){
                       <input type="hidden" name="nImagem" value="<?php echo $col['nome_imagem'] ?>">
                       <button type="submit " name="imagem" value="<?php echo $col['id']; ?>" class="btn btn-light"><img class="img-fluid" src="<?php echo $col['caminho'];?>" alt=""> </button>
                     </Form>
+                    <form action="Tag_jogo_gif.php" method="get">
                     <ul class="list-group list-group-horizontal">
-                      <?php echo ".";?><li><h6><?php echo $gif->getJogoTag1($col['id'])?></h6></li><?php echo ".";?>
-                      <?php echo ".";?><li><h6><?php echo $gif->getJogoTag2($col['id'])?></h6></li><?php echo ".";?>
-                      <?php echo ".";?><li><h6><?php echo $gif->getJogoTag3($col['id'])?></h6></li><?php echo ".";?>
-                      <?php echo ".";?><li><h6><?php echo $gif->getJogoTag4($col['id'])?></h6></li><?php echo ".";?>
-                      <?php echo ".";?><li><h6><?php echo $gif->getJogoTag5($col['id'])?></h6></li><?php echo ".";?>
+                    <?php if(!empty($gif->getJogoTag1($col['id']))){?>
+                      <li><h6><button type="submit" name="tag" value="<?php echo $gif->getJogoTag1($col['id']);?>" class="btn btn-light"> <?php echo $gif->getJogoTag1($col['id'])?></h6></li></button>
+                      <?php }?>
+                      <?php if(!empty($gif->getJogoTag2($col['id']))){?>
+                      <li><h6><button type="submit" name="tag" value="<?php echo $gif->getJogoTag2($col['id']);?>" class="btn btn-light"><?php echo $gif->getJogoTag2($col['id'])?></h6></li></button>
+                      <?php }?>
+                      <?php if(!empty($gif->getJogoTag3($col['id']))){?>
+                      <li><h6><button type="submit" name="tag" value="<?php echo $gif->getJogoTag3($col['id']);?>" class="btn btn-light"><?php echo $gif->getJogoTag3($col['id'])?></h6></li></button>
+                      <?php }?>
+                      <?php if(!empty($gif->getJogoTag4($col['id']))){?>
+                      <li><h6><button type="submit" name="tag" value="<?php echo $gif->getJogoTag4($col['id']);?>" class="btn btn-light"><?php echo $gif->getJogoTag4($col['id'])?></h6></li></button>
+                      <?php }?>
+                      <?php if(!empty($gif->getJogoTag5($col['id']))){?>
+                      <li><h6><button type="submit" name="tag" value="<?php echo $gif->getJogoTag5($col['id']);?>" class="btn btn-light"><?php echo $gif->getJogoTag5($col['id'])?></h6></li></button>
+                      <?php }?>
                     </ul>
                     <ul class="list-group list-group-horizontal">
                       <form action="" method="post">

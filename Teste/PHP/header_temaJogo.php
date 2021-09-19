@@ -130,7 +130,6 @@ if(!empty( $_SESSION['nome'])){
 </nav>    
    </header> 
 <body>
-<br><br><br> 
 <?php
 }else{ 
  header('Location: ../index.php');
