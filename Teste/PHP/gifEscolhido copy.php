@@ -152,7 +152,6 @@ $id = null;?>
             <ul class="list-group list-group-horizontal">
             <form action="Tag_anime_gif.php" method="get">
             <?php if(!empty($cat->getTag1($idImagem))){?>
-
           <li><button type="submit" name="tag" value="<?php echo $cat->getTag1($idImagem)?>" class="btn btn-light">
        <h6><?php echo $cat->getTag1($idImagem)?></h6> </button></li>
        <?php }?>

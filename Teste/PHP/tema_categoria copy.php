@@ -180,11 +180,21 @@ $id = null;
           </Form>
           <form action="Tag_anime_imagem.php" method="get">
                     <ul class="list-group list-group-horizontal">
+                    <?php if(!empty($cat->getTag1($col['id']))){?>
                       <li><h6><button type="submit" name="tag" value="<?php echo $cat->getTag1($col['id']);?>" class="btn btn-light"> <?php echo $cat->getTag1($col['id'])?></h6></li></button>
+                      <?php }?>
+                      <?php if(!empty($cat->getTag2($col['id']))){?>
                       <li><h6><button type="submit" name="tag" value="<?php echo $cat->getTag2($col['id']);?>" class="btn btn-light"><?php echo $cat->getTag2($col['id'])?></h6></li></button>
+                      <?php }?>
+                      <?php if(!empty($cat->getTag3($col['id']))){?>
                       <li><h6><button type="submit" name="tag" value="<?php echo $cat->getTag3($col['id']);?>" class="btn btn-light"><?php echo $cat->getTag3($col['id'])?></h6></li></button>
+                      <?php }?>
+                      <?php if(!empty($cat->getTag4($col['id']))){?>
                       <li><h6><button type="submit" name="tag" value="<?php echo $cat->getTag4($col['id']);?>" class="btn btn-light"><?php echo $cat->getTag4($col['id'])?></h6></li></button>
+                      <?php }?>
+                      <?php if(!empty($cat->getTag5($col['id']))){?>
                       <li><h6><button type="submit" name="tag" value="<?php echo $cat->getTag5($col['id']);?>" class="btn btn-light"><?php echo $cat->getTag5($col['id'])?></h6></li></button>
+                      <?php }?>
                     </ul>
                     </form>
 <ul class="list-group list-group-horizontal">
