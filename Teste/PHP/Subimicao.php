@@ -48,24 +48,29 @@ if(!empty( $_SESSION['nome'])){
    
 </head>
 <body>
-   <header id="top" >          
+<header id="top" >          
           <nav class="navbar navbar-dark bg-dark">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="../index.php" id="a1">
-                        <img src="img/bull-horns_39319.ico" alt="" width="30" height="24" class="d-inline-block align-text-top" >    
+                        <img src="../img/bull-horns_39319.ico" alt="" width="30" height="24" class="d-inline-block align-text-top" >    
                           Horn's Gallery
                     </a>
+                   
                     <div class="d-grid gap-2 d-md-block">
+                      
                         <div class="btn-group dropstart">
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                              Dropstart
-                            </button>
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                              <?php echo $con->getUser($id); ?>
+                            </button>                          
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <li><a class="dropdown-item" href="../index.php">Inicio</a></li>
                                 <?php if($con->getAdmin($id)== "S") {?>
                                   <li><a class="dropdown-item" href="gerenciar.php">Gerenciar Usuários</a></li>
                                 <li><a class="dropdown-item" href="lista de usuario.php">Lista de usuários</a></li>
                                 <li><a class="dropdown-item" href="../escolher_categoria.php">Criar categoria</a></li>
+                                <li><a class="dropdown-item" href="novo_genero.php">Criar genero musical</a></li>
+                                <li><a class="dropdown-item" href="gerenciar_artista.php">Gerenciar artistas</a></li>
+                                <li><a class="dropdown-item" href="gerenciar_musica.php">Gerenciar músicas</a></li>
                                 <li><a class="dropdown-item" href="../escolher_Imagem.php">Gerenciar imagens</a></li>
                                 <li><a class="dropdown-item" href="../escolher_gif.php">Gerenciar Gif</a></li>
                                 <li><a class="dropdown-item" href="../escolher_carroceu.php">Gerenciar Carroceu</a></li>
@@ -73,27 +78,33 @@ if(!empty( $_SESSION['nome'])){
                                 <?php }?>
                                 <li><a class="dropdown-item" href="favoritos.php">Favoritos</a></li>                                
                                 <li><a class="dropdown-item" href="perfil.php">Perfil de usuário</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><button type="submit" class="dropdown-item"form ="logout">Logout</a></button>
+                                <li><a class="dropdown-item" href="logout.php">Logout</a></button>
                             </ul>
+                          </div>
                           </div>
                     </div>
                 </div>
-               
-            </nav>
-            <div class="collapse" id="navbarToggleExternalContent">
+                <nav class="navbar navbar-dark bg-dark">
+                    <div class="collapse" id="navbarToggleExternalContent">
   <div class="bg-dark p-4">
     <ul class="nav navbar-dark bg-dark">
             <li class="nav-item">
-                <a class="nav-link" href="buscar_por_categoria.php"><button class="btn btn-secondary" type="button">Buscar por categorias</button></a>
+                <a class="nav-link" href="../Jogos.php"><button class="btn btn-secondary" type="button">Jogos</button></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="buscar_por_categoria_gif.php"><button class="btn btn-secondary" type="button">Buscar por categorias</button></a>
+                <a class="nav-link" href="../Animes.php"><button class="btn btn-secondary" type="button">Animes</button></a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="Subimicao.php"><button class="btn btn-secondary"><img src="https://img.icons8.com/office/16/000000/upload--v1.png"/>Submeter conteúdo</button></a>
+                <a class="nav-link" href="../Musicas.php"><button class="btn btn-secondary" type="button">Musicas</button></a>
             </li>
         </ul>
+  </div>
+</div>
+                </nav>
+            </nav>
+        
+        <div class="collapse" id="navbarToggleExternalContent">
+  <div class="bg-dark p-4">
   </div>
 </div>
 <nav class="navbar navbar-dark bg-dark">
@@ -103,7 +114,7 @@ if(!empty( $_SESSION['nome'])){
     </button>
   </div>
 </nav>    
-   </header> 
+   </header>  
    <main>
        <h1 id="Topo">Submeter conteúdo</h1>
        <div class="container">

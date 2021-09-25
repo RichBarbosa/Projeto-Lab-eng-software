@@ -78,6 +78,9 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
                                   <li><a class="dropdown-item" href="gerenciar.php">Gerenciar Usuários</a></li>
                                 <li><a class="dropdown-item" href="lista de usuario.php">Lista de usuários</a></li>
                                 <li><a class="dropdown-item" href="../escolher_categoria.php">Criar categoria</a></li>
+                                <li><a class="dropdown-item" href="novo_genero.php">Criar genero musical</a></li>
+                                <li><a class="dropdown-item" href="gerenciar_artista.php">Gerenciar artistas</a></li>
+                                <li><a class="dropdown-item" href="gerenciar_musica.php">Gerenciar músicas</a></li>
                                 <li><a class="dropdown-item" href="../escolher_Imagem.php">Gerenciar imagens</a></li>
                                 <li><a class="dropdown-item" href="../escolher_gif.php">Gerenciar Gif</a></li>
                                 <li><a class="dropdown-item" href="../escolher_carroceu.php">Gerenciar Carroceu</a></li>
@@ -191,7 +194,7 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
         Tem certeza que deseja excluir essa imagem?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
         <form action="excluir_imagemJogo.php" method="post">
             <input type="hidden" name="excluir" value="<?php echo $idImagem;?>">
         <button type="submit" class="btn btn-danger">Excluir</button>

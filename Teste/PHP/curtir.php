@@ -4,10 +4,12 @@ if(!isset($_SESSION)){
 }require_once('classes\Usuario.php');
 require_once('classes\Imagem.php');
 require_once('classes\Gif.php');
+require_once('classes\Musica.php');
 
 $con = new Usuario();
 $cat = new Imagem();
 $gif = new Gif();
+$mus = new Musica();
 
 $id = $_SESSION['nome'];
 if(!empty( $_SESSION['nome'])){ 
@@ -91,6 +93,28 @@ if(!empty( $_SESSION['nome'])){
       try{
         $con->removerCurtido($nome, $id);
         header('Location: gifJogoEscolhido copy.php');
+      }catch(Exception $e){
+
+      }
+    }else if(!empty($_POST['curtirM'])){
+      $idMusica = $_POST['curtirM'];
+      $autoria = $mus ->getAutoriaById($idMusica);
+      $nome = $mus->getNome($idMusica);      
+      $_SESSION['musica'] = $idMusica;
+      try{
+        $con->inserirCurtido($nome, $id);
+        header('Location: Letra.php');
+      }catch(Exception $e){
+
+      }
+    }else if(!empty($_POST['descurtirM'])){
+      $idMusica = $_POST['descurtirM'];
+      $autoria = $mus ->getAutoriaById($idMusica);
+      $nome = $mus->getNome($idMusica);  
+      $_SESSION['musica'] = $idMusica;
+      try{
+        $con->removerCurtido($nome, $id);
+        header('Location: Letra.php');
       }catch(Exception $e){
 
       }

@@ -67,6 +67,9 @@ if(!empty( $_SESSION['nome'])){
                                   <li><a class="dropdown-item" href="gerenciar.php">Gerenciar Usuários</a></li>
                                 <li><a class="dropdown-item" href="lista de usuario.php">Lista de usuários</a></li>
                                 <li><a class="dropdown-item" href="../escolher_categoria.php">Criar categoria</a></li>
+                                <li><a class="dropdown-item" href="novo_genero.php">Criar genero musical</a></li>
+                                <li><a class="dropdown-item" href="gerenciar_artista.php">Gerenciar artistas</a></li>
+                                <li><a class="dropdown-item" href="gerenciar_musica.php">Gerenciar músicas</a></li>
                                 <li><a class="dropdown-item" href="../escolher_Imagem.php">Gerenciar imagens</a></li>
                                 <li><a class="dropdown-item" href="../escolher_gif.php">Gerenciar Gif</a></li>
                                 <li><a class="dropdown-item" href="../escolher_carroceu.php">Gerenciar Carroceu</a></li>
@@ -97,7 +100,7 @@ if(!empty( $_SESSION['nome'])){
                 <a class="nav-link" href="../Animes.php"><button class="btn btn-secondary" type="button">Animes</button></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href=""><button class="btn btn-secondary" type="button"></button></a>
+                <a class="nav-link" href="../Musicas.php"><button class="btn btn-secondary" type="button">Músicas</button></a>
             </li>
         </ul>
   </div>

@@ -11,10 +11,12 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
     if(!empty($_POST)){
         $idImagem = $_POST['excluir'];
         $caminho = $cat->getCaminho($idImagem);
+        $nome = $cat->getNome($idImagem);
        
 
         try{
             $cat->deletarGif($idImagem);
+            $cat->deletarTodosGifFavorito($nome);
             if(file_exists($caminho)){
                 if (unlink($caminho)){
                 }else {

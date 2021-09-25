@@ -80,7 +80,7 @@ include_once("header_buscar.php");
                 <a class="nav-link" href="../Animes.php"><button class="btn btn-secondary" type="button">Animes</button></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href=""><button class="btn btn-secondary" type="button"></button></a>
+                <a class="nav-link" href="../Musicas.php"><button class="btn btn-secondary" type="button">Músicas</button></a>
             </li>
         </ul>
   </div>
@@ -158,14 +158,18 @@ include_once("header_buscar.php");
             <?php
             if(!empty($_GET)){
                 $inicial = $_GET['inicial'];?>
-                <form action="tema_categoria_gif copy.php" method="GET">
-                    <ul class="list-group list-group-horizontal">
-               <?php foreach ($img->listarCategoriasByInicial($inicial) as $col) {?>
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item"><button class="btn btn-outline-dark" type="submit" value="<?php echo $col['nome'];?>" name="escolha" ><?php echo $col['nome']?></li></button> 
-                    </ul>
-                <?php } ?>
-             </form>
+                <div class="container">
+                  <div class="row">
+                    <form action="tema_categoria_gif copy.php" method="GET">
+                      <?php foreach ($img->listarCategoriasByInicial($inicial) as $col) {?>
+                        <div class="col-sm-3"><br>
+                        <button class="btn btn-outline-dark" type="submit" value="<?php echo $col['nome'];?>" name="escolha" ><?php echo $col['nome']?></button>
+                        <br>
+                    </form>
+                      </div>  
+                  <?php } ?>             
+                </div>
+             </div>
             <?php 
         }else{
             unset($inicial);

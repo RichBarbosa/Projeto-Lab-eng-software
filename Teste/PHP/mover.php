@@ -5,10 +5,13 @@ if(!isset($_SESSION)){
 require_once('classes\Usuario.php');
 require_once('classes\Imagem.php');
 require_once('classes\Gif.php');
+require_once('classes\Musica.php');
+
 
 $con = new Usuario();
 $cat = new Imagem();
 $gif = new Gif();
+$mus = new Musica();
 
 $id = $_SESSION['nome'];
 if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){ 
@@ -48,7 +51,35 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
         header('Location: gerenciar_gifs_jogo.php');
     }catch(Exception $e){
 
-    } }else {
+    } 
+}
+else if(!empty($_POST['idMusica'])){
+    $idMusica = $_POST['idMusica'];
+    $autoria = $_POST['categoria'];
+    $genero = $mus->getGeneroByAutoria($autoria);
+    $nome = $mus->getNome($idMusica);
+    try{
+        $mus->moverMusica($autoria, $genero, $idMusica);
+        $mus->MoverMusicaFavorita($autoria, $genero, $nome);
+        header('Location: gerenciar_musica.php');
+    }catch(Exception $e){
+
+    } 
+}
+else if(!empty($_POST['artista'])){
+    $autoria = $_POST['artista'];
+    $IdGenero = $_POST['categoria'];
+    $genero = $mus->getGeneroByIdGenero($IdGenero);
+    try{
+        $mus->MoverAutoria($autoria, $genero);
+        $mus->MoverAutoriaMusica($autoria, $genero);
+        $mus->MoverAutoriaMusicaFavorita($autoria, $genero);
+        header('Location: gerenciar_artista.php');
+    }catch(Exception $e){
+
+    } 
+}
+else {
      header('Location: ../index.php');
  } 
   

@@ -1,8 +1,10 @@
 <?php
 error_reporting(E_ALL ^ E_NOTICE);
 include_once("PHP\classes\Imagem.php");
+include_once("PHP\classes\Musica.php");
 
 $img = new Imagem();
+$mus = new Musica();
 //Se der pau no servidor a primeira coisa que pra tentar é tirar todos o !isset($_SESSION)
   session_start();
  
@@ -89,7 +91,7 @@ if(!empty( $_SESSION['nome'])){
                 <a class="nav-link" href="Animes.php"><button class="btn btn-secondary" type="button">Animes</button></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href=""><button class="btn btn-secondary" type="button"></button></a>
+                <a class="nav-link" href="Musicas.php"><button class="btn btn-secondary" type="button">Musicas</button></a>
             </li>
         </ul>
   </div>
@@ -128,34 +130,123 @@ if(!empty( $_SESSION['nome'])){
    <main>
      <?php    
      ?>
-       <h1 id="Topo">Titulo qualquer</h1>
+       <h1 id="Topo"></h1>
+       <br><br>
        <div class="container">
-          <div style="text-align: center;"> 
-            <p>novo index, ele será uma apresentação geral enquanto o index
-              antigo será a parte da categoria anime, ainda to pensando em oque vai ta aqui... </p>
-              <p>mas enquanto não tem nada vamos a informações gerais. 
-                tem alguns, bem, eu não diria que é um bug tá mais pra incompetencia minha pra codar.
-                como que tem muita pag que necessita de dados de formulários é muito comum se utilizar
-                o voltar do navegador ele pedir pra reeviar o formulario, eu fortemente recomendo utilizar
-                os links da propria aplicação pra não ter que da F5 toda hora pq sinceramente eu pesqusei formas
-                de arrumar mas não entendi direito então não posso garatir que eu consiga.
-
+          <div style="text-align: center;">
+          <h4> 
+            <p> Bem vindo ao Horn'Gallery! a galeria comunitarida de todos para todos. </p>
+              <p>Aqui no Horn'Gallery você pode encontrar os seguintes conteúdos para baixar: Imagens e Gifs
+                dos temas Jogos e animes. Use-os para oque você quiser!!, wallpapers, Stickers, imagens de referência e
+                mais oque sua imaginação desejar.
               </p>
+            <p>além das imagens nós também possuimos letras e traduções das mais diversas músicas! feitas de fãs para fãs!</p>
+            <p>além disso se não encontrar oque deseja em algum desses temas não se preocupe! você mesmo pode compatilhar conosco também 
+              expandindo o nosso conteúdo cada vez mais! 
+            </p>
+            </h4>  
           </div>
 
         </div>
-        
-      <br>
-      <br>
-      <br>
-            
-
+        <br><br><br>
+        <div style="text-align: center;"><h4>Sub categorias de imagens em destaque: Animes</h4></div>
+        <h6 style="text-align: center">
+        <a class="btn btn-outline-success" href="Animes.php" role="button">visitar esse tema por completo</a>
+        </h6>
+            <hr>
+            <div class="container">
+              <div class="row">
+                <form action="PHP\tema_categoria copy.php" method="get">
+                  <table>
+                  <tr>
+                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('1');?>"><?php echo $img->getnomeDestaqueA('1');?></button></td>
+                    </tr>
+                    <tr>
+                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('2');?>"><?php echo $img->getnomeDestaqueA('2');?></button></td>
+                    </tr>
+                    <tr>
+                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('3');?>"><?php echo $img->getnomeDestaqueA('3');?></button></td>
+                    </tr>
+                    <tr>
+                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('4');?>"><?php echo $img->getnomeDestaqueA('4');?></button></td>
+                    </tr>
+                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('5');?>"><?php echo $img->getnomeDestaqueA('5');?></button></td>
+                    </tr>
+                    <tr>
+                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('6');?>"><?php echo $img->getnomeDestaqueA('6');?></button></td>
+                  </tr>
+                  </table>
+                </form>                    
+              </div>
+            </div>
+        </div>
+        <br>
+        <h4 style="text-align:center">Sub categorias de imagens em destaque: Jogos</h4>
+        <h6 style="text-align: center">
+        <a class="btn btn-outline-success" href="Jogos.php" role="button">visitar esse tema por completo</a>
+        </h6>
+        <hr>
+            <div class="container">
+              <div class="row">
+                <form action="PHP\tema_categoria_jogo copy.php" method="get">
+                  <table>
+                  <tr>
+                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('7');?>"><?php echo $img->getnomeDestaqueA('7');?></button></td>
+                    </tr>
+                    <tr>
+                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('8');?>"><?php echo $img->getnomeDestaqueA('8');?></button></td>
+                    </tr>
+                    <tr>
+                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('9');?>"><?php echo $img->getnomeDestaqueA('9');?></button></td>
+                    </tr>
+                    <tr>
+                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('10');?>"><?php echo $img->getnomeDestaqueA('10');?></button></td>
+                    </tr>
+                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('11');?>"><?php echo $img->getnomeDestaqueA('11');?></button></td>
+                    </tr>
+                    <tr>
+                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('12');?>"><?php echo $img->getnomeDestaqueA('12');?></button></td>
+                  </tr>
+                  </table>
+                </form>                    
+              </div>
+            </div>
+        </div>
+        <br>
+        <h4 style="text-align:center">Generos músicais em destaque</h4>
+        <h6 style="text-align: center">
+        <a class="btn btn-outline-success" href="Musicas.php" role="button">visitar esse tema por completo</a>
+        </h6>
+        <hr>
+            <div class="container">
+              <div class="row">
+                <form action="PHP\generos.php" method="get">
+                  <table>
+                  <tr>
+                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $mus->getnomeDestaqueG('1');?>"><?php echo $mus->getnomeDestaqueG('1');?></button></td>
+                    </tr>
+                    <tr>
+                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $mus->getNomeDestaqueG('2');?>"><?php echo $mus->getnomeDestaqueG('2');?></button></td>
+                    </tr>
+                    <tr>
+                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $mus->getNomeDestaqueG('3');?>"><?php echo $mus->getnomeDestaqueG('3');?></button></td>
+                    </tr>
+                    <tr>
+                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $mus->getNomeDestaqueG('4');?>"><?php echo $mus->getnomeDestaqueG('4');?></button></td>
+                    </tr>
+                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $mus->getNomeDestaqueG('5');?>"><?php echo $mus->getnomeDestaqueG('5');?></button></td>
+                    </tr>
+                    <tr>
+                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $mus->getNomeDestaqueG('6');?>"><?php echo $mus->getnomeDestaqueG('6');?></button></td>
+                  </tr>
+                  </table>
+                </form>                    
+              </div>
+            </div>
+        </div>
+        <hr>
     </main> 
-    <br>
-    <br>
-    <br>
-    <hr>
-
+<br><br>
         <footer>
           
           <!--essa tag a faz voltar pro topo da página, simples.... oq? achou q eu ia fazer mais um comentário

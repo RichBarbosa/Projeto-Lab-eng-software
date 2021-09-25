@@ -65,6 +65,9 @@ if(!empty( $_SESSION['nome'])){
                                   <li><a class="dropdown-item" href="PHP\gerenciar.php">Gerenciar Usuários</a></li>
                                 <li><a class="dropdown-item" href="PHP\lista_de_usuario.php">Lista de usuários</a></li>
                                 <li><a class="dropdown-item" href="escolher_categoria.php">Criar categoria</a></li>
+                                <li><a class="dropdown-item" href="PHP\novo_genero.php">Criar genero musical</a></li>
+                                <li><a class="dropdown-item" href="PHP\gerenciar_artista.php">Gerenciar artistas</a></li>
+                                <li><a class="dropdown-item" href="PHP\gerenciar_musica.php">Gerenciar músicas</a></li>
                                 <li><a class="dropdown-item" href="escolher_Imagem.php">Gerenciar imagens</a></li>
                                 <li><a class="dropdown-item" href="escolher_gif.php">Gerenciar Gif</a></li>
                                 <li><a class="dropdown-item" href="escolher_carroceu.php">Gerenciar Carroceu</a></li>
@@ -91,7 +94,7 @@ if(!empty( $_SESSION['nome'])){
                 <a class="nav-link" href="Animes.php"><button class="btn btn-secondary" type="button">Animes</button></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href=""><button class="btn btn-secondary" type="button"></button></a>
+                <a class="nav-link" href="Musicas.php"><button class="btn btn-secondary" type="button">Musicas</button></a>
             </li>
         </ul>
   </div>
@@ -101,16 +104,6 @@ if(!empty( $_SESSION['nome'])){
         
         <div class="collapse" id="navbarToggleExternalContent">
   <div class="bg-dark p-4">
-    <ul class="nav navbar-dark bg-dark">
-            <li class="nav-item">
-                <a class="nav-link" href="PHP\buscar_por_categoria.php"><button class="btn btn-secondary" type="button">Buscar imagens</button></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="PHP\buscar_por_categoria_gif.php"><button class="btn btn-secondary" type="button">Buscar gifs</button></a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="PHP\Subimicao.php"><button class="btn btn-secondary"><img src="https://img.icons8.com/office/16/000000/upload--v1.png"/>Submeter conteudo</button></a>
-        </ul>
   </div>
 </div>
 <nav class="navbar navbar-dark bg-dark">

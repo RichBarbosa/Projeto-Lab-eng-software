@@ -48,35 +48,76 @@ if(!empty( $_SESSION['nome'])){
    
 </head>
 <body>
-   <header id="top" >          
+<header id="top" >          
           <nav class="navbar navbar-dark bg-dark">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="index.php" id="a1">
                         <img src="img/bull-horns_39319.ico" alt="" width="30" height="24" class="d-inline-block align-text-top" >    
                           Horn's Gallery
                     </a>
+                   
                     <div class="d-grid gap-2 d-md-block">
+                      
                         <div class="btn-group dropstart">
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                              Dropstart
-                            </button>
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                              <?php echo $con->getUser($id); ?>
+                            </button>                          
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="index.php">Inicio</a></li>
+                            <li><a class="dropdown-item" href="index.php">Inicio</a></li>
                                 <?php if($con->getAdmin($id)== "S") {?>
-                                <li><a class="dropdown-item" href="PHP\gerenciar.php">Gerenciar Usuários</a></li>
-                                <li><a class="dropdown-item" href="PHP\lista de usuario.php">Lista de usuários</a></li>
-                                <li><a class="dropdown-item" href="PHP\gerenciar_imagens.php">Gerenciar imagens</a></li>                                
+                                  <li><a class="dropdown-item" href="PHP\gerenciar.php">Gerenciar Usuários</a></li>
+                                <li><a class="dropdown-item" href="PHP\lista_de_usuario.php">Lista de usuários</a></li>
+                                <li><a class="dropdown-item" href="escolher_categoria.php">Criar categoria</a></li>
+                                <li><a class="dropdown-item" href="PHP\novo_genero.php">Criar genero musical</a></li>
+                                <li><a class="dropdown-item" href="PHP\gerenciar_artista.php">Gerenciar artistas</a></li>
+                                <li><a class="dropdown-item" href="PHP\gerenciar_musica.php">Gerenciar músicas</a></li>
+                                <li><a class="dropdown-item" href="escolher_Imagem.php">Gerenciar imagens</a></li>
+                                <li><a class="dropdown-item" href="escolher_gif.php">Gerenciar Gif</a></li>
+                                <li><a class="dropdown-item" href="escolher_carroceu.php">Gerenciar Carroceu</a></li>
+                                <li><a class="dropdown-item" href="escolher_destaque.php">Gerenciar Destaques</a></li>
+
+                                
                                 <?php }?>
-                                <li><a class="dropdown-item" href="PHP/perfil.php">Perfil</a></li>                                
-                                <li><a class="dropdown-item" href="#">bla bla bla</a></li>
+                                <li><a class="dropdown-item" href="PHP\favoritos.php">Favoritos</a></li>                                
+                                <li><a class="dropdown-item" href="PHP/perfil.php">Perfil de usuário</a></li>                               
+
                                 <li><a class="dropdown-item" href="PHP\logout.php">Logout</a></li>
                             </ul>
                           </div>
+                          </div>
                     </div>
                 </div>
-               
+                <nav class="navbar navbar-dark bg-dark">
+                    <div class="collapse" id="navbarToggleExternalContent">
+  <div class="bg-dark p-4">
+    <ul class="nav navbar-dark bg-dark">
+            <li class="nav-item">
+                <a class="nav-link" href="Jogos.php"><button class="btn btn-secondary" type="button">Jogos</button></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Animes.php"><button class="btn btn-secondary" type="button">Animes</button></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Musicas.php"><button class="btn btn-secondary" type="button">Musicas</button></a>
+            </li>
+        </ul>
+  </div>
+</div>
+                </nav>
             </nav>
-   </header> 
+        
+        <div class="collapse" id="navbarToggleExternalContent">
+  <div class="bg-dark p-4">
+  </div>
+</div>
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>    
+   </header>
    <main>
        <h1 id="Topo">Titulo qualquer</h1>
        <div class="container">

@@ -65,6 +65,7 @@ if(!empty( $_SESSION['nome'])){
                                   <li><a class="dropdown-item" href="PHP\gerenciar.php">Gerenciar Usuários</a></li>
                                 <li><a class="dropdown-item" href="PHP\lista_de_usuario.php">Lista de usuários</a></li>
                                 <li><a class="dropdown-item" href="escolher_categoria.php">Criar categoria</a></li>
+                                <li><a class="dropdown-item" href="PHP\novo_genero.php">Criar genero musical</a></li>
                                 <li><a class="dropdown-item" href="escolher_Imagem.php">Gerenciar imagens</a></li>
                                 <li><a class="dropdown-item" href="escolher_gif.php">Gerenciar Gif</a></li>
                                 <li><a class="dropdown-item" href="escolher_carroceu.php">Gerenciar Carroceu</a></li>

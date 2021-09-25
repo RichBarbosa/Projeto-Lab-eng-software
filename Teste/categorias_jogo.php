@@ -80,15 +80,18 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
                             <li><a class="dropdown-item" href="index.php">Inicio</a></li>
                                 <?php if($con->getAdmin($id)== "S") {?>
                                   <li><a class="dropdown-item" href="gerenciar.php">Gerenciar Usuários</a></li>
-                                <li><a class="dropdown-item" href="lista de usuario.php">Lista de usuários</a></li>
-                                <li><a class="dropdown-item" href="../escolher_categoria.php">Criar categoria</a></li>
-                                <li><a class="dropdown-item" href="../escolher_Imagem.php">Gerenciar imagens</a></li>
-                                <li><a class="dropdown-item" href="../escolher_gif.php">Gerenciar Gif</a></li>
-                                <li><a class="dropdown-item" href="../escolher_carroceu.php">Gerenciar Carroceu</a></li>
-                                <li><a class="dropdown-item" href="../escolher_destaque.php">Gerenciar Destaques</a></li>
+                                <li><a class="dropdown-item" href="PHP\lista de usuario.php">Lista de usuários</a></li>
+                                <li><a class="dropdown-item" href="escolher_categoria.php">Criar categoria</a></li>
+                                <li><a class="dropdown-item" href="PHP\novo_genero.php">Criar genero musical</a></li>
+                                <li><a class="dropdown-item" href="PHP\gerenciar_artista.php">Gerenciar artistas</a></li>
+                                <li><a class="dropdown-item" href="gerenciar_musica.php">Gerenciar músicas</a></li>
+                                <li><a class="dropdown-item" href="escolher_Imagem.php">Gerenciar imagens</a></li>
+                                <li><a class="dropdown-item" href="escolher_gif.php">Gerenciar Gif</a></li>
+                                <li><a class="dropdown-item" href="escolher_carroceu.php">Gerenciar Carroceu</a></li>
+                                <li><a class="dropdown-item" href="escolher_destaque.php">Gerenciar Destaques</a></li>
                                 <?php }?>
-                                <li><a class="dropdown-item" href="favoritos.php">Favoritos</a></li>                                
-                                <li><a class="dropdown-item" href="perfil.php">Perfil de usuário</a></li>
+                                <li><a class="dropdown-item" href="PHP\favoritos.php">Favoritos</a></li>                                
+                                <li><a class="dropdown-item" href="PHP\perfil.php">Perfil de usuário</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><button type="submit" class="dropdown-item"form ="logout">Logout</a></button>
                             </ul>
