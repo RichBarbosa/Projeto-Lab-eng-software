@@ -23,6 +23,13 @@ $id = null;
     if(isset($_GET['imagem'])){
         $idImagem = $_GET['imagem'];
         $nImagem = $_GET['nImagem'];
+        $contView = $cat->getJogoViews($nImagem);
+        $contView = $contView + 1;
+        try{
+          $cat->inserirJogoVisualizacao($nImagem, $contView);
+        }catch(Exception $e){
+
+        }
     }
     else{
       $idImagem = $_SESSION['imagem'];
@@ -73,6 +80,12 @@ $id = null;
               <h6><?php echo $cat->getJogoTag5($idImagem)?></h6> </button></li>
               <?php }?>
             </ul>
+              </form>
+              <?php if ($cat->getJogoViews($nImagem)== 1) {?>
+          <h6 style="text-align: end;"><?php echo $cat->getJogoViews($nImagem);?> visualização</h6>
+        <?php }else{ ?>
+          <h6 style="text-align: end;"><?php echo $cat->getJogoViews($nImagem);?> visualizações</h6>
+          <?php }?>
             <ul class="list-group list-group-horizontal">
               <form action="favoritar_gifJ.php" method="post">
                 <?php 
@@ -85,6 +98,8 @@ $id = null;
                 <?php }else{ ?>
                             <form action="favoritar_gifJ.php" method="post">
                               <input type="hidden" name="caminho" value="<?php echo $cat->getCaminhoJogo($idImagem);?>">
+                              <input type="hidden" name="categoriaFavorito" value="Jogo">
+                              <input type="hidden" name="tipoFavorito" value="Gif">
                                 <li><br><button class="btn btn-outline-success" type ="submit" 
                                 name="favoritar" value="<?php echo $idImagem;?>" 
                                 <?php if (empty($_SESSION['nome'])){?> 
@@ -113,10 +128,10 @@ $id = null;
                         src="../img/download.svg" alt=""></a></li>  
                   </ul> 
                   <br>
-                  <?php if(count($con->getCurtido($nImagem)) == 1){?>
-                  <h6> <?php echo count($con->getCurtido($nImagem)) . " ";?> curtida!</h6>
+                  <?php if ($cat->getJogoCurtido($nImagem) == 1){?>
+                  <h6> <?php echo $cat->getJogoCurtido($nImagem) . " ";?> curtida!</h6>
                   <?php }else{ ?>
-                    <h6> <?php echo count($con->getCurtido($nImagem)) . " ";?> curtidas!</h6>
+                    <h6> <?php echo $cat->getJogoCurtido($nImagem) . " ";?> curtidas!</h6>
                     <?php }?>
               <hr>
       </div>

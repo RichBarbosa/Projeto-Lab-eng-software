@@ -208,6 +208,8 @@ if(!empty( $_SESSION['nome'])){
   
   <?php }else{ ?>
     <form action="favoritarG.php" method="post">
+    <input type="hidden" name="categoriaFavorito" value="Anime">
+    <input type="hidden" name="tipoFavorito" value="Gif">
     <li><br><button class="btn btn-outline-success" type ="submit" 
     name="favoritar" value="<?php echo $col['id'];?>" 
     <?php if (empty($_SESSION['nome'])){?> 
@@ -219,7 +221,12 @@ if(!empty( $_SESSION['nome'])){
   <li><button class="btn btn-outline-light"> 
     <a href="<?php echo $col['caminho'];?>" download="<?php echo $col['id'] + 0310; ?>"><img class="img-thumbnail" 
     src="../img/download.svg" alt=""></a>
-</ul>         
+</ul>    
+          <?php if($cat->getCurtido($favnome) == 1) {?>
+          <h6><?php echo $cat->getCurtido($favnome);?> curtida</h6>
+          <?php }else{ ?>
+            <h6><?php echo $cat->getCurtido($favnome);?> curtidas</h6>
+            <?php }?>     
           <hr>
         </div>
           <?php }?> 

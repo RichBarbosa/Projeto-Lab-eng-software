@@ -15,9 +15,11 @@ if(!empty( $_SESSION['nome'])){
           $idImagem = $_POST['favoritar'];
           $nome = $cat->getNomeJogo($idImagem);
           $caminho = $_POST['caminho'];
+          $TipoCat = $_POST['categoriaFavorito'];
+          $tipo = $_POST['tipoFavorito'];
           $_SESSION['categoria'] = $categoria;
           try{
-            $cat->inserirJogoFavorita($caminho, $nome, $id);
+            $cat->inserirJogoFavorita($caminho, $nome, $id, $TipoCat, $tipo);
             header('Location: tema_categoria_jogoGif copy.php');
           }catch(Exception $e){
 

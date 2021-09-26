@@ -16,6 +16,7 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
             $mus -> renomearGenero($nome, $categoria);
             $mus -> renomearGenAutoria($nome, $categoria);
             $mus -> renomearGenMusica($nome, $categoria);
+            $mus -> renomearGenAutoriaFavorita($nome, $categoria);
             $mus -> renomearGenFavorita($nome, $categoria);
             header('Location: novo_genero.php');
         }catch(Exception $e){

@@ -134,13 +134,15 @@ class Gif extends Connect {
         $run = $stmt->execute();
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    function inserirFavorita($caminho, $nome, $id){
+    function inserirFavorita($caminho, $nome, $id, $categoria, $tipo){
         $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
-        $stmt = $conn->prepare("INSERT INTO imagens_anime_favorita (id_favorito, caminho, id, nome_gif) 
-        VALUES (null, :caminho, :id, :nome)");
+        $stmt = $conn->prepare("INSERT INTO imagens_anime_favorita (id_favorito, caminho, id, nome_gif, categorias, tipo) 
+        VALUES (null, :caminho, :id, :nome, :categorias, :tipo)");
         $stmt ->bindValue(":caminho",$caminho);
         $stmt ->bindValue(":id",$id);       
         $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":categorias",$categoria);
+        $stmt ->bindValue(":tipo",$tipo);
         $run = $stmt->execute();
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -337,13 +339,15 @@ class Gif extends Connect {
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);        
         return $rs;  
     }
-    function inserirJogoFavorita($caminho, $nome, $id){
+    function inserirJogoFavorita($caminho, $nome, $id, $categoria, $tipo){
         $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
-        $stmt = $conn->prepare("INSERT INTO imagens_anime_favorita (id_favorito, caminho, id, nome_gifJ)
-        VALUES (null, :caminho, :id, :nome)");
+        $stmt = $conn->prepare("INSERT INTO imagens_anime_favorita (id_favorito, caminho, id, nome_gifJ, categorias, tipo)
+        VALUES (null, :caminho, :id, :nome, :categorias, :tipo)");
         $stmt ->bindValue(":caminho",$caminho);
         $stmt ->bindValue(":id",$id);
         $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":categorias",$categoria);
+        $stmt ->bindValue(":tipo",$tipo);
         $run = $stmt->execute();
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -549,7 +553,116 @@ class Gif extends Connect {
         $stmt ->bindValue(":nome",$nome);
         $run = $stmt->execute();
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }         
+    }
+    function inserirCurtido($curtir, $nome){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE gif_animes SET curtidas = :curtir
+        WHERE nome_gif = :nome");
+        $stmt->bindValue("curtir",$curtir);
+        $stmt ->bindValue(":nome",$nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rs;          
+    }
+    function removerCurtido($curtir, $nome){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE gif_animes SET curtidas = :curtir
+        WHERE nome_gif = :nome");
+        $stmt->bindValue("curtir",$curtir);
+        $stmt ->bindValue(":nome",$nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rs;          
+    }
+    function getCurtido($nome){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT curtidas FROM gif_animes WHERE nome_gif = :nome");
+        $stmt ->bindValue(":nome",$nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+        return $rs['curtidas'];                  
+    }
+    function inserirJogoCurtido($curtir, $nome){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE gif_jogo SET curtidas = :curtir
+        WHERE nome_imagem = :nome");
+        $stmt->bindValue("curtir",$curtir);
+        $stmt ->bindValue(":nome",$nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rs;          
+    }
+    function removerJogoCurtido($curtir, $nome){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE gif_jogo SET curtidas = :curtir
+        WHERE nome_imagem = :nome");
+        $stmt->bindValue("curtir",$curtir);
+        $stmt ->bindValue(":nome",$nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rs;          
+    }
+    function getJogoCurtido($nome){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT curtidas FROM gif_jogo WHERE nome_imagem = :nome");
+        $stmt ->bindValue(":nome",$nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+        return $rs['curtidas'];                  
+    }
+    function inserirVisualizacao($nome, $view){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE gif_animes SET visualizacao = :view
+        WHERE nome_gif = :nome");
+        $stmt->bindValue("view",$view);
+        $stmt ->bindValue(":nome",$nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rs;          
+    }
+    function inserirJogoVisualizacao($nome, $view){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE gif_jogo SET visualizacao = :view
+        WHERE nome_imagem = :nome");
+        $stmt->bindValue("view",$view);
+        $stmt ->bindValue(":nome",$nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rs;          
+    }
+    function getViews($nome){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT visualizacao FROM gif_animes WHERE nome_gif = :nome");
+        $stmt ->bindValue(":nome",$nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+        return $rs['visualizacao'];                  
+    }
+    function getJogoViews($nome){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT visualizacao FROM gif_jogo WHERE nome_imagem = :nome");
+        $stmt ->bindValue(":nome",$nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+        return $rs['visualizacao'];                  
+    }
+    function  getId($caminho){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT * FROM gif_animes WHERE caminho = :nome");
+        $stmt ->bindValue(":nome",$caminho);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+        return $rs['id'];  
+    }
+    function  getJogoId($caminho){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT * FROM gif_jogo WHERE caminho = :nome");
+        $stmt ->bindValue(":nome",$caminho);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+        return $rs['id'];  
+    }
+             
 }
 
 

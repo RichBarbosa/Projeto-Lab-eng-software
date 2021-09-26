@@ -242,10 +242,12 @@ if(!empty( $_SESSION['nome'])){
   <br><br>
     <div class="container">
       <div class="row">
-          <form action="" method="post">
         <?php foreach($cat->getFavorita($id) as $col){ ?> 
         <div class="col-sm-6">
-          <button type="submit " class="btn btn-light"><img class="img-fluid" src="<?php echo $col['caminho'];?>" alt=""> </button>
+        <form action="definirFavorito.php" method="post">
+          <input type="hidden" name="categoriaFavorito" value="<?php echo $col['categorias']?>">
+          <input type="hidden" name="tipoFavorito" value="<?php echo $col['tipo'] ?>">
+          <button type="submit " class="btn btn-light" name="favorito" value="<?php echo $col['caminho'];?>"><img class="img-fluid" src="<?php echo $col['caminho'];?>" alt=""> </button>
         </form>
 <ul class="list-group list-group-horizontal">
   <form action="Deletar_favoritos.php" method="post"> 

@@ -317,7 +317,7 @@ class Musica extends Connect{
         $stmt = $conn->prepare("SELECT nome_musica, id
         FROM musica
         WHERE nome_autoria = :autoria
-        ORDER BY nome_autoria ASC");
+        ORDER BY curtidas DESC");
         $stmt ->bindValue(":autoria",$this->autoria = $autoria);               
         $run = $stmt->execute();
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -633,5 +633,78 @@ class Musica extends Connect{
         $stmt ->bindValue(":idD",$idD);
         $run = $stmt->execute();
         $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+    }
+    function renomearMusicaFavorita($nome, $autoria){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE musica_favorita SET nome_musica = :nome
+        WHERE autoria = :autoria");
+         $stmt ->bindValue(":autoria",$this->autoria = $autoria);
+         $stmt ->bindValue(":nome",$this->nome = $nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function renomearGenAutoriaFavorita($genero, $Ngenero){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE autoria_favorita SET genero = :nome
+         WHERE genero = :genero");
+        $stmt ->bindValue(":nome",$this->genero = $genero);
+        $stmt ->bindValue(":genero",$Ngenero);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function renomearAutAutoriaFavorita($autoria, $Ngenero){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE autoria_favorita SET nome = :nome
+         WHERE nome = :autoria");
+        $stmt ->bindValue(":nome",$this->autoria = $autoria);
+        $stmt ->bindValue(":autoria",$Ngenero);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function inserirCurtido($curtir, $id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE musica SET curtidas = :curtir
+        WHERE id = :nome");
+        $stmt->bindValue("curtir",$curtir);
+        $stmt ->bindValue(":nome",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rs;          
+    }
+    function removerCurtido($curtir, $id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE musica SET curtidas = :curtir
+        WHERE id = :nome");
+        $stmt->bindValue("curtir",$curtir);
+        $stmt ->bindValue(":nome",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rs;          
+    }
+    function getCurtido($id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT curtidas FROM musica WHERE id = :nome");
+        $stmt ->bindValue(":nome",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+        return $rs['curtidas'];                  
+    }
+    function inserirVisualizacao($id, $view){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE musica SET visualizacao = :view
+        WHERE id = :nome");
+        $stmt->bindValue("view",$view);
+        $stmt ->bindValue(":nome",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rs;          
+    }
+    function getViews($id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT visualizacao FROM musica WHERE id = :nome");
+        $stmt ->bindValue(":nome",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+        return $rs['visualizacao'];                  
     }
 }

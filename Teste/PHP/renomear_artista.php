@@ -16,6 +16,7 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
             $mus -> renomearAutoria($autoria, $Nautoria);
             $mus -> renomearAutMusica($autoria, $Nautoria);
             $mus -> renomearAutFavorita($autoria, $Nautoria);
+            $mus -> renomearAutAutoriaFavorita($autoria, $Nautoria);
             header('Location: gerenciar_artista.php');
         }catch(Exception $e){
 

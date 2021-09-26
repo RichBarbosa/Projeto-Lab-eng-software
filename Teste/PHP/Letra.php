@@ -24,6 +24,13 @@ $id = null;
         $genero = $_GET['genero'];
         $musica = $cat->getNome($idMusica);
         $idUser = $cat->getUser($idMusica);
+        $contView = $cat->getViews($idMusica);
+        $contView = $contView + 1;
+        try{
+          $cat->inserirVisualizacao($idMusica, $contView);
+        }catch(Exception $e){
+
+        }
     }
     else{
       $idMusica = $_SESSION['musica'];
@@ -106,6 +113,11 @@ $id = null;
     <div class="container">
       <div class="row">
         <div class="col-6">
+        <?php if ($cat->getViews($idMusica)== 1) {?>
+          <h6 style="text-align: end;"><?php echo $cat->getViews($idMusica);?> visualização</h6>
+        <?php }else{ ?>
+          <h6 style="text-align: end;"><?php echo $cat->getViews($idMusica);?> visualizações</h6>
+          <?php }?>
     <ul class="list-group list-group-horizontal">
       <form action="favoritar_musica.php" method="post">
           <?php 
@@ -144,11 +156,11 @@ $id = null;
                           </form> 
                   </ul> 
                   <br>
-                  <?php if(count($con->getCurtido($musica)) == 1){?>
+                  <?php if($cat->getCurtido($idMusica) == 1){?>
                     <br>
-                  <h6> <?php echo count($con->getCurtido($musica)) . " ";?> curtida!</h6>
+                  <h6> <?php echo $cat->getCurtido($idMusica) . " ";?> curtida!</h6>
                   <?php }else{ ?>
-                    <h6> <?php echo count($con->getCurtido($musica)) . " ";?> curtidas!</h6>
+                    <h6> <?php echo $cat->getCurtido($idMusica) . " ";?> curtidas!</h6>
                     <?php }?>
             </div> 
       </div>        

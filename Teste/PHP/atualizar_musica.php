@@ -15,9 +15,11 @@ $id = $_SESSION['nome'];
         $linkS = $_POST['streaming'];
         $letraO = $_POST['letraO']; 
         $letraT = $_POST['letraT'];
+        $autoria = $mus->getAutoriaById($idMusica);
         $_SESSION['musica'] = $idMusica;
     try{
      $mus-> atualizarMusica($nome, $letraO, $letraT, $linkY, $linkS, $id, $idMusica);
+     $mus->renomearMusicaFavorita($nome, $autoria);
      header('Location: Letra.php');
 
     }catch(Exception $e){
