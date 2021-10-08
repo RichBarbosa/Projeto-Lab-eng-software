@@ -4,7 +4,9 @@ include_once("PHP\classes\Imagem.php");
 
 $img = new Imagem();
 //Se der pau no servidor a primeira coisa que pra tentar é tirar todos o !isset($_SESSION)
+if(!isset($_SESSION)){
   session_start();
+ }
   $id1 = $img->getIdCarroceuA('1');
   $id2 = $img->getIdCarroceuA('2'); 
   $id3 = $img->getIdCarroceuA('3');
@@ -12,7 +14,7 @@ $img = new Imagem();
   $imagem2 = $img->getCaminhoCarroceuA('2'); 
   $imagem3 = $img->getCaminhoCarroceuA('3');
 
-if(!empty( $_SESSION['nome'])){  
+ if(!empty( $_SESSION['nome'])){  
   include_once('PHP/header.php');   
   
 }else{?>
@@ -27,8 +29,6 @@ if(!empty( $_SESSION['nome'])){
     krl, pq ninguém fala que é tão simples assim?-->
     <link rel="icon" href="img/bull-horns_39319.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="CSS/menu.css">
-    <link rel="stylesheet" type="text/css" href="../CSS/footer.css">
-    <link rel="stylesheet" href="https://unpkg.com/wingcss"/>
 
     
     <!--os treco do Bootstrap, quem diria que um link desses faz até um asno como eu fazer um front
@@ -53,16 +53,6 @@ if(!empty( $_SESSION['nome'])){
         padding: 0;
         border: 0;
       }
-      .imgT{
-        max-height: max-content;
-        max-width: max-content;
-        object-fit: cover;
-     }
-     .imgC{
-       height: 360px;
-       width: 360px;
-       object-fit: cover;
-     }
     </style>
    
 </head>
@@ -92,11 +82,11 @@ if(!empty( $_SESSION['nome'])){
                 <nav class="navbar navbar-dark bg-dark">
                     <div class="container-fluid">
                         <form class="d-flex" action="PHP\pesquisa.php" method="GET">
-                            <input class="form-control " type="search" placeholder="Pesquisar" aria-label="Search"  name="buscar" autocomplete="off">
+                            <input class="form-control " type="search" placeholder="Pesquisar" aria-label="Search" name="buscar" autocomplete="off">
                             <button class="btn btn-outline-success" type="submit">Buscar</button>
                         </form>
                     </div>
-                    <div class="collapse" id="navbarToggleExternalContent">
+                     <div class="collapse" id="navbarToggleExternalContent">
   <div class="bg-dark p-4">
     <ul class="nav navbar-dark bg-dark">
             <li class="nav-item">
@@ -112,16 +102,17 @@ if(!empty( $_SESSION['nome'])){
   </div>
 </div>
                 </nav>
-                
             </nav>
             <div class="collapse" id="navbarToggleExternalContent">
   <div class="bg-dark p-4">
     <ul class="nav navbar-dark bg-dark">
             <li class="nav-item">
-                <a class="nav-link" href="PHP\buscar_por_categoria.php"><button class="btn btn-secondary" type="button">Buscar por imagens</button></a>
+                <a class="nav-link" href="PHP\buscar_por_categoria.php"><button class="btn btn-secondary" type="button">Buscar por Imagens</button></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="PHP\buscar_por_categoria_gif.php"><button class="btn btn-secondary" type="button">Buscar gifs</button></a>
+            </li>
+            <li class="nav-item">
             </li>
             <li class="nav-item">
             <a class="nav-link" href="PHP\Subimicao.php"><button class="btn btn-secondary"><img src="https://img.icons8.com/office/16/000000/upload--v1.png"/>Submeter conteúdo</button></a>
@@ -140,12 +131,10 @@ if(!empty( $_SESSION['nome'])){
 <?php }?>
   <body> 
    <main>
-     <?php    
-     ?>
        <h1 id="Topo">Horn's Gallery: Anime</h1>
        <div class="container">
-          <div style="text-align: center;">
-          <br> 
+          <div style="text-align: center;"> 
+           <br> 
             <p>Precisa de um Wallpaper? ou de um Gif de anime? Aqui no Horn Gallery você pode encontrar
               o suficiente para encher uma galaria com 15GB de imagens. </p>
             <p>caso não encontre oque deseja, não se preocupe, o horn's gallery é inteiramente comunitário,
@@ -166,13 +155,15 @@ if(!empty( $_SESSION['nome'])){
                     <div class="col-sm-8">
 
                     </div>
+                   
                     <!--Carrosseu de imagens, tenho que diminuir o tamanho delas, ou não,
                   até que eu gostei delas assim. Também preciso colocar mais imagens além
-                de três, embora o intuito seja que elas são trocaveis pelos adms.-->
-                    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                de três, embora o intuito seja que elas são trocaveis pelos adms.--> 
+                     <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                           <div class="carousel-item active" data-bs-interval="4000">
-                          <form action="PHP\imagemEscolhida copy.php" method="GET"> 
+                          <form action="PHP\imagemEscolhida.php" method="GET"> 
                               <input type="hidden" name="nImagem" value="<?php echo $img->getNome($id1); ?>">
                             <button type="submit" class="btn btn-outline-light" name="imagem" value="<?php echo $id1;?>">
                               <img  class="img-fluid" src=" PHP\<?php echo $imagem1;?>" class="d-block w-100" alt="...">
@@ -180,7 +171,7 @@ if(!empty( $_SESSION['nome'])){
                           </form>  
                           </div>
                           <div class="carousel-item" data-bs-interval="4000">
-                          <form action="PHP\imagemEscolhida copy.php" method="GET">
+                          <form action="PHP\imagemEscolhida.php" method="GET">
                           <input type="hidden" name="nImagem" value="<?php echo $img->getNome($id2); ?>"> 
                           <button type="submit" class="btn btn-outline-light" name="imagem" value="<?php echo $id2?>">
                               <img  class="img-fluid" src=" PHP\<?php echo $imagem2?>" class="d-block w-100" alt="...">
@@ -188,7 +179,7 @@ if(!empty( $_SESSION['nome'])){
                             </form>  
                           </div>
                           <div class="carousel-item" data-bs-interval="4000">
-                          <form action="PHP\imagemEscolhida copy.php" method="GET">
+                          <form action="PHP\imagemEscolhida.php" method="GET">
                           <input type="hidden" name="nImagem" value="<?php echo $img->getNome($id3); ?>">  
                           <button type="submit" class="btn btn-outline-light" name="imagem" value="<?php echo $id3?>">
                               <img  class="img-fluid" src=" PHP\<?php echo $imagem3?>" class="d-block w-100" alt="...">
@@ -214,7 +205,7 @@ if(!empty( $_SESSION['nome'])){
 
     <h2>Algumas categorias em destaque</h2>
     <section> 
-      <form action="PHP\tema_categoria copy.php" method="GET">   
+      <form action="PHP\tema_categoria.php" method="GET">   
       <div class="container">        
         <div class="row">
           <div class="col-6">
@@ -299,7 +290,7 @@ if(!empty( $_SESSION['nome'])){
         </div>
       </div>
         </section>
-        </form>  
+        </form>
         <footer>
           
           <!--essa tag a faz voltar pro topo da página, simples.... oq? achou q eu ia fazer mais um comentário
@@ -314,11 +305,5 @@ if(!empty( $_SESSION['nome'])){
           </ul>
         </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>  
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script>
-          $.post("PHP\imagemEscolhida.php"), "nImagem=<?php echo $img->getNome($id2); ?>",function(data){
-                console.log(data);
-          });
-        </script>
 </body>
-</html> 
+</html>

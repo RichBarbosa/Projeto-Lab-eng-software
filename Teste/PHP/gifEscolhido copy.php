@@ -185,7 +185,6 @@ $id = null;?>
         <?php }else{ ?>
           <h6 style="text-align: end;"><?php echo $cat->getViews($nImagem);?> visualizações</h6>
           <?php }?>
-            </ul>
             <ul class="list-group list-group-horizontal">
               <form action="favoritar_gif.php" method="post">
                 <?php 

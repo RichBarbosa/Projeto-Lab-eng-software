@@ -151,6 +151,9 @@ $id = null;?>
          <button type="button" class="btn btn-light">Imagem</button>
 </div>
 <div class="container">
+  <h6 style="text-align:end;">
+    nota dos usuários:  <?php echo  round($con->getMediaNota($nImagem), 2);?>
+</h6>
  <div class="imgT">
     <img src="<?php echo $cat->getCaminho($idImagem);?>" class="img-thumbnail" alt="...">
   </div>
@@ -183,6 +186,70 @@ $id = null;?>
        <?php }?>
         </ul>
         </form>
+        <br>
+        <?php if (!empty($_SESSION['nome'])) {?>        
+          <h6>dê uma avaliação</h6>
+            <form action="avaliar.php" method="post">
+              <?php
+              $nota = $con->getNota($id, $nImagem);
+              ?>
+              <input type="hidden" name="tipo" value="imagem">
+              <input type="hidden" name="nome" value="<?php echo $nImagem; ?>">
+              <input type="hidden" name="idImagem" value="<?php echo $idImagem;?>">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <?php if ($nota == 1) {?>
+                  <button type="submit" name="voto" value="1" class="btn btn-success">1</button>
+                <?php }else{ ?>
+                  <button type="submit" name="voto" value="1" class="btn btn-outline-success">1</button>
+                <?php }?>
+                <?php if ($nota == 2) {?>
+                  <button type="submit" name="voto" value="2" class="btn btn-success">2</button>
+                <?php }else{ ?>
+                  <button type="submit" name="voto" value="2" class="btn btn-outline-success">2</button> 
+                <?php }?>
+                <?php if ($nota == 3) {?>
+                  <button type="submit" name="voto" value="3" class="btn btn-success">3</button>
+                <?php }else{ ?>
+                <button type="submit" name="voto" value="3" class="btn btn-outline-success">3</button>
+                <?php }?>
+                <?php if ($nota == 4) {?>
+                  <button type="submit" name="voto" value="4" class="btn btn-success">4</button>
+                <?php }else{ ?>
+                  <button type="submit" name="voto" value="4" class="btn btn-outline-success">4</button>
+                <?php }?>
+                <?php if ($nota == 5) {?>
+                  <button type="submit" name="voto" value="5" class="btn btn-success">5</button>
+                <?php }else{ ?>
+                  <button type="submit" name="voto" value="5" class="btn btn-outline-success">5</button> 
+                <?php }?>
+                <?php if ($nota == 6) {?>
+                  <button type="submit" name="voto" value="6" class="btn btn-success">6</button>
+                <?php }else{ ?>
+                  <button type="submit" name="voto" value="6" class="btn btn-outline-success">6</button>
+                <?php }?>
+                <?php if ($nota == 7) {?>
+                  <button type="submit" name="voto" value="7" class="btn btn-success">7</button>
+                <?php }else{ ?>
+                  <button type="submit" name="voto" value="7" class="btn btn-outline-success">7</button> 
+                <?php }?>
+                <?php if ($nota == 8) {?>
+                  <button type="submit" name="voto" value="8" class="btn btn-success">8</button>
+                <?php }else{ ?>
+                <button type="submit" name="voto" value="8" class="btn btn-outline-success">8</button>
+                <?php }?>
+                <?php if ($nota == 9) {?>
+                  <button type="submit" name="voto" value="9" class="btn btn-success">9</button>
+                <?php }else{ ?>
+                  <button type="submit" name="voto" value="9" class="btn btn-outline-success">9</button>
+                <?php }?>
+                <?php if ($nota == 10) {?>
+                  <button type="submit" name="voto" value="10" class="btn btn-success">10</button>
+                <?php }else{ ?>
+                  <button type="submit" name="voto" value="10" class="btn btn-outline-success">10</button> 
+                <?php }?>      
+            </div>
+          </form>
+        <?php }?>  
         <?php if ($cat->getViews($nImagem)== 1) {?>
           <h6 style="text-align: end;"><?php echo $cat->getViews($nImagem);?> visualização</h6>
         <?php }else{ ?>

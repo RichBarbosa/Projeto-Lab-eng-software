@@ -661,9 +661,5 @@ class Gif extends Connect {
         $run = $stmt->execute();
         $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
         return $rs['id'];  
-    }
-             
+    }             
 }
-
-
-

@@ -43,6 +43,7 @@ if(empty( $_SESSION['nome'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../CSS/menu.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/footer.css">
     <link rel="icon" href="../img/bull-horns_39319.ico" type="image/x-icon">
     <!--os treco do Bootstrap, quem diria que um link desses faz até um asno como eu fazer um front
     end, krl, eu amo frameworks -->

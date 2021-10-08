@@ -24,24 +24,30 @@ if(!empty( $_SESSION['nome'])){
           if($img ->listarCategoriasJogoByInicial($busca) != null || $gif ->listarCategoriasJogoByInicial($busca) != null){ ?>
             <form action="tema_categoria_jogo copy.php" method="GET">
               <h6>Imagens</h6>
-              <ul class="list-group list-group-horizontal">
-                  <?php 
-                    foreach ($img->listarCategoriasJogoByInicial($busca) as $col) {?>
-                      <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item"><button class="btn btn-outline-dark" type="submit" value="<?php echo $col['nome'];?>" name="escolha" ><?php echo $col['nome']?></li></button> 
-                      </ul>
-                  <?php }?>
-              </ul>  
+                <div class="container">
+                  <div class="row">
+                    <?php 
+                      foreach ($img->listarCategoriasJogoByInicial($busca) as $col) {?>
+                        <div class="col-sm-3"><br>
+                          <button class="btn btn-outline-dark" type="submit" value="<?php echo $col['nome'];?>" name="escolha" ><?php echo $col['nome']?></button> 
+                      </div>
+                    <?php }?>
+                  </div>
+                </div>
             </form>
+            <br>
               <form action="tema_categoria_jogoGif copy.php" method="GET">
                 <h6>gifs</h6>
-                <ul class="list-group list-group-horizontal">
-                  <?php 
-                    foreach ($gif->listarCategoriasJogoByInicial($busca) as $col) {?>
-                      <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item"><button class="btn btn-outline-dark" type="submit" value="<?php echo $col['nome'];?>" name="escolha" ><?php echo $col['nome']?></li></button> 
-                      </ul>
-                  <?php }?>
+                <div class="container">
+                  <div class="row">
+                    <?php 
+                      foreach ($gif->listarCategoriasJogoByInicial($busca) as $col) {?>
+                        <div class="col-sm-3">
+                          <button class="btn btn-outline-dark" type="submit" value="<?php echo $col['nome'];?>" name="escolha" ><?php echo $col['nome']?></button> 
+                        </div>
+                    <?php }?>
+                  </div>
+                </div>
               </form>
     <?php 
           }else{ ?>

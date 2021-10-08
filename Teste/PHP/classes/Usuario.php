@@ -348,5 +348,60 @@ class Usuario extends Connect  {
         $stmt ->bindValue(":id",$id);
         $run = $stmt->execute();
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function getNota($id, $nome){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT nota FROM avaliacao 
+        WHERE idUser = :id AND nome = :nome ");
+        $stmt ->bindValue(":id",$id);
+        $stmt ->bindValue(":nome",$nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+        return $rs['nota'];                  
+    }
+    function inserirNota($id, $nome, $nota){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("INSERT INTO avaliacao 
+        VALUES (null, :nome, :nota, :id)");
+        $stmt ->bindValue(":id",$id);
+        $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":nota",$nota);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+    }
+    function  removerNota($nome, $id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("DELETE FROM avaliacao WHERE idUser = :id AND nome = :nome");
+        $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function trocarNota($nome, $nota, $id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE avaliacao SET nota = :nota WHERE nome = :nome AND idUser = :id");
+        $stmt ->bindValue(":id",$id);
+        $stmt ->bindValue(":nome",$nome);
+        $stmt ->bindValue(":nota",$nota);      
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rs;
+    }
+    function getMediaNota($nome){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT AVG(nota) FROM avaliacao 
+        WHERE nome = :nome ");
+        $stmt ->bindValue(":nome",$nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+        return $rs['AVG(nota)'];                  
+    }
+    //obs, vc n fez um pra deletar a o conteudo pq provavelmente em uma situação real poderia buga.
+    function  deletarTodasAvaliacoes($id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("DELETE FROM avaliacao WHERE idUser = :id");
+        $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }        
 }

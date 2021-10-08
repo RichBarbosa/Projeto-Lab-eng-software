@@ -12,6 +12,7 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
         $con->deletarTodasFavoritas($IdUser);
         $con->deletarTodasCatFavoritas($IdUser);
         $con->deletarTodasCurtidas($IdUser);
+        $con->deletarTodasAvaliacoes($IdUser);
         $con->deletarUsuario($IdUser);
         header('Location: gerenciar.php');
 

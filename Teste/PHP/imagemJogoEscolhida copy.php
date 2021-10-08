@@ -79,13 +79,13 @@ $id = null;
        <li><button type="submit" name="tag" value="<?php echo $cat->getJogoTag5($idImagem)?>" class="btn btn-light">
        <h6><?php echo $cat->getJogoTag5($idImagem)?></h6> </button></li>
        <?php }?>
-        </ul>
+        </ul>       
+        </form>
         <?php if ($cat->getJogoViews($nImagem)== 1) {?>
           <h6 style="text-align: end;"><?php echo $cat->getJogoViews($nImagem);?> visualização</h6>
         <?php }else{ ?>
           <h6 style="text-align: end;"><?php echo $cat->getJogoViews($nImagem);?> visualizações</h6>
           <?php }?>
-        </form>
             <ul class="list-group list-group-horizontal">
               <form action="favoritar_imagemJ.php" method="post">
                 <?php 

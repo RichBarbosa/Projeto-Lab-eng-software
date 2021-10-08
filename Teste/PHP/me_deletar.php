@@ -11,6 +11,7 @@ if(!empty( $_SESSION['nome'])){
       $con->deletarTodasFavoritas($IdUser);
       $con->deletarTodasCatFavoritas($IdUser);
       $con->deletarTodasCurtidas($IdUser);
+      $con->deletarTodasAvaliacoes($IdUser);
       $con->deletarUsuario($IdUser);
         header('Location: logout.php');
 

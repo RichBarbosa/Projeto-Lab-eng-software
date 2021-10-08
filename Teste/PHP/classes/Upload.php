@@ -27,7 +27,9 @@ class Upload extends Connect {
         $nomecompleto = $novonome . ".". $this->extensao;
         move_uploaded_file($this->tmp,$pasta .$nomecompleto);
         $caminho = $pasta . $nomecompleto;
-        $stmt = $conn->prepare("INSERT INTO imagens_anime VALUES (null, :nome_imagem, :nome, :caminho, 
+        $stmt = $conn->prepare("INSERT INTO imagens_anime (id, nome_imagem, nome, caminho, 
+        tag1, tag2, tag3, tag4, tag5) 
+        VALUES (null, :nome_imagem, :nome, :caminho, 
         :tag1, :tag2, :tag3, :tag4, :tag5)");
         $stmt ->bindValue(":nome_imagem",$nomecompleto);
         $stmt ->bindValue(":nome",$categoria);
@@ -47,7 +49,9 @@ class Upload extends Connect {
         $nomecompleto = $novonome . ".". $this->extensao;
         move_uploaded_file($this->tmp,$pasta .$nomecompleto);
         $caminho = $pasta . $nomecompleto;
-        $stmt = $conn->prepare("INSERT INTO gif_animes VALUES (null, :nome_imagem, :nome, :caminho, 
+        $stmt = $conn->prepare("INSERT INTO gif_animes (id, nome_gif, nome, caminho, 
+        tag1, tag2, tag3, tag4, tag5) 
+        VALUES (null, :nome_imagem, :nome, :caminho, 
         :tag1, :tag2, :tag3, :tag4, :tag5)");
         $stmt ->bindValue(":nome_imagem",$nomecompleto);
         $stmt ->bindValue(":nome",$categoria);
@@ -67,7 +71,9 @@ class Upload extends Connect {
         $nomecompleto = $novonome . ".". $this->extensao;
         move_uploaded_file($this->tmp,$pasta .$nomecompleto);
         $caminho = $pasta . $nomecompleto;
-        $stmt = $conn->prepare("INSERT INTO imagens_jogo VALUES (null, :nome_imagem, :nome, :caminho, 
+        $stmt = $conn->prepare("INSERT INTO imagens_jogo (id, nome_imagem, nome, caminho, 
+        tag1, tag2, tag3, tag4, tag5)
+        VALUES (null, :nome_imagem, :nome, :caminho, 
         :tag1, :tag2, :tag3, :tag4, :tag5)");
         $stmt ->bindValue(":nome_imagem",$nomecompleto);
         $stmt ->bindValue(":nome",$categoria);
@@ -87,7 +93,9 @@ class Upload extends Connect {
         $nomecompleto = $novonome . ".". $this->extensao;
         move_uploaded_file($this->tmp,$pasta .$nomecompleto);
         $caminho = $pasta . $nomecompleto;
-        $stmt = $conn->prepare("INSERT INTO gif_jogo VALUES (null, :nome_imagem, :nome, :caminho, 
+        $stmt = $conn->prepare("INSERT INTO gif_jogo (id, nome_imagem, nome, caminho, 
+        tag1, tag2, tag3, tag4, tag5) 
+        VALUES (null, :nome_imagem, :nome, :caminho, 
         :tag1, :tag2, :tag3, :tag4, :tag5)");
         $stmt ->bindValue(":nome_imagem",$nomecompleto);
         $stmt ->bindValue(":nome",$categoria);

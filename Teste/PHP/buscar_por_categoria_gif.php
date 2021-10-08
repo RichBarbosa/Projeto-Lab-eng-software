@@ -160,16 +160,16 @@ include_once("header_buscar.php");
                 $inicial = $_GET['inicial'];?>
                 <div class="container">
                   <div class="row">
-                    <form action="tema_categoria_gif copy.php" method="GET">
                       <?php foreach ($img->listarCategoriasByInicial($inicial) as $col) {?>
-                        <div class="col-sm-3"><br>
-                        <button class="btn btn-outline-dark" type="submit" value="<?php echo $col['nome'];?>" name="escolha" ><?php echo $col['nome']?></button>
-                        <br>
-                    </form>
-                      </div>  
-                  <?php } ?>             
+                        <div class="col-sm-2"><br>
+                          <form action="tema_categoria_gif copy.php" method="GET">
+                            <button class="btn btn-outline-dark" type="submit" value="<?php echo $col['nome'];?>" name="escolha" ><?php echo $col['nome']?></button>
+                            <br>
+                          </form>                      
+                        </div>    
+                      <?php } ?>             
+                  </div>
                 </div>
-             </div>
             <?php 
         }else{
             unset($inicial);

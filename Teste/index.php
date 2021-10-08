@@ -134,8 +134,10 @@ if(!empty( $_SESSION['nome'])){
        <br><br>
        <div class="container">
           <div style="text-align: center;">
-          <h4> 
-            <p> Bem vindo ao Horn'Gallery! a galeria comunitarida de todos para todos. </p>
+          <h4> Horn's Gallery: a galaria online de todos </h4>  
+            <p> Bem vindo ao Horn'Gallery! a galeria comunitarida de todos para todos. 
+
+            </p>
               <p>Aqui no Horn'Gallery você pode encontrar os seguintes conteúdos para baixar: Imagens e Gifs
                 dos temas Jogos e animes. Use-os para oque você quiser!!, wallpapers, Stickers, imagens de referência e
                 mais oque sua imaginação desejar.
@@ -144,106 +146,186 @@ if(!empty( $_SESSION['nome'])){
             <p>além disso se não encontrar oque deseja em algum desses temas não se preocupe! você mesmo pode compatilhar conosco também 
               expandindo o nosso conteúdo cada vez mais! 
             </p>
-            </h4>  
+            
           </div>
 
         </div>
         <br><br><br>
-        <div style="text-align: center;"><h4>Sub categorias de imagens em destaque: Animes</h4></div>
-        <h6 style="text-align: center">
-        <a class="btn btn-outline-success" href="Animes.php" role="button">visitar esse tema por completo</a>
-        </h6>
-            <hr>
             <div class="container">
               <div class="row">
-                <form action="PHP\tema_categoria copy.php" method="get">
-                  <table>
-                  <tr>
-                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('1');?>"><?php echo $img->getnomeDestaqueA('1');?></button></td>
-                    </tr>
-                    <tr>
-                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('2');?>"><?php echo $img->getnomeDestaqueA('2');?></button></td>
-                    </tr>
-                    <tr>
-                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('3');?>"><?php echo $img->getnomeDestaqueA('3');?></button></td>
-                    </tr>
-                    <tr>
-                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('4');?>"><?php echo $img->getnomeDestaqueA('4');?></button></td>
-                    </tr>
-                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('5');?>"><?php echo $img->getnomeDestaqueA('5');?></button></td>
-                    </tr>
-                    <tr>
-                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('6');?>"><?php echo $img->getnomeDestaqueA('6');?></button></td>
-                  </tr>
-                  </table>
-                </form>                    
+                <div class="col-sm-5">
+                  <h6>Imagens mais curtidas: Anime</h6>
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                      <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <form action="PHP\imagemEscolhida copy.php" method="get">
+                                <?php 
+                                  $idImagem = $img->getId($img->getMaisCurtida(1));
+                                  $nImagem = $img->getNome($idImagem); 
+                                ?>
+                                <input type="hidden" name="imagem" value="<?php echo $idImagem;?>">
+                                <input type="hidden" name="nImagem" value="<?php echo $nImagem;?>">
+                                <button type="submit" class="btn btn-outline-light">
+                              <img src="PHP\<?php echo $img->getMaisCurtida(1);?>" class="d-block w-100" alt="...">
+                                </button>
+                            </form>
+                            </div>  
+                            <?php foreach($img->listarMaisCurtida(1) as $col) {?>
+                              <div class="carousel-item">
+                              <form action="PHP\imagemEscolhida copy.php" method="get">
+                                <input type="hidden" name="imagem" value="<?php echo $col['id'];?>">
+                                <input type="hidden" name="nImagem" value="<?php echo $col['nome_imagem'];?>">
+                                <button type="submit" class="btn btn-outline-light">
+                                  <img src="PHP\<?php echo $col['caminho'];?>" class="d-block w-100" alt="...">
+                                </button>
+                              </form>    
+                              </div>
+                            <?php }?>  
+                          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                          </button>
+                          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                          </button>
+                      </div>
+                    </div>
+              </div>
+              <div class="col-sm-3"></div>
+              <div class="col-sm-4">
+                <br><br>
+                  <div style="text-align: center;"><h4>Sub categorias de imagens em destaque: Animes</h4></div>
+                    <h6 style="text-align: center">
+                      <a class="btn btn-outline-success" href="Animes.php" role="button">visitar esse tema por completo</a></h6>
+                    <hr>
+                    <form action="PHP\tema_categoria copy.php" method="get">
+                      <table style="">
+                        <tr>
+                          <td><button class="btn btn-outline-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('1');?>"><?php echo $img->getnomeDestaqueA('1');?></button></td>
+                        </tr>
+                        <tr>
+                          <td><button class="btn btn-outline-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('2');?>"><?php echo $img->getnomeDestaqueA('2');?></button></td>
+                        </tr>
+                        <tr>
+                          <td><button class="btn btn-outline-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('3');?>"><?php echo $img->getnomeDestaqueA('3');?></button></td>
+                        </tr>
+                        <tr>
+                          <td><button class="btn btn-outline-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('4');?>"><?php echo $img->getnomeDestaqueA('4');?></button></td>
+                        </tr>
+                          <td><button class="btn btn-outline-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('5');?>"><?php echo $img->getnomeDestaqueA('5');?></button></td>
+                        </tr>
+                        <tr>
+                          <td><button class="btn btn-outline-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('6');?>"><?php echo $img->getnomeDestaqueA('6');?></button></td>
+                        </tr>
+                      </table>
+                    </form>
+                  </div>
+                </div>                    
+                    <br>
+                            
+              </div>
               </div>
             </div>
-        </div>
-        <br>
-        <h4 style="text-align:center">Sub categorias de imagens em destaque: Jogos</h4>
-        <h6 style="text-align: center">
-        <a class="btn btn-outline-success" href="Jogos.php" role="button">visitar esse tema por completo</a>
-        </h6>
-        <hr>
             <div class="container">
               <div class="row">
-                <form action="PHP\tema_categoria_jogo copy.php" method="get">
-                  <table>
-                  <tr>
-                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('7');?>"><?php echo $img->getnomeDestaqueA('7');?></button></td>
-                    </tr>
-                    <tr>
-                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('8');?>"><?php echo $img->getnomeDestaqueA('8');?></button></td>
-                    </tr>
-                    <tr>
-                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('9');?>"><?php echo $img->getnomeDestaqueA('9');?></button></td>
-                    </tr>
-                    <tr>
-                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('10');?>"><?php echo $img->getnomeDestaqueA('10');?></button></td>
-                    </tr>
-                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('11');?>"><?php echo $img->getnomeDestaqueA('11');?></button></td>
-                    </tr>
-                    <tr>
-                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('12');?>"><?php echo $img->getnomeDestaqueA('12');?></button></td>
-                  </tr>
-                  </table>
-                </form>                    
-              </div>
+                  <div class="col-sm-5">
+                      <h6>Imagens mais curtidas: Jogo</h6>
+                        <div id="carouselExampleControls2" class="carousel slide" data-bs-ride="carousel">
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                            <form action="PHP\imagemJogoEscolhida copy.php" method="get">
+                                <?php 
+                                  $idImagem = $img->getJogoId($img->getMaisCurtida(2));
+                                  $nImagem = $img->getNomeJogo($idImagem); 
+                                ?>
+                                <input type="hidden" name="imagem" value="<?php echo $idImagem;?>">
+                                <input type="hidden" name="nImagem" value="<?php echo $nImagem;?>">
+                                <button type="submit" class="btn btn-outline-light">
+                              <img src="PHP\<?php echo $img->getMaisCurtida(2);?>" class="d-block w-100" alt="...">
+                                </button>
+                            </form>
+                            </div>
+                            <?php foreach($img->listarMaisCurtida(2) as $col) {?>
+                              <div class="carousel-item">
+                              <form action="PHP\imagemJogoEscolhida copy.php" method="get">
+                                <input type="hidden" name="imagem" value="<?php echo $col['id'];?>">
+                                <input type="hidden" name="nImagem" value="<?php echo $col['nome_imagem'];?>">
+                                <button type="submit" class="btn btn-outline-light">
+                                  <img src="PHP\<?php echo $col['caminho'];?>" class="d-block w-100" alt="...">
+                                </button>
+                              </form>    
+                              </div>
+                            <?php }?>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls2" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls2" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                  </div>
+              </div>   
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-4">
+                    <br><br>
+                    <h4 style="text-align:center">Sub categorias de imagens em destaque: Jogos</h4>
+                    <h6 style="text-align: center">
+                      <a class="btn btn-outline-success" href="Jogos.php" role="button">visitar esse tema por completo</a>
+                    </h6>
+                    <hr>
+                    <form action="PHP\tema_categoria_jogo copy.php" method="get">
+                      <table>
+                        <tr>
+                          <td><button class="btn btn-outline-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('7');?>"><?php echo $img->getnomeDestaqueA('7');?></button></td>
+                        </tr>
+                        <tr>
+                          <td><button class="btn btn-outline-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('8');?>"><?php echo $img->getnomeDestaqueA('8');?></button></td>
+                        </tr>
+                        <tr>
+                          <td><button class="btn btn-outline-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('9');?>"><?php echo $img->getnomeDestaqueA('9');?></button></td>
+                        </tr>
+                        <tr>
+                          <td><button class="btn btn-outline-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('10');?>"><?php echo $img->getnomeDestaqueA('10');?></button></td>
+                        </tr>
+                          <td><button class="btn btn-outline-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('11');?>"><?php echo $img->getnomeDestaqueA('11');?></button></td>
+                        </tr>
+                        <tr>
+                          <td><button class="btn btn-outline-secondary" type="submit" name="escolha" value="<?php echo $img->getNomeDestaqueA('12');?>"><?php echo $img->getnomeDestaqueA('12');?></button></td>
+                        </tr>
+                      </table>
+                    </form>                    
+                    <br><br><br><br><br><br><br><br>
+                    <h4 style="text-align:center">Generos músicais em destaque</h4>
+                    <h6 style="text-align: center">
+                      <a class="btn btn-outline-success" href="Musicas.php" role="button">visitar esse tema por completo</a>
+                    </h6>
+                    <hr>
+                    <form action="PHP\generos.php" method="get">
+                      <table>
+                        <tr>
+                          <td><button class="btn btn-outline-secondary" type="submit" name="escolha" value="<?php echo $mus->getnomeDestaqueG('1');?>"><?php echo $mus->getnomeDestaqueG('1');?></button></td>
+                        </tr>
+                        <tr>
+                          <td><button class="btn btn-outline-secondary" type="submit" name="escolha" value="<?php echo $mus->getNomeDestaqueG('2');?>"><?php echo $mus->getnomeDestaqueG('2');?></button></td>
+                        </tr>
+                        <tr>
+                          <td><button class="btn btn-outline-secondary" type="submit" name="escolha" value="<?php echo $mus->getNomeDestaqueG('3');?>"><?php echo $mus->getnomeDestaqueG('3');?></button></td>
+                        </tr>
+                        <tr>
+                          <td><button class="btn btn-outline-secondary" type="submit" name="escolha" value="<?php echo $mus->getNomeDestaqueG('4');?>"><?php echo $mus->getnomeDestaqueG('4');?></button></td>
+                        </tr>
+                          <td><button class="btn btn-outline-secondary" type="submit" name="escolha" value="<?php echo $mus->getNomeDestaqueG('5');?>"><?php echo $mus->getnomeDestaqueG('5');?></button></td>
+                        </tr>
+                        <tr>
+                          <td><button class="btn btn-outline-secondary" type="submit" name="escolha" value="<?php echo $mus->getNomeDestaqueG('6');?>"><?php echo $mus->getnomeDestaqueG('6');?></button></td>
+                        </tr>
+                      </table>
+                    </form>
+                  </div>
             </div>
-        </div>
-        <br>
-        <h4 style="text-align:center">Generos músicais em destaque</h4>
-        <h6 style="text-align: center">
-        <a class="btn btn-outline-success" href="Musicas.php" role="button">visitar esse tema por completo</a>
-        </h6>
-        <hr>
-            <div class="container">
-              <div class="row">
-                <form action="PHP\generos.php" method="get">
-                  <table>
-                  <tr>
-                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $mus->getnomeDestaqueG('1');?>"><?php echo $mus->getnomeDestaqueG('1');?></button></td>
-                    </tr>
-                    <tr>
-                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $mus->getNomeDestaqueG('2');?>"><?php echo $mus->getnomeDestaqueG('2');?></button></td>
-                    </tr>
-                    <tr>
-                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $mus->getNomeDestaqueG('3');?>"><?php echo $mus->getnomeDestaqueG('3');?></button></td>
-                    </tr>
-                    <tr>
-                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $mus->getNomeDestaqueG('4');?>"><?php echo $mus->getnomeDestaqueG('4');?></button></td>
-                    </tr>
-                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $mus->getNomeDestaqueG('5');?>"><?php echo $mus->getnomeDestaqueG('5');?></button></td>
-                    </tr>
-                    <tr>
-                    <td><button class="btn btn-secondary" type="submit" name="escolha" value="<?php echo $mus->getNomeDestaqueG('6');?>"><?php echo $mus->getnomeDestaqueG('6');?></button></td>
-                  </tr>
-                  </table>
-                </form>                    
-              </div>
-            </div>
-        </div>
         <hr>
     </main> 
 <br><br>

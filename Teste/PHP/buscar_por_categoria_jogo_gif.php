@@ -58,14 +58,18 @@ include_once('header_nao_logado.php');?>
             <?php
             if(!empty($_GET)){
                 $inicial = $_GET['inicial'];?>
-                <form action="tema_categoria_jogoGif copy.php" method="GET">
-                    <ul class="list-group list-group-horizontal">
-               <?php foreach ($img->listarCategoriasJogoByInicial($inicial) as $col) {?>
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item"><button class="btn btn-outline-dark" type="submit" value="<?php echo $col['nome'];?>" name="escolha" ><?php echo $col['nome']?></li></button> 
-                    </ul>
-                <?php } ?>
-             </form>
+                <div class="container">
+                  <div class="row">               
+                    <?php foreach ($img->listarCategoriasJogoByInicial($inicial) as $col) {?>
+                        <div class="col-sm-2"><br>
+                            <form action="tema_categoria_jogoGif copy.php" method="GET">
+                                <button class="btn btn-outline-dark" type="submit" value="<?php echo $col['nome'];?>" name="escolha" ><?php echo $col['nome']?></button>
+                                <br> 
+                            </form>
+                        </div>
+                    <?php } ?>
+                  </div>
+                </div>
             <?php 
         }else{
             unset($inicial);

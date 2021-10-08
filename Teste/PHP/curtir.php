@@ -111,7 +111,7 @@ if(!empty( $_SESSION['nome'])){
       $idImagem = $_POST['descurtirGJ'];
       $nome = $gif->getNomeJogo($idImagem);
       $_SESSION['imagem'] = $idImagem;
-      $curtir = $cat->getJogoCurtido($nome);
+      $curtir = $gif->getJogoCurtido($nome);
       $curtir = $curtir - 1;
       try{
         $gif->removerJogoCurtido($curtir, $nome);

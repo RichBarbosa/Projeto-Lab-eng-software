@@ -732,7 +732,44 @@ class Imagem extends Connect {
         $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
         return $rs['id'];  
     }
+    function getMaisCurtida($genero){
+        if ($genero == 1) {
+            $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+            $stmt = $conn->prepare("SELECT caminho FROM imagens_anime 
+            WHERE curtidas = (SELECT MAX(curtidas) FROM imagens_anime)");
+            $run = $stmt->execute();
+            $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+            return $rs['caminho']; 
+        }else if($genero == 2){
+            $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+            $stmt = $conn->prepare("SELECT caminho FROM imagens_jogo 
+            WHERE curtidas = (SELECT MAX(curtidas) FROM imagens_jogo)");
+            $run = $stmt->execute();
+            $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+            return $rs['caminho'];
 
+        }                 
+    }
+    function listarMaisCurtida($genero){
+        if ($genero == 1) {
+            $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+            $stmt = $conn->prepare("SELECT * FROM imagens_anime 
+            ORDER BY curtidas DESC
+            LIMIT 1, 3");
+            $run = $stmt->execute();
+            $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);        
+            return $rs; 
+        }else if($genero == 2){
+            $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+            $stmt = $conn->prepare("SELECT * FROM imagens_jogo 
+            ORDER BY curtidas DESC
+            LIMIT 1, 3");
+            $run = $stmt->execute();
+            $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);        
+            return $rs;
+
+        }                 
+    }
 }
 
 
