@@ -18,7 +18,8 @@ $id = $_SESSION['nome'];
 
     try{
       $up->uploadImagemJogo($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5);
-      header('Location: ../upload_jogo.php');
+      $_SESSION['categoria'] = $categoria;
+      header('Location: tema_categoria_jogo copy.php');
 
     }catch(Exception $e){
       header('Location: erro.html');

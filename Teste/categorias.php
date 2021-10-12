@@ -10,10 +10,17 @@ $con = new Usuario();
 $cat = new Imagem();
 $gif = new Gif();
 $id = $_SESSION['nome'];
-if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){ 
-  if(!empty($_POST)){
-    
-}     
+if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
+  $existe = null;
+  $existeG = null; 
+  if (!empty($_SESSION['cat'])) {
+    $existe = $_SESSION['cat'];
+    unset($_SESSION['cat']);
+  }
+  if (!empty($_SESSION['catG'])) {
+    $existeG = $_SESSION['catG'];
+    unset($_SESSION['catG']);
+  }
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -143,9 +150,15 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
                     <form method="POST" action="PHP\criar categorias.php">
                         <div class="row mb-3">
                             <div class="col-sm-10">
-                                <input type="text" name="nome" class="form-control" placeholder="Criar nova Categoria" autocomplete="off">
-                                <button type="submit" class="btn btn-primary">Confirmar</button>
-                              </div>
+                            <?php 
+                              if($existe != null){ ?>
+                            <div class="alert alert-success form-floating" role="alert">
+                            a sub categoria <b><?php echo $existe; ?></b> já existe</a>
+                            </div>
+                            <?php }?>
+                            <input type="text" name="nome" class="form-control" placeholder="Criar nova Categoria" autocomplete="off">
+                            <button type="submit" class="btn btn-primary">Confirmar</button>
+                            </div>
                         </div>  
                       </form>
                 <div class="col sm-6">
@@ -207,6 +220,12 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
       <form method="POST" action="PHP\criar_categorias_gif.php">
                         <div class="row mb-3">
                             <div class="col-sm-10">
+                            <?php 
+                              if($existeG != null){ ?>
+                            <div class="alert alert-success form-floating" role="alert">
+                            a sub categoria <?php echo $existeG; ?> já existe</a>
+                            </div>
+                            <?php }?>
                                 <input type="text" name="nome" class="form-control" placeholder="Criar nova Categoria" autocomplete="off">
                                 <button type="submit" class="btn btn-primary">Confirmar</button>
                               </div>

@@ -9,9 +9,11 @@ $con = new Usuario();
 $cat = new Musica();
 $id = $_SESSION['nome'];
 if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){ 
-  if(!empty($_POST)){
-    
-}     
+  $existe = null;
+  if (!empty($_SESSION['gen'])) {
+    $existe = $_SESSION['gen'];
+    unset($_SESSION['gen']);
+  }    
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -137,7 +139,12 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
                 <div class="col-sm-6">
                     <form method="POST" action="criar_genero.php">
                         <div class="row mb-3">
-                            <div class="col-sm-10">
+                            <div class="col-sm-10"><?php 
+                              if($existe != null){ ?>
+                            <div class="alert alert-success form-floating" role="alert">
+                            o genero  <b><?php echo $existe; ?></b> já existe</a>
+                            </div>
+                            <?php }?>
                                 <input type="text" name="nome" class="form-control" placeholder="Criar novo genero" autocomplete="off">
                                 <button type="submit" class="btn btn-primary">Confirmar</button>
                               </div>

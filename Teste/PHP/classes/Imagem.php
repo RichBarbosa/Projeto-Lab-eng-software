@@ -770,6 +770,34 @@ class Imagem extends Connect {
 
         }                 
     }
+    function validarCategoria($nome){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT * FROM categorias_anime WHERE nome = :nome");
+        $stmt->bindValue(":nome",$this->nome = $nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($rs){
+            return true;
+        }else{
+            return false;
+        } 
+       
+    }
+    function validarCategoriaJogo($nome){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT * FROM categorias_jogo WHERE nome = :nome");
+        $stmt->bindValue(":nome",$this->nome = $nome);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($rs){
+            return true;
+        }else{
+            return false;
+        } 
+       
+    }
 }
 
 

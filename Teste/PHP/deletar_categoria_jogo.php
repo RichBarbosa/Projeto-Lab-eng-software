@@ -15,6 +15,9 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
         if ($cat == $img->getNomeDestaqueA($i)) {
           $img->atualizarDestaquesA("cat_apagada", "destaque a ser definido", $i);
         }
+      }
+      if (!empty($_SESSION['catJ'])) {
+        unset($_SESSION['catJ']);
       }  
         $img->deletarImagemByCategoriaJogo($cat);
         $img->deletarCategoriaJogo($cat);

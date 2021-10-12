@@ -46,6 +46,7 @@ if(empty( $_SESSION['nome'])){
     <link rel="stylesheet" type="text/css" href="../CSS/menu.css">
     <link rel="stylesheet" type="text/css" href="../CSS/footer.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <title>Login</title>
     <style>
@@ -76,12 +77,29 @@ if(empty( $_SESSION['nome'])){
         padding: 0;
         border: 0;
       }
-      .lnr-eye{
+      .olho{
         position: absolute;
         top: 20px;
         right: 10px;
         cursor: pointer;
       }
+      span a {
+      color: black;
+      text-decoration: none;
+      }
+      span a:visited {
+      color: black;
+      text-decoration: none;
+      }
+      span a:hover {
+      color: black;
+      text-decoration: none;
+      }
+      span a:active {
+      color: black;
+      text-decoration: none;
+      } 
+
     </style>
        <link href="../CSS/signin.css" rel="stylesheet">
 
@@ -115,7 +133,7 @@ if(empty( $_SESSION['nome'])){
       </div>
       <div class="form-floating">
         <input type="password" class="form-control" id="floatingPassword" name="senha" placeholder="Password" autocomplete="off">
-        <span class="lnr lnr-eye"></span>
+        <span class="olho"><a type="button" id="show_password" name="show_password" class="fa fa-eye-slash" aria-hidden="true"></a> </span>
         <label for="floatingPassword">Senha</label>
       </div>
 
@@ -143,18 +161,21 @@ if(empty( $_SESSION['nome'])){
           </ul>
         </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>                           
     <script>
-        let btn = document.querySelector('.lnr-eye');
-        btn.addEventListener('click', function() {
-          let input = document.querySelector('#senha');
-          
-          if(input.getAttribute('type') == 'password'){
-            input.setAttribute('type', 'text');
-          }else{
-            input.setAttribute('type', 'password');
-          }
-        });
-    </script>  
+      jQuery(document).ready(function($) {
+    $('#show_password').click(function(e){
+        e.preventDefault();
+        if($('#floatingPassword').attr('type') == 'password'){
+            $('#floatingPassword').attr('type', 'text');
+            $('#show_password').attr('class', 'fa fa-eye');
+        }else{
+            $('#floatingPassword').attr('type', 'password');
+            $('#show_password').attr('class', 'fa fa-eye-slash');
+        }
+    });
+});
+    </script>
 </body>
 </html>
 <?php

@@ -707,4 +707,31 @@ class Musica extends Connect{
         $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
         return $rs['visualizacao'];                  
     }
+    function validarGenero($genero){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT * FROM generos_musica WHERE nome = :genero");
+        $stmt->bindValue(":genero",$this->genero = $genero);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($rs){
+            return true;
+        }else{
+            return false;
+        }        
+    }
+    function validarAutoria($genero, $autoria){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT * FROM autoria_musica WHERE nome_genero = :genero AND nome_autoria = :autoria");
+        $stmt->bindValue(":genero",$this->genero = $genero);
+        $stmt->bindValue(":autoria",$this->autoria = $autoria);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($rs){
+            return true;
+        }else{
+            return false;
+        }        
+    }
 }

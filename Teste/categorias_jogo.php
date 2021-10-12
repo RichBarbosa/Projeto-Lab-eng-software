@@ -10,10 +10,17 @@ $con = new Usuario();
 $cat = new Imagem();
 $gif = new Gif();
 $id = $_SESSION['nome'];
-if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){ 
-  if(!empty($_POST)){
-    
-}     
+if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
+  $existeJ = null;
+  $existeGJ = null; 
+  if (!empty($_SESSION['catJ'])) {
+    $existeJ = $_SESSION['catJ'];
+    unset($_SESSION['catJ']);
+  }
+  if (!empty($_SESSION['catJG'])) {
+    $existeGJ = $_SESSION['catJG'];
+    unset($_SESSION['catJG']);
+  } 
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -110,6 +117,12 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
                     <form method="POST" action="PHP\criar_categorias_jogo.php">
                         <div class="row mb-3">
                             <div class="col-sm-10">
+                            <?php 
+                              if($existeJ != null){ ?>
+                            <div class="alert alert-success form-floating" role="alert">
+                            a sub categoria <b><?php echo $existeJ; ?></b> já existe</a>
+                            </div>
+                            <?php }?>
                                 <input type="text" name="nome" class="form-control" placeholder="Criar nova Categoria" autocomplete="off">
                                 <button type="submit" class="btn btn-primary">Confirmar</button>
                               </div>
@@ -174,6 +187,12 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
       <form method="POST" action="PHP\criar_categorias_gif_jogo.php">
                         <div class="row mb-3">
                             <div class="col-sm-10">
+                            <?php 
+                              if($existeGJ != null){ ?>
+                            <div class="alert alert-success form-floating" role="alert">
+                            a sub categoria <?php echo $existeGJ; ?> já existe</a>
+                            </div>
+                            <?php }?>
                                 <input type="text" name="nome" class="form-control" placeholder="Criar nova Categoria" autocomplete="off">
                                 <button type="submit" class="btn btn-primary">Confirmar</button>
                               </div>

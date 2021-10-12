@@ -10,7 +10,19 @@ $gif = new Gif();
 $img = new Imagem();
 
 $id = $_SESSION['nome'];
-if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){ 
+if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
+    if (!empty($_SESSION['cat'])) {
+        unset($_SESSION['cat']);
+    }
+    if (!empty($_SESSION['catG'])) {
+        unset($_SESSION['catG']);
+    }
+    if (!empty($_SESSION['catJ'])) {
+        unset($_SESSION['catJ']);
+    }
+    if (!empty($_SESSION['catJG'])) {
+        unset($_SESSION['catJG']);
+    } 
     if(!empty($_POST['novoNomeA'])){
         $nome = $_POST['novoNomeA'];
         $categoria = $_POST['categoria'];

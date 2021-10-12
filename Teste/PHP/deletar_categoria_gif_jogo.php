@@ -11,6 +11,9 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
   if(!empty($_POST)){
     $cat = $_POST['categoria2']; 
     try{
+      if (!empty($_SESSION['catJG'])) {
+        unset($_SESSION['catJG']);
+      }
         $gif->deletarGifByCategoriaJogo($cat);
         $gif->deletarCategoriaJogo($cat);
         $gif->deletarCatJogoFavoritaByCategoria($cat);

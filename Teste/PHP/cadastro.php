@@ -44,6 +44,7 @@ if(empty( $_SESSION['nome'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../CSS/menu.css">
     <link rel="stylesheet" type="text/css" href="../CSS/footer.css">
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
     <link rel="icon" href="../img/bull-horns_39319.ico" type="image/x-icon">
     <!--os treco do Bootstrap, quem diria que um link desses faz até um asno como eu fazer um front
     end, krl, eu amo frameworks -->
@@ -79,6 +80,28 @@ if(empty( $_SESSION['nome'])){
         padding: 0;
         border: 0;
       }
+      .olho{
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        cursor: pointer;
+      }
+      span a {
+      color: black;
+      text-decoration: none;
+      }
+      span a:visited {
+      color: black;
+      text-decoration: none;
+      }
+      span a:hover {
+      color: black;
+      text-decoration: none;
+      }
+      span a:active {
+      color: black;
+      text-decoration: none;
+      } 
     </style>
        <link href="../CSS/signin.css" rel="stylesheet">
 
@@ -150,7 +173,22 @@ if(empty( $_SESSION['nome'])){
             <li></li>
           </ul>
         </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>                           
+    <script>
+      jQuery(document).ready(function($) {
+    $('#show_password').click(function(e){
+        e.preventDefault();
+        if($('#floatingPassword').attr('type') == 'password'){
+            $('#floatingPassword').attr('type', 'text');
+            $('#show_password').attr('class', 'fa fa-eye');
+        }else{
+            $('#floatingPassword').attr('type', 'password');
+            $('#show_password').attr('class', 'fa fa-eye-slash');
+        }
+    });
+});
+    </script>  
 </body>
 </html>
 <?php
