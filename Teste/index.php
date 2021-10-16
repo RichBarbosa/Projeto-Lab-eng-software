@@ -327,6 +327,16 @@ if(!empty( $_SESSION['nome'])){
                   </div>
             </div>
         <hr>
+        <div class="container">
+          <div class="row">
+            <div class="col-6">
+              <h4 style="text-align:center">Horn's Gallery: NSFW</h4>
+              <h6 style="text-align: center">
+                <a class="btn btn-outline-success" href="assegurar_idade.php" role="button">visitar</a>
+              </h6>              
+            </div>
+          </div>
+        </div>
     </main> 
 <br><br>
         <footer>

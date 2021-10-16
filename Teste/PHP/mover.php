@@ -6,12 +6,15 @@ require_once('classes\Usuario.php');
 require_once('classes\Imagem.php');
 require_once('classes\Gif.php');
 require_once('classes\Musica.php');
+require_once('classes\NSFW.php');
+
 
 
 $con = new Usuario();
 $cat = new Imagem();
 $gif = new Gif();
 $mus = new Musica();
+$nsfw = new NSFW();
 
 $id = $_SESSION['nome'];
 if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){ 
@@ -78,6 +81,16 @@ else if(!empty($_POST['artista'])){
     }catch(Exception $e){
 
     } 
+}else if(!empty($_POST['idNSFW'])){
+    $idImagem = $_POST['idNSFW'];
+    $categoria = $_POST['categoria'];
+    try{
+        
+        $nsfw->moverImagem($categoria, $idImagem);
+        header('Location: ger_NSFW.php');
+    }catch(Exception $e){
+
+    }
 }
 else {
      header('Location: ../index.php');

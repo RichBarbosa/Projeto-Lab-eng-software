@@ -1,19 +1,13 @@
 <?php
 if(!isset($_SESSION)){
   session_start();
-}
-include('classes\Usuario.php');
-include('classes\Musica.php');
+}include('classes\Usuario.php');
+include('classes\NSFW.php');
 
 $con = new Usuario();
-$cat = new Musica();
+$img = new NSFW();
 $id = $_SESSION['nome'];
 if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){ 
-  $existe = null;
-  if (!empty($_SESSION['gen'])) {
-    $existe = $_SESSION['gen'];
-    unset($_SESSION['gen']);
-  }    
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -31,7 +25,7 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
     <!--os treco do Bootstrap, quem diria que um link desses faz até um asno como eu fazer um front
     end, krl, eu amo frameworks -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <title>Categorias</title>
+    <title>editar destaques</title>
     
     <!--um pouco de CSS no código mesmo, eu também to usando uma stylesheet separada mas né? 
       as vezes da preguiça de ficar trocando de arquivo-->
@@ -49,14 +43,14 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
         font-size: x-large;
         padding: 0;
         border: 0;
+
+      
       }
-      #tabImg{
+      #div1{
+          
         overflow: scroll;
-        overflow-x: hidden;
-        overflow-y: auto;
-      }
-      #tabGif{
-        overflow: scroll;
+        height: 500px;
+        width: 100%;
         overflow-x: hidden;
         overflow-y: auto;
       }
@@ -130,93 +124,76 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
     </button>
   </div>
 </nav>    
-   </header> 
+   </header>
     <br><br><br>
    <main>       
-       <div class="container">
-            <div class="row">
-            <h6>Criar nova genero musical</h6>
-                <div class="col-sm-6">
-                    <form method="POST" action="criar_genero.php">
-                        <div class="row mb-3">
-                            <div class="col-sm-10">
-                              <?php 
-                              if($existe != null){ ?>
-                            <div class="alert alert-success form-floating" role="alert">
-                            o genero  <b><?php echo $existe; ?></b> já existe</a>
-                            </div>
-                            <?php }?>
-                                <input type="text" name="nome" class="form-control" placeholder="Criar novo genero" autocomplete="off">
-                                <button type="submit" class="btn btn-primary">Confirmar</button>
-                              </div>
-                        </div>  
-                      </form>
-                <div class="col sm-6">
-                    <div class="form-check">
-                        <h6>Excluir genero musical</h6>
-                        <form action="deletar_genero.php" method="POST" id="deletar">
-                            <select class="form-select" aria-label="Default select example" name= "categoria">
-                                <?php foreach($cat->listarGenero() as $col){ ?>      
-                                    <option value="<?php echo $col['nome'];?>"><?php echo $col['nome'];?></option>
-                                <?php }?>
-                            </select>
-                        </form>  
-                              <button class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Excluir</button> 
-                          <br><br>
-                        <h6>renomear genero musical </h6>
-                        <form action="renomear_genero.php" method="POST" id="renomearA">
-                            <select class="form-select" aria-label="Default select example" name= "categoria">
-                                <?php foreach($cat->listarGenero() as $col){ ?>      
-                                    <option value="<?php echo $col['nome'];?>"><?php echo $col['nome'];?></option>
-                                <?php }?>
-                            </select>
-                        </form>
-                        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Renomear esse genero
-                        </button>
-                        <div class="collapse" id="collapseExample">
-                          <div class="card card-body">
-                            <input type="text" name="novoNomeA" form="renomearA" autocomplete ="off">
-                            <button class="btn btn-secondary" type="submit" form="renomearA">Confirmar</button>
-                          </div>
-                        </div>   
-                    </div>                          
+   <h4 style="text-align:center">Editar destaques</h4>
+        <div class="container">
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading"></h4>
+                <p>Atualmente possuimos <?php echo count($img->listarCategorias()) . " ";?> categorias no total</p>
+            </div>
+            <div class="container">
+                <div class ="row">
+                    <div class="col">
+
+                    </div>
                 </div>
+            </div>
+            <hr/>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col align-self-center">
+                    <form action="" method="GET">
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="A">A</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="B">B</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="C">C</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="D">D</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="E">E</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="F">F</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="G">G</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="H">H</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="I">I</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="J">J</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="K">K</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="L">L</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="M">M</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="N">N</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="O">O</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="P">P</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="Q">Q</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="R">R</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="S">S</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="T">T</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="U">U</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="V">V</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="W">W</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="X">X</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="Y">Y</button>
+                    <button type="submit" class="btn btn-secondary" name="inicial" value="Z">Z</button>
+                </form>
+            </div>
         </div>
-        
-
-        <div class="col-sm-6">
-          <h6>Lista de generos musicas</h6>
-        <Table  class="table" id="tabImg">
-        <tr>
-          <th>nome</th>
-        </tr> 
-    <?php foreach($cat->listarGenero() as $col){ ?>
-        <tr>
-            <td><?php echo $col['nome'];?></td>
-            <?php }?> 
-        </tr>
-    </Table>
     </div>
-    <br><br><br><br><br><br>
-    <div class="container">
-  <div class="row">
-    <div class="col-6">
-    <br><br><br><br><br><br>
-
-              
-    
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-  <div class="offcanvas-header">
-    <h5 id="offcanvasTopLabel">Excluir genero</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    Alerta, excluir um genero irá apagar todos os astistas e suas respectiva letras musicais, deseja continuar?
-    <button class="btn btn-danger" type="submit" form="deletar">Excluir </button> 
-
-  </div>
-</div>     
+    <hr/>
+            <?php
+            if(!empty($_GET)){
+                $inicial = $_GET['inicial'];?>
+                <form action="../editar_DestaqueN.php" method="post" id="destaque">
+                    <ul class="list-group list-group-horizontal">
+               <?php foreach ($img->listarCategoriasByInicial($inicial) as $col) {?>
+                <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item"><button class="btn btn-outline-dark" type="submit" value="<?php echo $col['nome'];?>" name="categoria" ><?php echo $col['nome']?></li></button> 
+                    </ul>
+                <?php } ?>
+             </form>
+            <?php 
+        }else{
+            unset($inicial);
+        }?>
+            <hr>
+            
+            
   </main>
   <br><br><br><br><br><br><br><br><br>
   <footer>          
@@ -234,6 +211,6 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
 </html> 
 <?php
 }else{ 
- header('Location: index.php');
+ header('Location: ../index.php');
 }
 ?>

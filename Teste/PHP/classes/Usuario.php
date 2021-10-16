@@ -403,5 +403,44 @@ class Usuario extends Connect  {
         $stmt ->bindValue(":id",$id);
         $run = $stmt->execute();
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function getConfirmacao($id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT * FROM usuario WHERE id = :id");
+        $stmt ->bindValue(":id",$this->id=$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+        return $rs['conf_idade'];                  
+    }
+    function inserirConfirmacao($conf, $id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("UPDATE usuario SET conf_idade = :conf
+        WHERE id = :id");
+        $stmt ->bindValue(":conf",$conf);
+        $stmt ->bindValue(":id",$this->id=$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+    }
+    function  deletarTodasNSFWFavoritas($id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("DELETE FROM favoritas_nsfw WHERE id = :id");
+        $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function  deletarTodasCatNSFWFavoritas($id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("DELETE FROM catnsfw_favorita WHERE id_user = :id");
+        $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function  deletarFavoritaNSFWById($id, $id_user){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("DELETE FROM favoritas_nsfw WHERE id_favorito = :id AND id = :id_user");
+        $stmt ->bindValue(":id",$id);
+        $stmt ->bindValue(":id_user",$id_user);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
     }        
 }

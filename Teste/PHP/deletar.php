@@ -10,6 +10,8 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
     try{
         $con->deletarTodosComentario($IdUser);
         $con->deletarTodasFavoritas($IdUser);
+        $con->deletarTodasNSFWFavoritas($IdUser);
+        $con->deletarTodasCatNSFWFavoritas($IdUser);
         $con->deletarTodasCatFavoritas($IdUser);
         $con->deletarTodasCurtidas($IdUser);
         $con->deletarTodasAvaliacoes($IdUser);

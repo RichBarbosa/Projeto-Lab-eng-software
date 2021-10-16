@@ -3,17 +3,17 @@ if(!isset($_SESSION)){
   session_start();
 }
 include('classes\Usuario.php');
-include('classes\Musica.php');
+include('classes\NSFW.php');
 
 $con = new Usuario();
-$cat = new Musica();
+$cat = new NSFW();
 $id = $_SESSION['nome'];
-if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){ 
+if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
   $existe = null;
-  if (!empty($_SESSION['gen'])) {
-    $existe = $_SESSION['gen'];
-    unset($_SESSION['gen']);
-  }    
+  if (!empty($_SESSION['catN'])) {
+    $existe = $_SESSION['catN'];
+    unset($_SESSION['catN']);
+  }
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -79,10 +79,10 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
                               <?php echo $con->getUser($id); ?>
                             </button>                          
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="../index.php">Inicio</a></li>
+                            <li><a class="dropdown-item" href="index.php">Inicio</a></li>
                                 <?php if($con->getAdmin($id)== "S") {?>
                                   <li><a class="dropdown-item" href="gerenciar.php">Gerenciar Usuários</a></li>
-                                <li><a class="dropdown-item" href="lista de usuario.php">Lista de usuários</a></li>
+                                <li><a class="dropdown-item" href="lista_de_usuario.php">Lista de usuários</a></li>
                                 <li><a class="dropdown-item" href="../escolher_categoria.php">Criar categoria</a></li>
                                 <li><a class="dropdown-item" href="novo_genero.php">Criar genero musical</a></li>
                                 <li><a class="dropdown-item" href="gerenciar_artista.php">Gerenciar artistas</a></li>
@@ -91,10 +91,13 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
                                 <li><a class="dropdown-item" href="../escolher_gif.php">Gerenciar Gif</a></li>
                                 <li><a class="dropdown-item" href="../escolher_carroceu.php">Gerenciar Carroceu</a></li>
                                 <li><a class="dropdown-item" href="../escolher_destaque.php">Gerenciar Destaques</a></li>
+
+                                
                                 <?php }?>
                                 <li><a class="dropdown-item" href="favoritos.php">Favoritos</a></li>                                
-                                <li><a class="dropdown-item" href="perfil.php">Perfil de usuário</a></li>
-                                <li><a class="dropdown-item" href="logout.php">Logout</a></button>
+                                <li><a class="dropdown-item" href="perfil.php">Perfil de usuário</a></li>                               
+
+                                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                             </ul>
                           </div>
                           </div>
@@ -132,52 +135,61 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
 </nav>    
    </header> 
     <br><br><br>
-   <main>       
+   <main> 
+       <div class="container">
+           <div class="row">
+               <div>
+                   <h6>Conteúdo NSFW</h6>
+                <a role="button" class="btn btn-outline-success" href="ger_NSFW.php">gerenciar conteúdos NSFW</a>
+               </div>
+           </div>
+       </div>
+       <br><br><br>
        <div class="container">
             <div class="row">
-            <h6>Criar nova genero musical</h6>
+            <h6>Criar nova categoria NSFW</h6>
                 <div class="col-sm-6">
-                    <form method="POST" action="criar_genero.php">
+                    <form method="POST" action="criar_NSFW.php">
                         <div class="row mb-3">
                             <div class="col-sm-10">
-                              <?php 
+                            <?php 
                               if($existe != null){ ?>
                             <div class="alert alert-success form-floating" role="alert">
-                            o genero  <b><?php echo $existe; ?></b> já existe</a>
+                            a sub categoria <b><?php echo $existe; ?></b> já existe</a>
                             </div>
                             <?php }?>
-                                <input type="text" name="nome" class="form-control" placeholder="Criar novo genero" autocomplete="off">
-                                <button type="submit" class="btn btn-primary">Confirmar</button>
-                              </div>
+                            <input type="text" name="nome" class="form-control" placeholder="Criar nova Categoria" autocomplete="off">
+                            <button type="submit" class="btn btn-primary">Confirmar</button>
+                            </div>
                         </div>  
                       </form>
                 <div class="col sm-6">
                     <div class="form-check">
-                        <h6>Excluir genero musical</h6>
-                        <form action="deletar_genero.php" method="POST" id="deletar">
+                        <h6>Excluir categoria NSFW </h6>
+                        <form action="deletar_NSFW.php" method="POST" id="deletar">
                             <select class="form-select" aria-label="Default select example" name= "categoria">
-                                <?php foreach($cat->listarGenero() as $col){ ?>      
+                                <?php foreach($cat->listarCategorias() as $col){ ?>      
                                     <option value="<?php echo $col['nome'];?>"><?php echo $col['nome'];?></option>
                                 <?php }?>
                             </select>
                         </form>  
                               <button class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Excluir</button> 
                           <br><br>
-                        <h6>renomear genero musical </h6>
-                        <form action="renomear_genero.php" method="POST" id="renomearA">
+                        <h6>renomear categoria NSFW </h6>
+                        <form action="renomear_categoria.php" method="POST" id="renomearN">
                             <select class="form-select" aria-label="Default select example" name= "categoria">
-                                <?php foreach($cat->listarGenero() as $col){ ?>      
+                                <?php foreach($cat->listarCategorias() as $col){ ?>      
                                     <option value="<?php echo $col['nome'];?>"><?php echo $col['nome'];?></option>
                                 <?php }?>
                             </select>
                         </form>
                         <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Renomear esse genero
+                            Renomear essa sub categoria
                         </button>
                         <div class="collapse" id="collapseExample">
                           <div class="card card-body">
-                            <input type="text" name="novoNomeA" form="renomearA" autocomplete ="off">
-                            <button class="btn btn-secondary" type="submit" form="renomearA">Confirmar</button>
+                            <input type="text" name="novoNomeN" form="renomearN" autocomplete ="off">
+                            <button class="btn btn-secondary" type="submit" form="renomearN">Confirmar</button>
                           </div>
                         </div>   
                     </div>                          
@@ -186,37 +198,36 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
         
 
         <div class="col-sm-6">
-          <h6>Lista de generos musicas</h6>
+          <h6>Lista da categorias NSFW</h6>
         <Table  class="table" id="tabImg">
         <tr>
+          <th>id da categoria</th>
           <th>nome</th>
         </tr> 
-    <?php foreach($cat->listarGenero() as $col){ ?>
+    <?php foreach($cat->listarCategorias() as $col){ ?>
         <tr>
+            <td><?php echo $col['id'];?></td>
             <td><?php echo $col['nome'];?></td>
             <?php }?> 
         </tr>
     </Table>
     </div>
     <br><br><br><br><br><br>
-    <div class="container">
-  <div class="row">
-    <div class="col-6">
     <br><br><br><br><br><br>
 
-              
+             
     
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
-    <h5 id="offcanvasTopLabel">Excluir genero</h5>
+    <h5 id="offcanvasTopLabel">Excluir categoria: NSFW</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    Alerta, excluir um genero irá apagar todos os astistas e suas respectiva letras musicais, deseja continuar?
+    Alerta, excluir uma categoria irá apagar todos os dados dela, deseja continuar?
     <button class="btn btn-danger" type="submit" form="deletar">Excluir </button> 
 
   </div>
-</div>     
+</div>
   </main>
   <br><br><br><br><br><br><br><br><br>
   <footer>          

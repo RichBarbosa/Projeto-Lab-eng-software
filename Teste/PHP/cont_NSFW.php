@@ -1,19 +1,18 @@
 <?php
 if(!isset($_SESSION)){
   session_start();
-}
-include('classes\Usuario.php');
-include('classes\Musica.php');
+}include('classes\Usuario.php');
+include('classes\NSFW.php');
 
 $con = new Usuario();
-$cat = new Musica();
+$cat = new NSFW();
 $id = $_SESSION['nome'];
-if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){ 
-  $existe = null;
-  if (!empty($_SESSION['gen'])) {
-    $existe = $_SESSION['gen'];
-    unset($_SESSION['gen']);
-  }    
+if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
+    if(!empty($_POST)){
+        $idImagem = $_POST['imagem'];
+       
+
+     
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -49,17 +48,13 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
         font-size: x-large;
         padding: 0;
         border: 0;
+
+      
       }
-      #tabImg{
-        overflow: scroll;
-        overflow-x: hidden;
-        overflow-y: auto;
-      }
-      #tabGif{
-        overflow: scroll;
-        overflow-x: hidden;
-        overflow-y: auto;
-      }
+      .imgT{
+        height:500px;
+        width: 500px;
+     }
     </style>
    
 </head>
@@ -133,90 +128,108 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
    </header> 
     <br><br><br>
    <main>       
-       <div class="container">
-            <div class="row">
-            <h6>Criar nova genero musical</h6>
-                <div class="col-sm-6">
-                    <form method="POST" action="criar_genero.php">
-                        <div class="row mb-3">
-                            <div class="col-sm-10">
-                              <?php 
-                              if($existe != null){ ?>
-                            <div class="alert alert-success form-floating" role="alert">
-                            o genero  <b><?php echo $existe; ?></b> já existe</a>
-                            </div>
-                            <?php }?>
-                                <input type="text" name="nome" class="form-control" placeholder="Criar novo genero" autocomplete="off">
-                                <button type="submit" class="btn btn-primary">Confirmar</button>
-                              </div>
-                        </div>  
-                      </form>
-                <div class="col sm-6">
-                    <div class="form-check">
-                        <h6>Excluir genero musical</h6>
-                        <form action="deletar_genero.php" method="POST" id="deletar">
-                            <select class="form-select" aria-label="Default select example" name= "categoria">
-                                <?php foreach($cat->listarGenero() as $col){ ?>      
-                                    <option value="<?php echo $col['nome'];?>"><?php echo $col['nome'];?></option>
-                                <?php }?>
-                            </select>
-                        </form>  
-                              <button class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Excluir</button> 
-                          <br><br>
-                        <h6>renomear genero musical </h6>
-                        <form action="renomear_genero.php" method="POST" id="renomearA">
-                            <select class="form-select" aria-label="Default select example" name= "categoria">
-                                <?php foreach($cat->listarGenero() as $col){ ?>      
-                                    <option value="<?php echo $col['nome'];?>"><?php echo $col['nome'];?></option>
-                                <?php }?>
-                            </select>
-                        </form>
-                        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Renomear esse genero
-                        </button>
-                        <div class="collapse" id="collapseExample">
-                          <div class="card card-body">
-                            <input type="text" name="novoNomeA" form="renomearA" autocomplete ="off">
-                            <button class="btn btn-secondary" type="submit" form="renomearA">Confirmar</button>
-                          </div>
-                        </div>   
-                    </div>                          
+    <h2>Gerenciar itens<h2>
+        <form action="atualizar_NSFW.php" method="post" >
+            <input type="hidden" name="id" value="<?php echo $idImagem;?>">
+            <div class="container">
+              <div class=row>
+                <div class="col-6">
+              <div class="imgT">
+              <img src="<?php echo $cat->getCaminho($idImagem);?>" class="img-thumbnail" alt="...">
                 </div>
-        </div>
-        
-
-        <div class="col-sm-6">
-          <h6>Lista de generos musicas</h6>
-        <Table  class="table" id="tabImg">
+              </div>
+     <div class="col-6">         
+    <table class="table">
+      <tr>
+        <th>Tag1</th>
+      </tr>
+      <tr>
+        <td><input type="text" name="tag1" value="<?php echo $cat->getTag1($idImagem);?>" required autocomplete="off"></td>
+      </tr>
+      <tr>
+        <th>Tag2</th>
+      </tr>
+      <tr>
+        <td><input type="text" name="tag2" value="<?php echo $cat->getTag2($idImagem);?>" autocomplete="off"></td>
+      </tr>
+      <tr>
+        <th>Tag3</th>
+      </tr>
+      <tr>
+        <td><input type="text" name="tag3" value="<?php echo $cat->getTag3($idImagem);?>" autocomplete="off"></td>
+      </tr>
+      <tr>
+        <th>Tag4</th>
+      </tr>
+      <tr>
+        <td><input type="text" name="tag4" value="<?php echo $cat->getTag4($idImagem);?>" autocomplete="off"></td>
+      </tr>
+      <tr>
+        <th>Tag 5</th>
+      </tr>
+      <tr>
+        <td><input type="text" name="tag5" value="<?php echo $cat->getTag5($idImagem);?>"autocomplete="off"></td>
+      </tr>
+      <tr>
+        <td><button class="btn btn-outline-success" type="submit">editar informações</button>
+            <button class="btn btn-outline-success" type="reset">Redefinir</button>                        
+    </td>
+      </tr>
+      <td>
         <tr>
-          <th>nome</th>
-        </tr> 
-    <?php foreach($cat->listarGenero() as $col){ ?>
-        <tr>
-            <td><?php echo $col['nome'];?></td>
-            <?php }?> 
+          <td><button class="btn btn-outline-success" type="button" data-bs-toggle="collapse" 
+        data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Mover Conteúdo</button></td>
         </tr>
-    </Table>
+      </td>
+      <tr>
+          <td><button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Excluir</button></td>
+      </tr>
+      </form>
+ 
+    </table>
+
+    <div class="collapse" id="collapseExample">
+  <div class="card card-body">
+  <div class="form-check">
+    <h6>mover para:</h6>
+        <form action="mover.php" method="POST">
+          <input type="hidden" name="idNSFW" value="<?php echo $idImagem;?>">
+        <select class="form-select" aria-label="Default select example" name= "categoria">
+            <?php foreach($cat->listarCategorias() as $col){ ?>      
+                <option value="<?php echo $col['nome'];?>"><?php echo $col['nome'];?></option>
+            <?php }?>
+        </select>
+        <button type="submit " class="btn btn-primary">Confirmar</button>
+
+            </form>  
+            
     </div>
-    <br><br><br><br><br><br>
-    <div class="container">
-  <div class="row">
-    <div class="col-6">
-    <br><br><br><br><br><br>
-
-              
+  </div>
+</div>
+      </div>
+      </div>
     
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-  <div class="offcanvas-header">
-    <h5 id="offcanvasTopLabel">Excluir genero</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    Alerta, excluir um genero irá apagar todos os astistas e suas respectiva letras musicais, deseja continuar?
-    <button class="btn btn-danger" type="submit" form="deletar">Excluir </button> 
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Excluir?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Tem certeza que deseja excluir esse item?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <form action="excluir_NSFW.php" method="post">
+            <input type="hidden" name="excluir" value="<?php echo $idImagem;?>">
+        <button type="submit" class="btn btn-danger">Excluir</button>
+        </form>
+      </div>
+    </div>
   </div>
-</div>     
+</div>  
   </main>
   <br><br><br><br><br><br><br><br><br>
   <footer>          
@@ -233,7 +246,10 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
 </body>
 </html> 
 <?php
+    }else{
+        header('Location: ../gerenciar_imagens.php');
+    }
 }else{ 
- header('Location: index.php');
+ header('Location: ../index.php');
 }
 ?>

@@ -5,9 +5,11 @@ if(!isset($_SESSION)){
 require_once('classes\Usuario.php');
 require_once('classes\Gif.php');
 require_once('classes\Imagem.php');
+require_once('classes\NSFW.php');
 $con = new Usuario();
 $gif = new Gif();
 $img = new Imagem();
+$nsfw = new NSFW();
 
 $id = $_SESSION['nome'];
 if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
@@ -22,6 +24,9 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
     }
     if (!empty($_SESSION['catJG'])) {
         unset($_SESSION['catJG']);
+    }
+    if (!empty($_SESSION['catN'])) {
+        unset($_SESSION['catN']);
     } 
     if(!empty($_POST['novoNomeA'])){
         $nome = $_POST['novoNomeA'];
@@ -68,6 +73,17 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
         }catch(Exception $e){
 
         }       
+    }else if(!empty($_POST['novoNomeN'])){
+        $nome = $_POST['novoNomeN'];
+        $categoria = $_POST['categoria'];
+        try{
+            $nsfw -> atualizarCategoria($nome, $categoria);
+            $nsfw -> atualizarCatImagem($nome, $categoria);
+            $nsfw -> atualizarCatFavorita($nome, $categoria);
+            header('Location: categorias_NSFW.php');
+        }catch(Exception $e){
+
+        }
     }
     else {
      header('Location: ../escolher_categorias.php');

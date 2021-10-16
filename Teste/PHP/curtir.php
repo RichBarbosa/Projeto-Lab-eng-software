@@ -5,11 +5,13 @@ if(!isset($_SESSION)){
 require_once('classes\Imagem.php');
 require_once('classes\Gif.php');
 require_once('classes\Musica.php');
+require_once('classes\NSFW.php');
 
 $con = new Usuario();
 $cat = new Imagem();
 $gif = new Gif();
 $mus = new Musica();
+$nsfw = new NSFW();
 
 $id = $_SESSION['nome'];
 if(!empty( $_SESSION['nome'])){ 
@@ -148,7 +150,35 @@ if(!empty( $_SESSION['nome'])){
       }catch(Exception $e){
 
       }
-    }else {
+    }
+      else if(!empty($_POST['curtirN'])){
+      $idImagem = $_POST['curtirN'];
+      $nome = $nsfw->getNome($idImagem);
+      $_SESSION['NSFW'] = $idImagem;
+      $curtir = $nsfw->getCurtido($nome);
+      $curtir = $curtir + 1;
+      try{
+        $nsfw->inserirCurtido($curtir, $nome);
+        $con->inserirCurtido($nome, $id);
+        header('Location: NSFWEscolhido.php');
+      }catch(Exception $e){
+
+      }
+    }else if(!empty($_POST['descurtirN'])){
+      $idImagem = $_POST['descurtirN'];
+      $nome = $nsfw->getNome($idImagem);
+      $_SESSION['NSFW'] = $idImagem;
+      $curtir = $nsfw->getCurtido($nome);
+      $curtir = $curtir - 1;
+      try{
+        $nsfw->removerCurtido($curtir, $nome);
+        $con->removerCurtido($nome, $id);
+        header('Location: NSFWEscolhido.php');
+      }catch(Exception $e){
+
+      }
+    }
+    else {
       header('Location: ../index.php');
     }
   }else{

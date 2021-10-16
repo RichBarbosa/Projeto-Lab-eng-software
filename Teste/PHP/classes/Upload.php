@@ -108,4 +108,26 @@ class Upload extends Connect {
         $run = $stmt->execute();
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    function uploadNSFW($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $nomeoriginal = $this->nome;
+        $novonome = md5($nomeoriginal . date("dmYHis"));
+        $nomecompleto = $novonome . ".". $this->extensao;
+        move_uploaded_file($this->tmp,$pasta .$nomecompleto);
+        $caminho = $pasta . $nomecompleto;
+        $stmt = $conn->prepare("INSERT INTO imagens_nsfw (id, nome_imagem, nome, caminho, 
+        tag1, tag2, tag3, tag4, tag5) 
+        VALUES (null, :nome_imagem, :nome, :caminho, 
+        :tag1, :tag2, :tag3, :tag4, :tag5)");
+        $stmt ->bindValue(":nome_imagem",$nomecompleto);
+        $stmt ->bindValue(":nome",$categoria);
+        $stmt ->bindValue(":caminho",$caminho);
+        $stmt ->bindValue(":tag1",$tag1);
+        $stmt ->bindValue(":tag2",$tag2);
+        $stmt ->bindValue(":tag3",$tag3);
+        $stmt ->bindValue(":tag4",$tag4);
+        $stmt ->bindValue(":tag5",$tag5);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }    
