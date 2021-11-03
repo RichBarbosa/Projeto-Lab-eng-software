@@ -17,7 +17,7 @@ $id = $_SESSION['nome'];
       $pasta = "../NSFW/";
 
     try{
-      $up->uploadNSFW($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5);
+      $up->uploadNSFW($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5, $id);
       $_SESSION['categoria'] = $categoria;
       header('Location: tema_NSFW.php');
 

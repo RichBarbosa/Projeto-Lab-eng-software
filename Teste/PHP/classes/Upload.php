@@ -20,7 +20,7 @@ class Upload extends Connect {
         $this->extensao = $info['extension'];
     }
 
-    function uploadImagem($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5){
+    function uploadImagem($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5, $id){
         $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
         $nomeoriginal = $this->nome;
         $novonome = md5($nomeoriginal . date("dmYHis"));
@@ -28,9 +28,9 @@ class Upload extends Connect {
         move_uploaded_file($this->tmp,$pasta .$nomecompleto);
         $caminho = $pasta . $nomecompleto;
         $stmt = $conn->prepare("INSERT INTO imagens_anime (id, nome_imagem, nome, caminho, 
-        tag1, tag2, tag3, tag4, tag5) 
+        tag1, tag2, tag3, tag4, tag5, idUser) 
         VALUES (null, :nome_imagem, :nome, :caminho, 
-        :tag1, :tag2, :tag3, :tag4, :tag5)");
+        :tag1, :tag2, :tag3, :tag4, :tag5, :idUser)");
         $stmt ->bindValue(":nome_imagem",$nomecompleto);
         $stmt ->bindValue(":nome",$categoria);
         $stmt ->bindValue(":caminho",$caminho);
@@ -39,10 +39,11 @@ class Upload extends Connect {
         $stmt ->bindValue(":tag3",$tag3);
         $stmt ->bindValue(":tag4",$tag4);
         $stmt ->bindValue(":tag5",$tag5);
+        $stmt ->bindValue(":idUser",$id);
         $run = $stmt->execute();
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    function uploadGif($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5){
+    function uploadGif($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5, $id){
         $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
         $nomeoriginal = $this->nome;
         $novonome = md5($nomeoriginal . date("dmYHis"));
@@ -50,9 +51,9 @@ class Upload extends Connect {
         move_uploaded_file($this->tmp,$pasta .$nomecompleto);
         $caminho = $pasta . $nomecompleto;
         $stmt = $conn->prepare("INSERT INTO gif_animes (id, nome_gif, nome, caminho, 
-        tag1, tag2, tag3, tag4, tag5) 
+        tag1, tag2, tag3, tag4, tag5, idUser) 
         VALUES (null, :nome_imagem, :nome, :caminho, 
-        :tag1, :tag2, :tag3, :tag4, :tag5)");
+        :tag1, :tag2, :tag3, :tag4, :tag5, :idUser)");
         $stmt ->bindValue(":nome_imagem",$nomecompleto);
         $stmt ->bindValue(":nome",$categoria);
         $stmt ->bindValue(":caminho",$caminho);
@@ -61,10 +62,11 @@ class Upload extends Connect {
         $stmt ->bindValue(":tag3",$tag3);
         $stmt ->bindValue(":tag4",$tag4);
         $stmt ->bindValue(":tag5",$tag5);
+        $stmt ->bindValue(":idUser",$id);
         $run = $stmt->execute();
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    function uploadImagemJogo($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5){
+    function uploadImagemJogo($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5, $id){
         $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
         $nomeoriginal = $this->nome;
         $novonome = md5($nomeoriginal . date("dmYHis"));
@@ -72,9 +74,9 @@ class Upload extends Connect {
         move_uploaded_file($this->tmp,$pasta .$nomecompleto);
         $caminho = $pasta . $nomecompleto;
         $stmt = $conn->prepare("INSERT INTO imagens_jogo (id, nome_imagem, nome, caminho, 
-        tag1, tag2, tag3, tag4, tag5)
+        tag1, tag2, tag3, tag4, tag5, idUser)
         VALUES (null, :nome_imagem, :nome, :caminho, 
-        :tag1, :tag2, :tag3, :tag4, :tag5)");
+        :tag1, :tag2, :tag3, :tag4, :tag5, :idUser)");
         $stmt ->bindValue(":nome_imagem",$nomecompleto);
         $stmt ->bindValue(":nome",$categoria);
         $stmt ->bindValue(":caminho",$caminho);
@@ -83,10 +85,11 @@ class Upload extends Connect {
         $stmt ->bindValue(":tag3",$tag3);
         $stmt ->bindValue(":tag4",$tag4);
         $stmt ->bindValue(":tag5",$tag5);
+        $stmt ->bindValue(":idUser",$id);
         $run = $stmt->execute();
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    function uploadGifJogo($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5){
+    function uploadGifJogo($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5, $id){
         $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
         $nomeoriginal = $this->nome;
         $novonome = md5($nomeoriginal . date("dmYHis"));
@@ -94,9 +97,9 @@ class Upload extends Connect {
         move_uploaded_file($this->tmp,$pasta .$nomecompleto);
         $caminho = $pasta . $nomecompleto;
         $stmt = $conn->prepare("INSERT INTO gif_jogo (id, nome_imagem, nome, caminho, 
-        tag1, tag2, tag3, tag4, tag5) 
+        tag1, tag2, tag3, tag4, tag5, idUser) 
         VALUES (null, :nome_imagem, :nome, :caminho, 
-        :tag1, :tag2, :tag3, :tag4, :tag5)");
+        :tag1, :tag2, :tag3, :tag4, :tag5, :idUser)");
         $stmt ->bindValue(":nome_imagem",$nomecompleto);
         $stmt ->bindValue(":nome",$categoria);
         $stmt ->bindValue(":caminho",$caminho);
@@ -105,10 +108,11 @@ class Upload extends Connect {
         $stmt ->bindValue(":tag3",$tag3);
         $stmt ->bindValue(":tag4",$tag4);
         $stmt ->bindValue(":tag5",$tag5);
+        $stmt ->bindValue(":idUser",$id);
         $run = $stmt->execute();
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    function uploadNSFW($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5){
+    function uploadNSFW($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5, $id){
         $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
         $nomeoriginal = $this->nome;
         $novonome = md5($nomeoriginal . date("dmYHis"));
@@ -116,9 +120,9 @@ class Upload extends Connect {
         move_uploaded_file($this->tmp,$pasta .$nomecompleto);
         $caminho = $pasta . $nomecompleto;
         $stmt = $conn->prepare("INSERT INTO imagens_nsfw (id, nome_imagem, nome, caminho, 
-        tag1, tag2, tag3, tag4, tag5) 
+        tag1, tag2, tag3, tag4, tag5, idUser) 
         VALUES (null, :nome_imagem, :nome, :caminho, 
-        :tag1, :tag2, :tag3, :tag4, :tag5)");
+        :tag1, :tag2, :tag3, :tag4, :tag5, :idUser)");
         $stmt ->bindValue(":nome_imagem",$nomecompleto);
         $stmt ->bindValue(":nome",$categoria);
         $stmt ->bindValue(":caminho",$caminho);
@@ -127,6 +131,7 @@ class Upload extends Connect {
         $stmt ->bindValue(":tag3",$tag3);
         $stmt ->bindValue(":tag4",$tag4);
         $stmt ->bindValue(":tag5",$tag5);
+        $stmt ->bindValue(":idUser",$id);
         $run = $stmt->execute();
         $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

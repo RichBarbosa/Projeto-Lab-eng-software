@@ -798,6 +798,42 @@ class Imagem extends Connect {
         } 
        
     }
+    function  getUser($id, $genero){
+        if ($genero == 1) {
+            $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+            $stmt = $conn->prepare("SELECT * FROM imagens_anime WHERE id = :id");
+            $stmt ->bindValue(":id",$id);
+            $run = $stmt->execute();
+            $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+            return $rs['idUser'];    
+        }
+        else if($genero == 2){
+            $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+            $stmt = $conn->prepare("SELECT * FROM imagens_jogo WHERE id = :id");
+            $stmt ->bindValue(":id",$id);
+            $run = $stmt->execute();
+            $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+            return $rs['idUser'];   
+        }  
+    }
+    function  getCaminhoByUser($id, $genero){
+        if ($genero == 1) {
+            $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+            $stmt = $conn->prepare("SELECT * FROM imagens_anime WHERE idUser = :id");
+            $stmt ->bindValue(":id",$id);
+            $run = $stmt->execute();
+            $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);        
+            return $rs;
+        }else if($genero == 2) {
+            $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+            $stmt = $conn->prepare("SELECT * FROM imagens_jogo WHERE idUser = :id");
+            $stmt ->bindValue(":id",$id);
+            $run = $stmt->execute();
+            $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);        
+            return $rs;
+        }
+          
+    }
 }
 
 

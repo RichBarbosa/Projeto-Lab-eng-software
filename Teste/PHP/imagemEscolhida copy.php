@@ -151,13 +151,28 @@ $id = null;?>
          <button type="button" class="btn btn-light">Imagem</button>
 </div>
 <div class="container">
-  <h6 style="text-align:end;">
-    nota dos usuários:  <?php echo  round($con->getMediaNota($nImagem), 2);?>
-</h6>
- <div class="imgT">
+  <div class="row">
+    <div class= "col-sm-2">
+    <?php /*
+      $IDdono = $cat->getUser($idImagem);
+      $dono = $con->getUser($IDdono);
+      if($dono != null){?>
+        <form method="get" action="imagensUserA.php">
+          <input type="hidden" name="genero" value="1">
+          <h6>enviado por: <button class="btn btn-light" name="User" value="<?php echo $IDdono;?>" type="submit"><b><?php echo $dono;?></b></button></h6>
+        </form>
+    <?php }*/?>
+    </div>
+    <div style="text-align:end;" class= "col-sm-10">
+      <h6 style="text-align:end;">
+        nota dos usuários:  <?php echo  round($con->getMediaNota($nImagem), 2);?>
+      </h6>
+    </div>
+  </div>  
+  <div class ="row">
     <img src="<?php echo $cat->getCaminho($idImagem);?>" class="img-thumbnail" alt="...">
   </div>
-  </div>
+</div>
 <hr/>       
 <div class="container">
   <div class="row">
@@ -186,6 +201,19 @@ $id = null;?>
        <?php }?>
         </ul>
         </form>
+        <br>
+        <div class= "col-sm-4">
+          <?php
+            $IDdono = $cat->getUser($idImagem, 1);
+            $dono = $con->getUser($IDdono);
+            if($dono != null){?>
+              <form method="get" action="imagensUserA.php">
+                <input type="hidden" name="genero" value="1">
+                <h6>enviado por:
+                  <button class="btn btn-light" name="User" value="<?php echo $IDdono;?>" type="submit"><b><?php echo $dono;?></b></button></h6>
+              </form>
+          <?php }?>
+        </div>
         <br>
         <?php if (!empty($_SESSION['nome'])) {?>        
           <h6>dê uma avaliação</h6>

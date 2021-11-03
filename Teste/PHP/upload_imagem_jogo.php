@@ -17,7 +17,7 @@ $id = $_SESSION['nome'];
       $pasta = "../imagensJogo/";
 
     try{
-      $up->uploadImagemJogo($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5);
+      $up->uploadImagemJogo($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5, $id);
       $_SESSION['categoria'] = $categoria;
       header('Location: tema_categoria_jogo copy.php');
 

@@ -385,6 +385,23 @@ class NSFW extends Connect {
         } 
        
     }
+    function  getUser($id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT * FROM imagens_nsfw WHERE id = :id");
+        $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetch(PDO::FETCH_ASSOC);        
+        return $rs['idUser'];    
+    
+    }
+    function  getCaminhoByUser($id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT * FROM imagens_nsfw WHERE idUser = :id");
+        $stmt ->bindValue(":id",$id);
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);        
+        return $rs;          
+    }
 }
 
 

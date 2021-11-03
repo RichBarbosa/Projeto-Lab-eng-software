@@ -17,7 +17,7 @@ $id = $_SESSION['nome'];
       $pasta = "../gifJogo/";
 
     try{
-      $up->uploadGifJogo($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5);
+      $up->uploadGifJogo($pasta, $categoria, $tag1, $tag2, $tag3, $tag4, $tag5, $id);
       $_SESSION['categoria'] = $categoria;
       header('Location: tema_categoriajogoGif copy.php');
 

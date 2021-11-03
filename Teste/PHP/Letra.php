@@ -49,6 +49,11 @@ $id = null;
      <button type="submit" class="btn btn-light" name="autoria" value="<?php echo $autoria;?>"><h6><?php echo $autoria; ?></h6></button>
     </form>
     </div>
+    <div style="text-align:end;" class= "col-sm-10">
+      <h6 style="text-align:end;">
+        nota dos usuários:  <?php echo  round($con->getMediaNota($musica), 2);?>
+      </h6>
+    </div>
     <div class="container">
       <br>
       <div class=row>
@@ -81,7 +86,10 @@ $id = null;
               <br>
            <b><?php echo $cat->getLetra($idMusica);?></b>
         </h6>
-        <h6 style="text-size: small"> enviada por<b> <?php echo $con->getUser($idUser); ?></b></h6>
+          <form action="LetraUser.php" method="get">
+              <input type="hidden" name="dono" value="<?php echo $con->getUser($idUser);?>">
+              <h6 style="text-size: small"> enviada por <button class="btn btn-light" name="User" value="<?php echo $idUser;?>" type="submit"><b><?php echo $con->getUser($idUser);?></b></button></h6>
+          </form>
         <br>  
           </pre>
                   <h6 style="text-size: smaller"><b>Nós apenas divulgamos traduções e letras feitas por fãs. Caso tenha
@@ -113,6 +121,70 @@ $id = null;
     <div class="container">
       <div class="row">
         <div class="col-6">
+        <br>
+        <?php if (!empty($_SESSION['nome'])) {?>        
+          <h6>dê uma avaliação</h6>
+            <form action="avaliar.php" method="post">
+              <?php
+              $nota = $con->getNota($id, $musica);
+              ?>
+              <input type="hidden" name="tipo" value="musica">
+              <input type="hidden" name="nome" value="<?php echo $musica; ?>">
+              <input type="hidden" name="idImagem" value="<?php echo $idMusica;?>">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <?php if ($nota == 1) {?>
+                  <button type="submit" name="voto" value="1" class="btn btn-success">1</button>
+                <?php }else{ ?>
+                  <button type="submit" name="voto" value="1" class="btn btn-outline-success">1</button>
+                <?php }?>
+                <?php if ($nota == 2) {?>
+                  <button type="submit" name="voto" value="2" class="btn btn-success">2</button>
+                <?php }else{ ?>
+                  <button type="submit" name="voto" value="2" class="btn btn-outline-success">2</button> 
+                <?php }?>
+                <?php if ($nota == 3) {?>
+                  <button type="submit" name="voto" value="3" class="btn btn-success">3</button>
+                <?php }else{ ?>
+                <button type="submit" name="voto" value="3" class="btn btn-outline-success">3</button>
+                <?php }?>
+                <?php if ($nota == 4) {?>
+                  <button type="submit" name="voto" value="4" class="btn btn-success">4</button>
+                <?php }else{ ?>
+                  <button type="submit" name="voto" value="4" class="btn btn-outline-success">4</button>
+                <?php }?>
+                <?php if ($nota == 5) {?>
+                  <button type="submit" name="voto" value="5" class="btn btn-success">5</button>
+                <?php }else{ ?>
+                  <button type="submit" name="voto" value="5" class="btn btn-outline-success">5</button> 
+                <?php }?>
+                <?php if ($nota == 6) {?>
+                  <button type="submit" name="voto" value="6" class="btn btn-success">6</button>
+                <?php }else{ ?>
+                  <button type="submit" name="voto" value="6" class="btn btn-outline-success">6</button>
+                <?php }?>
+                <?php if ($nota == 7) {?>
+                  <button type="submit" name="voto" value="7" class="btn btn-success">7</button>
+                <?php }else{ ?>
+                  <button type="submit" name="voto" value="7" class="btn btn-outline-success">7</button> 
+                <?php }?>
+                <?php if ($nota == 8) {?>
+                  <button type="submit" name="voto" value="8" class="btn btn-success">8</button>
+                <?php }else{ ?>
+                <button type="submit" name="voto" value="8" class="btn btn-outline-success">8</button>
+                <?php }?>
+                <?php if ($nota == 9) {?>
+                  <button type="submit" name="voto" value="9" class="btn btn-success">9</button>
+                <?php }else{ ?>
+                  <button type="submit" name="voto" value="9" class="btn btn-outline-success">9</button>
+                <?php }?>
+                <?php if ($nota == 10) {?>
+                  <button type="submit" name="voto" value="10" class="btn btn-success">10</button>
+                <?php }else{ ?>
+                  <button type="submit" name="voto" value="10" class="btn btn-outline-success">10</button> 
+                <?php }?>      
+            </div>
+          </form>
+        <?php }?>
         <?php if ($cat->getViews($idMusica)== 1) {?>
           <h6 style="text-align: end;"><?php echo $cat->getViews($idMusica);?> visualização</h6>
         <?php }else{ ?>

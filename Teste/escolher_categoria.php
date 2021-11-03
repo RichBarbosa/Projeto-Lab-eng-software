@@ -153,16 +153,16 @@ if(!empty( $_SESSION['nome']) && $con->getAdmin($id)){
     <hr>       
    <div class="container">
             <div class="row">
-                <div class="col-4">
+                <div class="col-sm-4">
                     <h6>Criar subcategoria de anime</h6>
                     <a class="nav-link" href="categorias.php"><button class="btn btn-secondary">Criar</button></a>
                 </div>
-                <div class="col-4">
+                <div class="col-sm-4">
                     <h6>Criar subcategoria de jogos</h6>
                     <a class="nav-link" href="categorias_jogo.php"><button class="btn btn-secondary">Criar</button></a>
 
                 </div>
-                <div class="col-4">
+                <div class="col-sm-4">
                 <h6>Criar subcategoria NSFW</h6>
                     <a class="nav-link" href="PHP\categorias_NSFW.php"><button class="btn btn-secondary">Criar</button></a>
                 </div>

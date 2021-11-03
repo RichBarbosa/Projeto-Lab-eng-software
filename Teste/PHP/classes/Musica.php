@@ -734,4 +734,16 @@ class Musica extends Connect{
             return false;
         }        
     }
+    
+    function  getMusicaByUser($id){
+        $conn = new PDO('mysql:host='.$this->servidor.';dbname='.$this->banco, $this->usuario, $this->password);
+        $stmt = $conn->prepare("SELECT id, nome_musica, nome_autoria, nome_genero
+        FROM musica
+        WHERE idUser = :id
+        ORDER BY nome_musica ASC");
+        $stmt ->bindValue(":id",$id = $id);               
+        $run = $stmt->execute();
+        $rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rs;
+    }
 }

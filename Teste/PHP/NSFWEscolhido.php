@@ -40,11 +40,10 @@ if(!empty($_SESSION['nome'])){
          <button type="button" class="btn btn-light">conteúdos</button>
 </div>
 <div class="container">
-  <!--
+  <!-- bagulho da avaliação. ta ativado por hora--> 
   <h6 style="text-align:end;">
-    nota dos usuários:  <?php //echo  round($con->getMediaNota($nImagem), 2);?>
+    nota dos usuários:  <?php echo  round($con->getMediaNota($nImagem), 2);?>
 </h6>
-  -->
  <div class="imgT">
     <img src="<?php echo $cat->getCaminho($idImagem);?>" class="img-thumbnail" alt="...">
   </div>
@@ -78,14 +77,26 @@ if(!empty($_SESSION['nome'])){
         </ul>
         </form>
         <br>
-        <?php //bagulho de avaliação, ta desativado por hora
-        /* if (!empty($_SESSION['nome'])) {?>        
+        <div class= "col-sm-4">
+          <?php
+            $IDdono = $cat->getUser($idImagem);
+            $dono = $con->getUser($IDdono);
+            if($dono != null){?>
+              <form method="get" action="NSFWUser.php">
+                <h6>enviado por:
+                  <button class="btn btn-light" name="User" value="<?php echo $IDdono;?>" type="submit"><b><?php echo $dono;?></b></button></h6>
+              </form>
+          <?php }?>
+        </div>
+        <br>
+        <?php //bagulho de avaliação, ta ativado por hora
+         if (!empty($_SESSION['nome'])) {?>        
           <h6>dê uma avaliação</h6>
             <form action="avaliar.php" method="post">
               <?php
               $nota = $con->getNota($id, $nImagem);
               ?>
-              <input type="hidden" name="tipo" value="imagem">
+              <input type="hidden" name="tipo" value="NSFW">
               <input type="hidden" name="nome" value="<?php echo $nImagem; ?>">
               <input type="hidden" name="idImagem" value="<?php echo $idImagem;?>">
               <div class="btn-group" role="group" aria-label="Basic example">
@@ -141,7 +152,7 @@ if(!empty($_SESSION['nome'])){
                 <?php }?>      
             </div>
           </form>
-        <?php }*/?>  
+        <?php }?>  
         <?php if ($cat->getViews($nImagem)== 1) {?>
           <h6 style="text-align: end;"><?php echo $cat->getViews($nImagem);?> visualização</h6>
         <?php }else{ ?>
